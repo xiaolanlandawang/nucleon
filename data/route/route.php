@@ -25,11 +25,11 @@ Route::get('overhead-crane', 'portal/index/product?id=28')->append(array('id' =>
 
 Route::get('Accessories', 'portal/index/product?id=29')->append(array('id' => '29',));
 
-Route::get('Hoist', 'portal/index/product?id=30')->append(array('id' => '30',));
+Route::get('Electric-Hoist', 'portal/index/product?id=30')->append(array('id' => '30',));
 
-Route::get('ld-single-girder-overhead-crane', 'portal/index/product_info?id=62')->append(array('id' => '62',));
+Route::get('LD-Single-Girder-Overhead-Crane', 'portal/index/product_info?id=62')->append(array('id' => '62',));
 
-Route::get('Double Girder Overhead Crane', 'portal/index/product_info?id=67')->append(array('id' => '67',));
+Route::get('double-girder-overhead-crane', 'portal/index/product_info?id=67')->append(array('id' => '67',));
 
 Route::get('Rubber-Tyred-Container-Gantry-Cranes', 'portal/index/product_info?id=68')->append(array('id' => '68',));
 
@@ -37,17 +37,19 @@ Route::get('Ship-to-Shore-Gantry-Crane', 'portal/index/product_info?id=69')->app
 
 Route::get('RMG-Rail-Mounted-Container-Gantry-Cranes', 'portal/index/product_info?id=70')->append(array('id' => '70',));
 
-Route::get('Single Beam Gantry Crane MH Type', 'portal/index/product_info?id=71')->append(array('id' => '71',));
+Route::get('single-beam-gantry-crane-mh-type', 'portal/index/product_info?id=89')->append(array('id' => '89',));
 
-Route::get('Double Girder Gantry Crane U Type', 'portal/index/product_info?id=72')->append(array('id' => '72',));
+Route::get('double-girder-gantry-crane-u-type', 'portal/index/product_info?id=72')->append(array('id' => '72',));
+
+Route::get('meltshop-ladle-crane', 'portal/index/product_info?id=73')->append(array('id' => '73',));
 
 Route::get('Crane for Meltshop | Ladle Cranes', 'portal/index/product_info?id=74')->append(array('id' => '74',));
 
-Route::get('Grab Bucket Overhead Crane QZ Type', 'portal/index/product_info?id=75')->append(array('id' => '75',));
+Route::get('grab-bucket-overhead-crane-qz-type', 'portal/index/product_info?id=75')->append(array('id' => '75',));
 
-Route::get('Electromagnetic Bridge Crane QC Type', 'portal/index/product_info?id=76')->append(array('id' => '76',));
+Route::get('electromagnetic-bridge-crane-qc-type', 'portal/index/product_info?id=76')->append(array('id' => '76',));
 
-Route::get('Electric Suspension Crane', 'portal/index/product_info?id=77')->append(array('id' => '77',));
+Route::get('electric-suspension-crane', 'portal/index/product_info?id=77')->append(array('id' => '77',));
 
 Route::get('european-single-girder-bridge-crane', 'portal/index/product_info?id=78')->append(array('id' => '78',));
 
@@ -70,8 +72,6 @@ Route::get('double-beam-gantry-crane-a-type', 'portal/index/product_info?id=86')
 Route::get('european-hoist-trolley-double-girder', 'portal/index/product_info?id=87')->append(array('id' => '87',));
 
 Route::get('european-electric-hoist', 'portal/index/product_info?id=88')->append(array('id' => '88',));
-
-Route::get('single-beam-gantry-crane-mh-type', 'portal/index/product_info?id=89')->append(array('id' => '89',));
 
 Route::get('hb-explosion-proof-electric-hoist', 'portal/index/product_info?id=90')->append(array('id' => '90',));
 
@@ -259,6 +259,8 @@ Route::get('Suspension Overhead Crane LX Type', 'portal/index/product_info?id=18
 
 Route::get('Cleanroom-Overhead-Crane', 'portal/index/product_info?id=183')->append(array('id' => '183',));
 
+Route::get('Clamps-Overhead-Crane', 'portal/index/product_info?id=184')->append(array('id' => '184',));
+
 Route::get('CampanyNews/:id', 'portal/index/news_info?cid=1')->append(array('cid' => '1',));
 
 Route::get('CampanyNews', 'portal/index/news?id=1')->append(array('id' => '1',));
@@ -290,6 +292,10 @@ Route::get('Weihua-Provide-Port-Crane-Solutions-for-Inland-River-Port', 'portal/
 Route::get('WEIHUA-2500t/h-Bridge-Grab-Ship-Unloader', 'portal/index/industries_info?id=22')->append(array('id' => '22',));
 
 Route::get('550t-Gantry-Crane-Load-Test', 'portal/index/industries_info?id=23')->append(array('id' => '23',));
+
+Route::get('weihuaAdmin$', 'admin/Index/index');
+
+Route::get('What-is-an-overhead-crane', 'portal/index/news_info?cid=2&id=26')->append(array('cid' => '2',  'id' => '26',));
 
 Route::get('case', 'portal/index/industries');
 
