@@ -1,13 +1,11 @@
-<?php /*a:4:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\index.html";i:1779784934;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:5:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\quote.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title><?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?></title>
     <meta name="keywords" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
     <meta name="description" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
-    <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
@@ -32,13 +30,11 @@
         max-height: 550px !important;
     }
 </style>
-    <link href="/themes/simpleboot3/public/assets/css/index.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/index.js"></script>
+    <link href="/themes/simpleboot3/public/assets/css/quote.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
 
-    <?php if(!(empty($site_info['google_body']) || (($site_info['google_body'] instanceof \think\Collection || $site_info['google_body'] instanceof \think\Paginator ) && $site_info['google_body']->isEmpty()))): ?>
+<?php if(!(empty($site_info['google_body']) || (($site_info['google_body'] instanceof \think\Collection || $site_info['google_body'] instanceof \think\Paginator ) && $site_info['google_body']->isEmpty()))): ?>
     <?php echo htmlspecialchars_decode($site_info['google_body']); ?>
 <?php endif; 
     $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
@@ -169,445 +165,64 @@
 
 
 
-    <!--BANNER START-->
-    <div class="banner">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <?php if(is_array($slides) || $slides instanceof \think\Collection || $slides instanceof \think\Paginator): if( count($slides)==0 ) : echo "" ;else: foreach($slides as $key=>$vo): ?>
-                    <div class="swiper-slide">
-                        <?php 
-                            $slideUrl = trim($vo['url'] ?? '');
-                            if ($slideUrl !== '' && !preg_match('/^(https?:)?\/\//i', $slideUrl) && strpos($slideUrl,
-                            '/') !== 0) {
-                            $slideUrl = 'http://' . $slideUrl;
-                            }
-                            $slideHref = $slideUrl ?: 'javascript:;';
-                            $slideTarget = !empty($vo['target']) ? $vo['target'] : '_self';
-                         ?>
-                        <a class="swiper-slide-link" href="<?php echo $slideHref; ?>" target="<?php echo $slideTarget; ?>">
-                            <img src="<?php echo cmf_get_image_url($vo['image']); ?>" class="d-block w-100" alt="<?php echo $vo['title']; ?>">
-                        </a>
-                        <div class="swiper-slide-title swiper-no-swiping">
-                            <div class="swiper-slide-name"><?php echo $vo['title']; ?></div>
-                            <?php if(!(empty($vo['description']) || (($vo['description'] instanceof \think\Collection || $vo['description'] instanceof \think\Paginator ) && $vo['description']->isEmpty()))): ?>
-                                <div class="swiper-slide-desc"><?php echo $vo['description']; ?></div>
-                            <?php endif; ?>
-                            <div class="swiper-slide-actions">
-                                <a href="<?php echo cmf_url('portal/index/quote'); ?>" class="btn-quote">GET A QUOTE</a>
-                                <a href="<?php echo cmf_url('portal/index/product'); ?>" class="btn-products">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; endif; else: echo "" ;endif; ?>
-            </div>
-            <!-- 分页器容器 -->
-            <div class="swiper-pagination swiper-pagination-bullets"></div>
-        </div>
-
-        <script>
-            var mySwiper = new Swiper('.swiper', {
-                autoplay: true,//可选选项，自动滑动
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true, // 允许点击分页器子弹切换幻灯片
-                },
-            })
-
-        </script>
+<!-- BANNER START -->
+<div class="banner">
+    <img src="<?php echo cmf_get_image_url($banner['image']); ?>" alt="<?php echo $banner['title']; ?>">
+    <div class="banner-text">
     </div>
-    <!--BANNER END-->
+</div>
+<!-- BANNER END -->
 
-    <!--CATEGORY NAV START-->
-    <nav class="product-category-nav home-category-nav">
-        <div class="product-category-nav__inner">
-            <ul class="product-category-nav__list">
-                <?php if(is_array($category_cards) || $category_cards instanceof \think\Collection || $category_cards instanceof \think\Paginator): if( count($category_cards)==0 ) : echo "" ;else: foreach($category_cards as $key=>$vo): ?>
-                    <li class="product-category-nav__item">
-                        <a href="<?php echo cmf_url('portal/index/product',array('id'=>$vo['id'])); ?>">
-                            <span class="product-category-nav__icon">
-                                <img src="<?php echo cmf_get_image_url($vo['icon'] ?: $vo['thumbnail']); ?>" alt="<?php echo $vo['name']; ?>">
-                            </span>
-                            <span class="product-category-nav__name"><?php echo $vo['name']; ?></span>
-                        </a>
+<div class="main-content">
+    <div class="contact-container">
+        <div class="contact-left">
+            <div class="quote-intro">
+                <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
+                <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
+                <ul class="intro-list">
+                    <li>
+                        <strong>1. Application:</strong> What will the crane be used for? 
+                        <span>(e.g., warehouse logistics, port container handling)</span>
                     </li>
-                <?php endforeach; endif; else: echo "" ;endif; ?>
-            </ul>
-        </div>
-    </nav>
-    <!--CATEGORY NAV END-->
-
-    <!--HOT PRODUCTS  START-->
-    <div class="hot-products reveal">
-        <div class="title">HOT PRODUCTS</div>
-        <div class="hot-products-desc"><?php echo $index_site['products_description']; ?></div>
-
-        <div class="products-category">
-            <div class="swiper-products-category">
-                <div class="swiper-wrapper">
-                    <?php if(is_array($hot_products) || $hot_products instanceof \think\Collection || $hot_products instanceof \think\Paginator): if( count($hot_products)==0 ) : echo "" ;else: foreach($hot_products as $key=>$vo): ?>
-                        <div class="swiper-slide category-slide <?php echo $key==0 ? 'active'  :  ''; ?>">
-                            <div class="swiper-products-category-title"><?php echo $vo['name']; ?></div>
-                        </div>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-            </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-        <div class="products">
-            <div class="swiper-products">
-                <div class="swiper-wrapper">
-                    <?php if(is_array($hot_products) || $hot_products instanceof \think\Collection || $hot_products instanceof \think\Paginator): if( count($hot_products)==0 ) : echo "" ;else: foreach($hot_products as $key=>$vo): ?>
-                        <div class="swiper-slide">
-                            <ul class="products-list">
-                                <?php if(is_array($vo['list']) || $vo['list'] instanceof \think\Collection || $vo['list'] instanceof \think\Paginator): if( count($vo['list'])==0 ) : echo "" ;else: foreach($vo['list'] as $key=>$v): ?>
-                                    <li class="product_item">
-                                        <a href="<?php echo cmf_url('portal/index/product_info',array('id'=>$v['id'])); ?>" class="product_item__link">
-                                            <div class="product_list_item_img">
-                                                <img loading="lazy" src="<?php echo cmf_get_image_url($v['thumbnail']); ?>" alt="<?php echo $v['title']; ?>" title="<?php echo $v['title']; ?>">
-                                            </div>
-                                            <div class="product_item__content">
-                                                <div class="product_list_item_title"><?php echo $v['title']; ?></div>
-                                                <div class="product_list_item_category"><?php echo (isset($v['overview']) && ($v['overview'] !== '')?$v['overview']:$v['industry']); ?></div>
-                                            </div>
-                                        </a>
-                                        <div class="product_item__footer">
-                                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
-                                        </div>
-                                    </li>
-                                <?php endforeach; endif; else: echo "" ;endif; ?>
-                            </ul>
-                        </div>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-                <!-- 分页器容器 -->
-                <div class="swiper-products-pagination swiper-products-pagination-bullets"></div>
-            </div>
-            <script>
-                // 初始化导航Swiper
-                const categorySwiper = new Swiper('.swiper-products-category', {
-                    slidesPerView: 'auto', // 自动根据内容宽度显示
-                    freeMode: true,        // 自由滚动模式
-                    resistanceRatio: 0,    // 边缘抵抗力
-                    watchSlidesProgress: true,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }
-                });
-                var productSwiper = new Swiper('.swiper-products', {
-                    autoplay: false,//可选选项，自动滑动
-                    loop: false,
-                    on: {
-                        slideChange: function () {
-                            // 同步导航状态
-                            document.querySelectorAll('.category-slide')
-                                .forEach(el => el.classList.remove('active'));
-                            document.querySelectorAll('.category-slide')[this.activeIndex].classList.add('active');
-
-                            // 同步导航位置
-                            categorySwiper.slideTo(this.activeIndex);
-                        }
-                    }
-                })
-
-                // 绑定导航点击事件
-                document.querySelectorAll('.category-slide').forEach((slide, index) => {
-                    slide.addEventListener('click', () => {
-                        productSwiper.slideTo(index);
-                    });
-                });
-
-            </script>
-        </div>
-    </div>
-    <!--HOT PRODUCTS  END-->
-
-    <!--ABOUT START -->
-    <div class="about reveal">
-        <div class="about-wrap">
-            <div class="about-img">
-                <img loading="lazy" src="<?php echo cmf_get_image_url($index_site['about_img'] ?? ''); ?>" alt="<?php echo $site_info['site_name']; ?>">
-            </div>
-            <div class="about-content">
-                <div class="about-heading">WHO WE ARE</div>
-                <div class="about-desc"><?php echo (isset($index_site['about_description']) && ($index_site['about_description'] !== '')?$index_site['about_description']:''); ?></div>
-                <ul>
-                    <?php if(!(empty($index_site['engineering']) || (($index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator ) && $index_site['engineering']->isEmpty()))): if(is_array($index_site['engineering']) || $index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator): if( count($index_site['engineering'])==0 ) : echo "" ;else: foreach($index_site['engineering'] as $key=>$vo): ?>
-                            <li class="about-content-item">
-                                <p class="about-content-num"><?php echo $vo['engineering_num']; ?></p>
-                                <div class="about-content-line"></div>
-                                <p class="about-content-item-title"><?php echo $vo['engineering_name']; ?></p>
-                                <p class="about-content-desc"><?php echo $vo['engineering_desc']; ?></p>
-                            </li>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                    <?php endif; ?>
+                    <li>
+                        <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
+                    </li>
+                    <li>
+                        <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
+                    </li>
                 </ul>
-                <div class="about-actions">
-                    <a class="about-btn" href="<?php echo cmf_url('portal/index/about'); ?>">LEARN MORE -&gt;</a>
+                <div class="intro-footer">
+                    Our team will recommend the most suitable and cost-effective solution for your project.
                 </div>
+            </div>
+        </div>
+
+        <div class="quote-form-section">
+            <h2 class="form-title">Customize Your Lifting Solutions</h2>
+            <div class="quote">
+                <div class="quote-field">
+                    <label>Name</label>
+                    <input type="text" name="name" class="quote-name" placeholder="Name">
+                </div>
+                <div class="quote-field">
+                    <label>Email</label>
+                    <input type="text" name="email" class="quote-email" placeholder="Email">
+                </div>
+                <div class="quote-field full-width">
+                    <label>Phone/Whatsapp</label>
+                    <input type="text" name="phone" class="quote-phone" placeholder="Phone/Whatsapp">
+                </div>
+                <div class="quote-field full-width">
+                    <label>Message</label>
+                    <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                </div>
+                <div class="quote-btn" onclick="submit()">SEND MESSAGE</div>
             </div>
         </div>
     </div>
-    <!--ABOUT END -->
+</div>
 
-    <!-- STATS START -->
-    <div class="home-stats reveal">
-        <div class="home-stats-wrap">
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="1988">0</span></div>
-                <div class="stat-text">Founded in China</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="3420">0</span>K</div>
-                <div class="stat-text">Square Meter Factory</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="1000">0</span></div>
-                <div class="stat-text">1000 R&D engineers team</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
-                <div class="stat-text">Export to over 170 countries</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
-                <div class="stat-text">500 honorary titles</div>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 100; // The lower the slower
-
-            const animateCounters = () => {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-target');
-
-                    const updateCount = () => {
-                        const count = +counter.innerText.replace(/,/g, '');
-                        const inc = target / speed;
-
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target.toLocaleString('en-US');
-                        }
-                    };
-                    updateCount();
-                });
-            };
-
-            const statsSection = document.querySelector('.home-stats');
-            if (statsSection) {
-                const observer = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        animateCounters();
-                        observer.disconnect();
-                    }
-                }, { threshold: 0.3 });
-                observer.observe(statsSection);
-            }
-        });
-    </script>
-    <!-- STATS END -->
-
-
-    <!-- CHOOSE START -->
-    <div class="choose-warp reveal">
-        <div class="choose">
-            <div class="title">WHY CHOOSE US</div>
-            <div class="choose-desc"><?php echo (isset($index_site['choose_description']) && ($index_site['choose_description'] !== '')?$index_site['choose_description']:''); ?></div>
-            <ul class="choose-list">
-                <?php if(!(empty($index_site['choose']) || (($index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator ) && $index_site['choose']->isEmpty()))): if(is_array($index_site['choose']) || $index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator): if( count($index_site['choose'])==0 ) : echo "" ;else: foreach($index_site['choose'] as $key=>$vo): ?>
-                        <li class="choose-item">
-                            <div class="choose-item-icon">
-                                <img loading="lazy" src="<?php echo cmf_get_image_url($vo['choose_image']); ?>" alt="choose"
-                                    data-default_img="<?php echo cmf_get_image_url($vo['choose_image']); ?>"
-                                    data-active_img="<?php echo cmf_get_image_url($vo['choose_image_active']); ?>">
-                            </div>
-                            <div class="choose-item-title"><?php echo $vo['choose_name']; ?></div>
-                            <div class="choose-item-desc"><?php echo $vo['choose_desc']; ?></div>
-                        </li>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </div>
-    <!-- CHOOSE END -->
-
-
-    <?php if(!(empty($about_site['cert']) || (($about_site['cert'] instanceof \think\Collection || $about_site['cert'] instanceof \think\Paginator ) && $about_site['cert']->isEmpty()))): ?>
-        <!-- CERTIFICATE START -->
-        <div class="certificate reveal">
-            <div class="title">CERTIFICATE</div>
-            <div class="certificate-carousel">
-                <button class="certificate-nav certificate-button-prev" type="button" aria-label="Previous"></button>
-                <div class="certificate-swiper">
-                    <div class="swiper-wrapper">
-                        <?php if(is_array($about_site['cert']) || $about_site['cert'] instanceof \think\Collection || $about_site['cert'] instanceof \think\Paginator): if( count($about_site['cert'])==0 ) : echo "" ;else: foreach($about_site['cert'] as $key=>$vo): ?>
-                            <div class="swiper-slide certificate-item">
-                                <img loading="lazy" src="<?php echo cmf_get_image_url($vo['url']); ?>" alt="<?php echo $vo['name']; ?>">
-                            </div>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                    </div>
-                </div>
-                <button class="certificate-nav certificate-button-next" type="button" aria-label="Next"></button>
-                <div class="certificate-pagination"></div>
-            </div>
-        </div>
-        <div class="certificate-preview" aria-hidden="true">
-            <button class="certificate-preview-close" type="button" aria-label="Close"></button>
-            <button class="certificate-preview-arrow certificate-preview-prev" type="button"
-                aria-label="Previous"></button>
-            <div class="certificate-preview-content">
-                <img src="" alt="">
-            </div>
-            <button class="certificate-preview-arrow certificate-preview-next" type="button" aria-label="Next"></button>
-        </div>
-        <!-- CERTIFICATE END -->
-    <?php endif; if(!(empty($case_list) || (($case_list instanceof \think\Collection || $case_list instanceof \think\Paginator ) && $case_list->isEmpty()))): ?>
-        <!-- CASE START -->
-        <div class="home-case reveal">
-            <div class="title">CASE STUDY</div>
-            <div class="home-case-carousel">
-                <div class="swiper home-case-swiper">
-                    <div class="swiper-wrapper case-list">
-                        <?php if(is_array($case_list) || $case_list instanceof \think\Collection || $case_list instanceof \think\Paginator): if( count($case_list)==0 ) : echo "" ;else: foreach($case_list as $key=>$vo): ?>
-                            <div class="swiper-slide case-item" title="<?php echo $vo['post_title']; ?>">
-                                <a href="<?php echo cmf_url('portal/index/industries_info',array('id'=>$vo['id'])); ?>">
-                                    <div class="case-item-img">
-                                        <img loading="lazy" src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>"
-                                            alt="<?php echo $vo['post_title']; ?>">
-                                    </div>
-                                    <div class="case-item-title"><?php echo $vo['post_title']; ?></div>
-                                    <div class="case-item-desc"><?php echo $vo['post_excerpt']; ?></div>
-                                </a>
-                            </div>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                    </div>
-                </div>
-                <div class="home-case-button-prev"></div>
-                <div class="home-case-button-next"></div>
-                <div class="home-case-pagination"></div>
-            </div>
-        </div>
-        <!-- CASE END -->
-    <?php endif; ?>
-
-
-    <div class="news reveal">
-        <div class="title">NEWS CENTER</div>
-        <div class="home-news-carousel">
-            <div class="swiper home-news-swiper">
-                <div class="swiper-wrapper news-list">
-                    <?php if(is_array($news_list) || $news_list instanceof \think\Collection || $news_list instanceof \think\Paginator): if( count($news_list)==0 ) : echo "" ;else: foreach($news_list as $key=>$vo): ?>
-                        <div class="swiper-slide news-item" title="<?php echo $vo['title']; ?>">
-                            <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id'])); ?>">
-                                <div class="news-item-img">
-                                    <img loading="lazy" src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>">
-                                </div>
-                                <div class="news-item-title"><?php echo $vo['post_title']; ?></div>
-                                <div class="news-item-desc"><?php echo $vo['post_excerpt']; ?></div>
-                            </a>
-                        </div>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-            </div>
-            <div class="home-news-button-prev"></div>
-            <div class="home-news-button-next"></div>
-            <div class="home-news-pagination"></div>
-        </div>
-    </div>
-
-    <?php if(!(empty($index_site['faq']) || (($index_site['faq'] instanceof \think\Collection || $index_site['faq'] instanceof \think\Paginator ) && $index_site['faq']->isEmpty()))): ?>
-        <div class="faq reveal">
-            <div class="title"><?php echo (isset($index_site['faq_title']) && ($index_site['faq_title'] !== '')?$index_site['faq_title']:'FAQ'); ?></div>
-            <?php 
-                $faqContactLink = !empty($index_site['faq_contact_btn_link']) ? $index_site['faq_contact_btn_link'] :
-                cmf_url('portal/index/quote');
-                $faqContactTitle = !empty($index_site['faq_contact_title']) ? $index_site['faq_contact_title'] : 'Can
-                not Find Your Question?';
-                $faqContactDesc = !empty($index_site['faq_contact_desc']) ? $index_site['faq_contact_desc'] : 'If you
-                can not find the answer, contact us and let us know how we can help you.';
-                $faqContactBtnText = !empty($index_site['faq_contact_btn_text']) ? $index_site['faq_contact_btn_text'] :
-                'Contact Us';
-             ?>
-            <div class="faq-wrap">
-                <div class="faq-list">
-                    <?php if(is_array($index_site['faq']) || $index_site['faq'] instanceof \think\Collection || $index_site['faq'] instanceof \think\Paginator): if( count($index_site['faq'])==0 ) : echo "" ;else: foreach($index_site['faq'] as $key=>$vo): ?>
-                        <div class="faq-item <?php echo $key==0 ? 'active'  :  ''; ?>">
-                            <div class="faq-question">
-                                <span><?php echo $key+1; ?>.<?php echo $vo['question']; ?></span>
-                                <em>+</em>
-                            </div>
-                            <div class="faq-answer"><?php echo nl2br($vo['answer']); ?></div>
-                        </div>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-                <div class="faq-contact">
-                    <div class="faq-contact-icon">?</div>
-                    <div class="faq-contact-title"><?php echo $faqContactTitle; ?></div>
-                    <div class="faq-contact-desc"><?php echo $faqContactDesc; ?></div>
-                    <a class="faq-contact-btn" href="<?php echo $faqContactLink; ?>"><?php echo $faqContactBtnText; ?></a>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <div class="home-collect reveal">
-        <div class="home-collect-container">
-            <div class="home-collect-left">
-                <div class="quote-intro">
-                    <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
-                    <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
-                    <ul class="intro-list">
-                        <li>
-                            <strong>1. Application:</strong> What will the crane be used for? 
-                        </li>
-                        <li>
-                            <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
-                        </li>
-                        <li>
-                            <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
-                        </li>
-                    </ul>
-                    <div class="intro-footer">
-                        Our team will recommend the most suitable and cost-effective solution for your project.
-                    </div>
-                </div>
-                
-            </div>
-
-            <div class="home-collect-form-section">
-                <h2 class="form-title">Customize Your Lifting Solutions</h2>
-                <div class="home-collect-form">
-                    <div class="home-collect-field">
-                        <label>Name</label>
-                        <input type="text" class="home-collect-name" placeholder="Name">
-                    </div>
-                    <div class="home-collect-field">
-                        <label>Email</label>
-                        <input type="text" class="home-collect-email" placeholder="Email">
-                    </div>
-                    <div class="home-collect-field full-width">
-                        <label>Phone / Whatsapp</label>
-                        <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
-                    </div>
-                    <div class="home-collect-field full-width">
-                        <label>Message</label>
-                        <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
-                    </div>
-                    <div class="home-collect-submit">SEND MESSAGE</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--FOOT START-->
+<!--FOOT START-->
 <div class="footer">
     <div class="footer-content clearfix">
 
@@ -1063,10 +678,88 @@
 </script>
 <!-- old -->
 
-</body>
+<script>
+    let quoteSubmitting = false;
 
+    function showQuoteMessage(title, message, type) {
+        if (typeof window.showFormMessage === 'function') {
+            window.showFormMessage(title, message, type);
+        } else {
+            alert(message || title);
+        }
+    }
+
+    function clearQuoteForm() {
+        $('.quote-name, .quote-email, .quote-phone, .quote-message').val('');
+    }
+
+    function getFormattedPhoneNumber($input) {
+        let rawValue = $input.val();
+        if ($input[0] && $input[0]._iti) {
+            let iti = $input[0]._iti;
+            let fullNumber = iti.getNumber();
+            if (fullNumber && fullNumber.indexOf('+') === -1) {
+                let countryData = iti.getSelectedCountryData();
+                if (countryData && countryData.dialCode) {
+                    return '+' + countryData.dialCode + ' ' + rawValue;
+                }
+            }
+            return fullNumber || rawValue;
+        }
+        return rawValue;
+    }
+
+    function submit() {
+        let name = $('.quote-name').val();// 姓名
+        let phone = getFormattedPhoneNumber($('.quote-phone'));// 手机号
+        let email = $('.quote-email').val();// 邮箱
+        let content = $('.quote-message').val();// 内容
+
+        if (quoteSubmitting) {
+            return;
+        }
+
+        let $button = $('.quote-btn');
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            content: content,
+            type: 2,
+        }
+        quoteSubmitting = true;
+        $button.addClass('is-loading').text('SUBMITTING...');
+        $.ajax({
+            url: '/portal/index/inquiry',
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 1) {
+                    //谷歌点击转化
+                    if (typeof gtag_report_conversion === 'function') {
+                        gtag_report_conversion();
+                    }
+                    clearQuoteForm();
+                    showQuoteMessage('Submit Success', 'Thank you for your inquiry. We will contact you soon.');
+                } else {
+                    showQuoteMessage('Submit Failed', res.msg || 'Please try again later.', 'error');
+                }
+            },
+            error: function () {
+                showQuoteMessage('Submit Failed', 'Network error. Please try again later.', 'error');
+            },
+            complete: function () {
+                quoteSubmitting = false;
+                $button.removeClass('is-loading').text('SUBMIT');
+            }
+        })
+    }
+
+</script>
+
+</body>
 </html>
 
 
 
-<!-- old -->

@@ -1,4 +1,4 @@
-<?php /*a:4:{s:74:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product-info.html";i:1779677151;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779697000;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779265794;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:4:{s:74:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product-info.html";i:1779677151;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +6,7 @@
     <title><?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?></title>
     <meta name="keywords" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
     <meta name="description" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2V25J0DR5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2V25J0DR5Z');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
 <link href="/themes/simpleboot3/public/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -32,13 +23,6 @@
     <?php echo htmlspecialchars_decode($site_info['google_head']); ?>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwe66llrvz");
-</script>
 
 
 <style>
@@ -107,7 +91,7 @@
     <div class="header-container">
         <div class="header-logo">
             <a href="/">
-                <img src="/themes/simpleboot3/public/assets/images/logo.svg" alt="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
+                <img src="/themes/simpleboot3/public/assets/images/logo.png" alt="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
             </a>
         </div>
 
@@ -119,7 +103,7 @@
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/about'); ?>">About Us</a>
                 <div class="nav-sub about-nav">
                     <div class="nav-sub-item">
-                        <a href="<?php echo cmf_url('portal/index/about'); ?>">About Weihua</a>
+                        <a href="<?php echo cmf_url('portal/index/about'); ?>">About Nucleon</a>
                     </div>
                     <div class="nav-sub-item">
                         <a href="<?php echo cmf_url('portal/index/cert'); ?>">Certificates</a>
@@ -429,7 +413,7 @@
 
         <div class="footer-about">
             <div class="footer-logo">
-                <img src="/themes/simpleboot3/public/assets/images/logo-white.svg" alt="logo">
+                <img src="/themes/simpleboot3/public/assets/images/logo.webp" alt="logo">
             </div>
             <div class="footer-about-desc">
                 HENAN WEIHUA CO., LTD. is a leading professional industry crane manufacturer and exporter located in the

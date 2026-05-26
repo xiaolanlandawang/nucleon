@@ -242,7 +242,8 @@ class AdminProductCategoryController extends AdminBaseController
         $selectorTitle = '',
         $selectorDescription = '',
         $selectorButtonText = '',
-        $selectorItemsText = ''
+        $selectorItemsText = '',
+        $icon = ''
     )
     {
         $categoryId = (int)$categoryId;
@@ -257,7 +258,8 @@ class AdminProductCategoryController extends AdminBaseController
             'selector_title'       => trim((string)$selectorTitle),
             'selector_description' => trim((string)$selectorDescription),
             'selector_button_text' => trim((string)$selectorButtonText),
-            'selector_items'       => $this->parseSelectorItemsText($selectorItemsText)
+            'selector_items'       => $this->parseSelectorItemsText($selectorItemsText),
+            'icon'                 => trim((string)$icon)
         ];
         $this->saveHeroSettings($settings);
     }
@@ -295,6 +297,7 @@ class AdminProductCategoryController extends AdminBaseController
         $this->assign('oneCategory', $oneCategory);
         $this->assign('hero_title', '');
         $this->assign('hero_description', '');
+        $this->assign('icon', '');
         $this->assign('selector_title', '');
         $this->assign('selector_description', '');
         $this->assign('selector_button_text', '');
@@ -350,7 +353,8 @@ class AdminProductCategoryController extends AdminBaseController
             $data['selector_title'] ?? '',
             $data['selector_description'] ?? '',
             $data['selector_button_text'] ?? '',
-            $data['selector_items_text'] ?? ''
+            $data['selector_items_text'] ?? '',
+            $data['icon'] ?? ''
         );
         $this->saveCategoryFaqContent(
             $id,
@@ -387,6 +391,7 @@ class AdminProductCategoryController extends AdminBaseController
         $heroContent                   = $heroSettings[$id] ?? [];
         $category['hero_title']       = $heroContent['title'] ?? '';
         $category['hero_description'] = $heroContent['description'] ?? '';
+        $category['icon']             = $heroContent['icon'] ?? '';
         $category['selector_title'] = $heroContent['selector_title'] ?? '';
         $category['selector_description'] = $heroContent['selector_description'] ?? '';
         $category['selector_button_text'] = $heroContent['selector_button_text'] ?? '';
@@ -453,7 +458,8 @@ class AdminProductCategoryController extends AdminBaseController
             $data['selector_title'] ?? '',
             $data['selector_description'] ?? '',
             $data['selector_button_text'] ?? '',
-            $data['selector_items_text'] ?? ''
+            $data['selector_items_text'] ?? '',
+            $data['icon'] ?? ''
         );
         $this->saveCategoryFaqContent(
             $data['id'],

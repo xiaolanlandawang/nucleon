@@ -15,7 +15,7 @@ Route::get('PortCrane', 'portal/index/product?id=23')->append(array('id' => '23'
 
 Route::get('MultifunctionalCrane', 'portal/index/product?id=24')->append(array('id' => '24',));
 
-Route::get('LightCrane', 'portal/index/product?id=25')->append(array('id' => '25',));
+Route::get('jibcrane', 'portal/index/product?id=25')->append(array('id' => '25',));
 
 Route::get('MaterialHandlingEquipment', 'portal/index/product?id=26')->append(array('id' => '26',));
 

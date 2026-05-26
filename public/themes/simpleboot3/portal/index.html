@@ -58,21 +58,31 @@
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true, // 允许点击分页器子弹切换幻灯片
-                    // 自定义分页器渲染函数（可选）
-                    renderBullet: function (index, className) {
-                        // 你可以在这里添加自定义的HTML结构或样式
-                        var index_text = index + 1;
-                        if (index <= 8) {
-                            index_text = '0' + index_text;
-                        }
-                        return '<span class="' + className + '">' + index_text + '</span>';
-                    },
                 },
             })
 
         </script>
     </div>
     <!--BANNER END-->
+
+    <!--CATEGORY NAV START-->
+    <nav class="product-category-nav home-category-nav">
+        <div class="product-category-nav__inner">
+            <ul class="product-category-nav__list">
+                <foreach name="category_cards" item="vo">
+                    <li class="product-category-nav__item">
+                        <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">
+                            <span class="product-category-nav__icon">
+                                <img src="{:cmf_get_image_url($vo['icon'] ?: $vo['thumbnail'])}" alt="{$vo.name}">
+                            </span>
+                            <span class="product-category-nav__name">{$vo.name}</span>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </nav>
+    <!--CATEGORY NAV END-->
 
     <!--HOT PRODUCTS  START-->
     <div class="hot-products reveal">
@@ -110,7 +120,7 @@
                                             </div>
                                         </a>
                                         <div class="product_item__footer">
-                                            <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+                                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
                                         </div>
                                     </li>
                                 </foreach>

@@ -1,4 +1,4 @@
-<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779697000;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779265794;s:75:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779331371;}*/ ?>
+<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product.html";i:1779784941;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:75:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +6,7 @@
     <title><?php echo (isset($page_title) && ($page_title !== '')?$page_title:$site_info['site_name']); ?></title>
     <meta name="keywords" content="<?php echo (isset($page_keywords) && ($page_keywords !== '')?$page_keywords:$site_info['site_name']); ?>">
     <meta name="description" content="<?php echo (isset($page_description) && ($page_description !== '')?$page_description:$site_info['site_name']); ?>">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2V25J0DR5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2V25J0DR5Z');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
 <link href="/themes/simpleboot3/public/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -32,13 +23,6 @@
     <?php echo htmlspecialchars_decode($site_info['google_head']); ?>
 <?php endif; ?>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wwe66llrvz");
-</script>
 
 
 <style>
@@ -108,7 +92,7 @@
     <div class="header-container">
         <div class="header-logo">
             <a href="/">
-                <img src="/themes/simpleboot3/public/assets/images/logo.svg" alt="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
+                <img src="/themes/simpleboot3/public/assets/images/logo.png" alt="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
             </a>
         </div>
 
@@ -120,7 +104,7 @@
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/about'); ?>">About Us</a>
                 <div class="nav-sub about-nav">
                     <div class="nav-sub-item">
-                        <a href="<?php echo cmf_url('portal/index/about'); ?>">About Weihua</a>
+                        <a href="<?php echo cmf_url('portal/index/about'); ?>">About Nucleon</a>
                     </div>
                     <div class="nav-sub-item">
                         <a href="<?php echo cmf_url('portal/index/cert'); ?>">Certificates</a>
@@ -184,108 +168,90 @@
 
 
 <div class="product-page">
-    <?php if(!$is_category_page): ?>
-        <section class="products-banner" style="background-image:url('<?php echo $hero_image; ?>');">
-            <div class="products-banner__inner">
-                <h1 class="products-banner__title"><?php echo $hero_title; ?></h1>
-                <p class="products-banner__desc"><?php echo $hero_description; ?></p>
-                <a href="javascript:;" class="products-banner__btn" id="inquiry">Get A Free Quote</a>
-            </div>
-        </section>
-
-        <section class="products-category-section reveal">
-            <div class="products-category-section__inner">
-                <div class="products-category-section__head">
-                    <h2 class="products-category-section__title"><?php echo $category_headline; ?></h2>
-                    <p class="products-category-section__desc"><?php echo $category_intro; ?></p>
-                </div>
-
-                <ul class="category-grid">
-                    <?php if(is_array($category_cards) || $category_cards instanceof \think\Collection || $category_cards instanceof \think\Paginator): if( count($category_cards)==0 ) : echo "" ;else: foreach($category_cards as $key=>$vo): ?>
-                        <li class="category-grid__item">
-                            <a href="<?php echo cmf_url('portal/index/product',array('id'=>$vo['id'])); ?>" class="category-card">
-                                <div class="category-card__image-wrap">
-                                    <img src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['name']; ?>" class="category-card__image">
-                                </div>
-                                <div class="category-card__content">
-                                    <div class="category-card__title"><?php echo $vo['name']; ?></div>
-                                    <div class="category-card__desc"><?php echo $vo['custom_description']; ?></div>
-                                    <div class="category-card__action">Explore Products</div>
-                                </div>
-                            </a>
-                        </li>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </ul>
-            </div>
-        </section>
-    <?php else: ?>
-        <div class="product-breadcrumb">
-            <div class="product-breadcrumb__inner">
-                <a href="/">Home</a>
-                <span>&gt;</span>
-                <a href="<?php echo cmf_url('portal/index/product'); ?>">Products</a>
-                <span>&gt;</span>
-                <span><?php echo $current_category_name; ?></span>
+    <section class="products-banner">
+        <img src="<?php echo $hero_image; ?>" alt="<?php echo (isset($hero_title) && ($hero_title !== '')?$hero_title:''); ?>" class="products-banner__bg-img">
+        <div class="products-banner__inner breadcrumb-banner">
+            <h1 class="products-banner__title-left">Products</h1>
+            <div class="products-banner__breadcrumb">
+                <a href="/">Home</a> » <a href="<?php echo cmf_url('portal/index/product'); ?>">Products</a>
+                <?php if($is_category_page): ?>
+                    » <span><?php echo $current_category['name']; ?></span>
+                <?php endif; ?>
             </div>
         </div>
+    </section>
 
-        <section class="category-hero reveal">
-            <div class="category-hero__inner">
-                <div class="category-hero__content">
-                    <h1 class="category-hero__title"><?php echo $hero_title; ?></h1>
-                    <p class="category-hero__desc"><?php echo $hero_description; ?></p>
-                    <div class="category-hero__actions">
-                        <a href="javascript:;" class="category-hero__btn" id="inquiry">Get A Free Quote</a>
-                    </div>
+    <nav class="product-category-nav reveal visible">
+        <div class="product-category-nav__inner">
+            <ul class="product-category-nav__list">
+
+                <?php if(is_array($category_cards) || $category_cards instanceof \think\Collection || $category_cards instanceof \think\Paginator): if( count($category_cards)==0 ) : echo "" ;else: foreach($category_cards as $key=>$vo): ?>
+                    <li class="product-category-nav__item <?php echo isset($current_category['id']) && $current_category['id'] == $vo['id'] ? 'active' : ''; ?>">
+                        <a href="<?php echo cmf_url('portal/index/product',array('id'=>$vo['id'])); ?>">
+                            <span class="product-category-nav__icon">
+                                <img src="<?php echo cmf_get_image_url($vo['icon'] ?: $vo['thumbnail']); ?>" alt="<?php echo $vo['name']; ?>">
+                            </span>
+                            <span class="product-category-nav__name"><?php echo $vo['name']; ?></span>
+                        </a>
+                    </li>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </ul>
+        </div>
+    </nav>
+
+    <?php if($is_category_page): ?>
+        <section class="category-hero-info reveal visible">
+            <div class="category-hero-info__inner">
+                <div class="category-hero-info__header">
+                    <h1 class="category-hero-info__title"><?php echo $hero_title; ?></h1>
                 </div>
-                <div class="category-hero__media">
-                    <div class="category-hero__image-wrap">
-                        <img src="<?php echo $hero_image; ?>" alt="<?php echo $current_category_name; ?>" class="category-hero__image">
-                    </div>
+                <div class="category-hero-info__desc">
+                    <?php echo nl2br($hero_description); ?>
                 </div>
             </div>
         </section>
+    <?php endif; ?>
 
-        <section class="products-showcase reveal">
+    <section class="products-showcase reveal visible">
+        <?php if(!$is_category_page): ?>
             <div class="products-showcase__head">
                 <h2 class="products-showcase__title"><?php echo $category_headline; ?></h2>
                 <p class="products-showcase__desc"><?php echo $category_intro; ?></p>
             </div>
+        <?php endif; ?>
 
-            <div class="product_list_warp">
-                <ul class="product_list">
-                    <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): if( count($list)==0 ) : echo "" ;else: foreach($list as $key=>$vo): ?>
-                        <li class="product_item">
-                            <a href="<?php echo cmf_url('portal/index/product_info',array('id'=>$vo['id'])); ?>" class="product_item__link">
-                                <div class="product_list_item_img">
-                                    <img src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['title']; ?>" title="<?php echo $vo['title']; ?>">
-                                </div>
-                                <div class="product_item__content">
-                                    <div class="product_list_item_title"><?php echo $vo['title']; ?></div>
-                                    <div class="product_list_item_category"><?php echo (isset($vo['industry']) && ($vo['industry'] !== '')?$vo['industry']:'Engineered lifting equipment for high-efficiency industrial material handling.'); ?></div>
-                                </div>
-                            </a>
-                            <div class="product_item__footer">
-                                <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+        <div class="product_list_warp">
+            <ul class="product_list">
+                <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): if( count($list)==0 ) : echo "" ;else: foreach($list as $key=>$vo): ?>
+                    <li class="product_item">
+                        <a href="<?php echo cmf_url('portal/index/product_info',array('id'=>$vo['id'])); ?>" class="product_item__link">
+                            <div class="product_list_item_img">
+                                <img src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['title']; ?>" title="<?php echo $vo['title']; ?>">
                             </div>
-                        </li>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                </ul>
+                            <div class="product_item__content">
+                                <div class="product_list_item_title"><?php echo $vo['title']; ?></div>
+                                <div class="product_list_item_category"><?php echo (isset($vo['industry']) && ($vo['industry'] !== '')?$vo['industry']:'Engineered lifting equipment for high-efficiency industrial material handling.'); ?></div>
+                            </div>
+                        </a>
+                        <div class="product_item__footer">
+                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
+                        </div>
+                    </li>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </ul>
 
-                <?php if(count($list) == 0): ?>
-                    <div class="product-empty">
-                        <h3>No products available</h3>
-                        <p>This category does not have visible products yet. Once products are added in the backend, they will appear here automatically.</p>
-                    </div>
-                <?php endif; ?>
-
-                <div class="products-content-right-page">
-                    <ul class="pagination"><?php echo $page; ?></ul>
+            <?php if(count($list) == 0): ?>
+                <div class="product-empty">
+                    <h3>No products available</h3>
+                    <p>This category does not have visible products yet. Once products are added in the backend, they will appear here automatically.</p>
                 </div>
-            </div>
-        </section>
+            <?php endif; ?>
 
-    <?php endif; ?>
+            <div class="products-content-right-page">
+                <ul class="pagination"><?php echo $page; ?></ul>
+            </div>
+        </div>
+    </section>
 
     <section class="crane-selector-module">
     <div class="crane-selector__inner">
@@ -458,7 +424,7 @@
 
         <div class="footer-about">
             <div class="footer-logo">
-                <img src="/themes/simpleboot3/public/assets/images/logo-white.svg" alt="logo">
+                <img src="/themes/simpleboot3/public/assets/images/logo.webp" alt="logo">
             </div>
             <div class="footer-about-desc">
                 HENAN WEIHUA CO., LTD. is a leading professional industry crane manufacturer and exporter located in the

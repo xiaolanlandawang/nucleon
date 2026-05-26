@@ -141,6 +141,27 @@ class IndexController extends HomeBaseController
             ->select();
         $this->assign('case_list', $case_list);
 
+        $heroSettingsAll = cmf_get_option('product_category_hero_settings');
+        $heroSettingsAll = is_array($heroSettingsAll) ? $heroSettingsAll : [];
+
+        $categoryCards = $this->category_list->toArray();
+        foreach ($categoryCards as $key => $categoryItem) {
+            $heroContentItem  = $heroSettingsAll[$categoryItem['id']] ?? [];
+            $categoryCards[$key]['icon'] = trim((string)($heroContentItem['icon'] ?? ''));
+
+            if (empty($categoryCards[$key]['thumbnail'])) {
+                $firstProduct = clone $productModel;
+                $firstProduct = $firstProduct->where('category_id', $categoryItem['id'])
+                    ->where('thumbnail', '<>', '')
+                    ->order('list_order asc,id desc')
+                    ->find();
+                if (!empty($firstProduct) && !empty($firstProduct['thumbnail'])) {
+                    $categoryCards[$key]['thumbnail'] = $firstProduct['thumbnail'];
+                }
+            }
+        }
+        $this->assign('category_cards', $categoryCards);
+
         return $this->fetch(':index');
     }
 
@@ -165,6 +186,7 @@ class IndexController extends HomeBaseController
             $heroContentItem  = $heroSettingsAll[$categoryItem['id']] ?? [];
             $customHeroDescription = trim((string)($heroContentItem['description'] ?? ''));
             $categoryCards[$key]['custom_description'] = $customHeroDescription !== '' ? $customHeroDescription : 'Explore our wide range of products in this category and request a custom quotation for your project.';
+            $categoryCards[$key]['icon'] = trim((string)($heroContentItem['icon'] ?? ''));
 
             if (empty($categoryCards[$key]['thumbnail'])) {
                 $firstProduct = $productModel->where('category_id', $categoryItem['id'])

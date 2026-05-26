@@ -15,108 +15,90 @@
 <include file="public@nav"/>
 
 <div class="product-page">
-    <if condition="!$is_category_page">
-        <section class="products-banner" style="background-image:url('{$hero_image}');">
-            <div class="products-banner__inner">
-                <h1 class="products-banner__title">{$hero_title}</h1>
-                <p class="products-banner__desc">{$hero_description}</p>
-                <a href="javascript:;" class="products-banner__btn" id="inquiry">Get A Free Quote</a>
-            </div>
-        </section>
-
-        <section class="products-category-section reveal">
-            <div class="products-category-section__inner">
-                <div class="products-category-section__head">
-                    <h2 class="products-category-section__title">{$category_headline}</h2>
-                    <p class="products-category-section__desc">{$category_intro}</p>
-                </div>
-
-                <ul class="category-grid">
-                    <foreach name="category_cards" item="vo">
-                        <li class="category-grid__item">
-                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}" class="category-card">
-                                <div class="category-card__image-wrap">
-                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.name}" class="category-card__image">
-                                </div>
-                                <div class="category-card__content">
-                                    <div class="category-card__title">{$vo.name}</div>
-                                    <div class="category-card__desc">{$vo.custom_description}</div>
-                                    <div class="category-card__action">Explore Products</div>
-                                </div>
-                            </a>
-                        </li>
-                    </foreach>
-                </ul>
-            </div>
-        </section>
-    <else />
-        <div class="product-breadcrumb">
-            <div class="product-breadcrumb__inner">
-                <a href="/">Home</a>
-                <span>&gt;</span>
-                <a href="{:cmf_url('portal/index/product')}">Products</a>
-                <span>&gt;</span>
-                <span>{$current_category_name}</span>
+    <section class="products-banner">
+        <img src="{$hero_image}" alt="{$hero_title|default=''}" class="products-banner__bg-img">
+        <div class="products-banner__inner breadcrumb-banner">
+            <h1 class="products-banner__title-left">Products</h1>
+            <div class="products-banner__breadcrumb">
+                <a href="/">Home</a> » <a href="{:cmf_url('portal/index/product')}">Products</a>
+                <if condition="$is_category_page">
+                    » <span>{$current_category.name}</span>
+                </if>
             </div>
         </div>
+    </section>
 
-        <section class="category-hero reveal">
-            <div class="category-hero__inner">
-                <div class="category-hero__content">
-                    <h1 class="category-hero__title">{$hero_title}</h1>
-                    <p class="category-hero__desc">{$hero_description}</p>
-                    <div class="category-hero__actions">
-                        <a href="javascript:;" class="category-hero__btn" id="inquiry">Get A Free Quote</a>
-                    </div>
+    <nav class="product-category-nav reveal visible">
+        <div class="product-category-nav__inner">
+            <ul class="product-category-nav__list">
+
+                <foreach name="category_cards" item="vo">
+                    <li class="product-category-nav__item {:isset($current_category['id']) && $current_category['id'] == $vo['id'] ? 'active' : ''}">
+                        <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">
+                            <span class="product-category-nav__icon">
+                                <img src="{:cmf_get_image_url($vo['icon'] ?: $vo['thumbnail'])}" alt="{$vo.name}">
+                            </span>
+                            <span class="product-category-nav__name">{$vo.name}</span>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </nav>
+
+    <if condition="$is_category_page">
+        <section class="category-hero-info reveal visible">
+            <div class="category-hero-info__inner">
+                <div class="category-hero-info__header">
+                    <h1 class="category-hero-info__title">{$hero_title}</h1>
                 </div>
-                <div class="category-hero__media">
-                    <div class="category-hero__image-wrap">
-                        <img src="{$hero_image}" alt="{$current_category_name}" class="category-hero__image">
-                    </div>
+                <div class="category-hero-info__desc">
+                    {$hero_description|nl2br}
                 </div>
             </div>
         </section>
+    </if>
 
-        <section class="products-showcase reveal">
+    <section class="products-showcase reveal visible">
+        <if condition="!$is_category_page">
             <div class="products-showcase__head">
                 <h2 class="products-showcase__title">{$category_headline}</h2>
                 <p class="products-showcase__desc">{$category_intro}</p>
             </div>
+        </if>
 
-            <div class="product_list_warp">
-                <ul class="product_list">
-                    <foreach name="list" item="vo">
-                        <li class="product_item">
-                            <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}" class="product_item__link">
-                                <div class="product_list_item_img">
-                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
-                                </div>
-                                <div class="product_item__content">
-                                    <div class="product_list_item_title">{$vo.title}</div>
-                                    <div class="product_list_item_category">{$vo.industry|default='Engineered lifting equipment for high-efficiency industrial material handling.'}</div>
-                                </div>
-                            </a>
-                            <div class="product_item__footer">
-                                <div class="product_list_item_btn" id="inquiry">CONSULT</div>
+        <div class="product_list_warp">
+            <ul class="product_list">
+                <foreach name="list" item="vo">
+                    <li class="product_item">
+                        <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}" class="product_item__link">
+                            <div class="product_list_item_img">
+                                <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
                             </div>
-                        </li>
-                    </foreach>
-                </ul>
+                            <div class="product_item__content">
+                                <div class="product_list_item_title">{$vo.title}</div>
+                                <div class="product_list_item_category">{$vo.industry|default='Engineered lifting equipment for high-efficiency industrial material handling.'}</div>
+                            </div>
+                        </a>
+                        <div class="product_item__footer">
+                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
 
-                <if condition="count($list) eq 0">
-                    <div class="product-empty">
-                        <h3>No products available</h3>
-                        <p>This category does not have visible products yet. Once products are added in the backend, they will appear here automatically.</p>
-                    </div>
-                </if>
-
-                <div class="products-content-right-page">
-                    <ul class="pagination">{$page}</ul>
+            <if condition="count($list) eq 0">
+                <div class="product-empty">
+                    <h3>No products available</h3>
+                    <p>This category does not have visible products yet. Once products are added in the backend, they will appear here automatically.</p>
                 </div>
-            </div>
-        </section>
+            </if>
 
-    </if>
+            <div class="products-content-right-page">
+                <ul class="pagination">{$page}</ul>
+            </div>
+        </div>
+    </section>
 
     <include file="public@crane_selector"/>
 
