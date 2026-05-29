@@ -413,6 +413,12 @@ class SettingController extends AdminBaseController
         if (!empty($params['about_bg_img'])){
             $index_site['about_bg_img'] = $params['about_bg_img'];
         }
+        if (isset($params['choose_bg_img'])){
+            $index_site['choose_bg_img'] = $params['choose_bg_img'];
+        }
+        if (isset($params['faq_bg_img'])){
+            $index_site['faq_bg_img'] = $params['faq_bg_img'];
+        }
         if (!empty($params['about_right_bg_img'])){
             $index_site['about_right_bg_img'] = $params['about_right_bg_img'];
         }

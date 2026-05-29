@@ -224,7 +224,7 @@ $(document).ready(function() {
 
     $('.faq-item').each(function(index){
         if (index === 0) {
-            $(this).addClass('active').find('.faq-question em').text('−');
+            $(this).addClass('active').find('.faq-question em').text('×');
         } else {
             $(this).removeClass('active').find('.faq-question em').text('+');
         }
@@ -242,7 +242,7 @@ $(document).ready(function() {
 
         $('.faq-item').removeClass('active').find('.faq-question em').text('+');
         $item.addClass('active');
-        $item.find('em').text('−');
+        $item.find('em').text('×');
     });
 })
 

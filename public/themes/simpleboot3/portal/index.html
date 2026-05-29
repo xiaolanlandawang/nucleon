@@ -262,27 +262,35 @@
 
 
     <!-- CHOOSE START -->
-    <div class="choose-warp reveal">
-        <div class="choose">
-            <div class="title">WHY CHOOSE NUCLEON</div>
-            <div class="choose-desc">{$index_site.choose_description|default=''}</div>
-            <ul class="choose-list">
+    <div class="premium-choose-section reveal" style="background: #181818 <notempty name='index_site.choose_bg_img'>url('{:cmf_get_image_url($index_site[\'choose_bg_img\'])}')<else/>url('__TMPL__/public/assets/images/logo-white.svg')</notempty> no-repeat calc(100% - 120px) center; background-size: auto 100%;">
+        <div class="premium-choose-container">
+            <div class="premium-choose-header">
+                <div class="premium-choose-subtitle">WHY CHOOSE NUCLEON</div>
+                <h2 class="premium-choose-title">ENGINEERING EXCELLENCE,<br>LIFTING THE FUTURE.</h2>
+            </div>
+            
+            <div class="premium-choose-grid">
                 <notempty name="index_site.choose">
+                    <php>$c_count = 0;</php>
                     <foreach name="index_site.choose" item="vo">
-                        <li class="choose-item">
-                            <div class="choose-item-icon">
-                                <img loading="lazy" src="{:cmf_get_image_url($vo.choose_image)}" alt="choose"
-                                    data-default_img="{:cmf_get_image_url($vo.choose_image)}"
-                                    data-active_img="{:cmf_get_image_url($vo.choose_image_active)}">
+                        <if condition="$c_count lt 4">
+                            <div class="premium-choose-card">
+                                <div class="choose-icon-wrap">
+                                    <img loading="lazy" src="{:cmf_get_image_url($vo.choose_image_active ?: $vo.choose_image)}" alt="{$vo.choose_name}">
+                                </div>
+                                <div class="choose-content-wrap">
+                                    <h3 class="choose-card-title">{$vo.choose_name}</h3>
+                                    <p class="choose-card-desc">{$vo.choose_desc}</p>
+                                </div>
                             </div>
-                            <div class="choose-item-title">{$vo.choose_name}</div>
-                            <div class="choose-item-desc">{$vo.choose_desc}</div>
-                        </li>
+                            <php>$c_count++;</php>
+                        </if>
                     </foreach>
                 </notempty>
-            </ul>
-            <div class="choose-btn-wrap">
-                <a href="javascript:;" class="choose-btn open-popover-btn">Get a free quote <i class="fa fa-hand-pointer-o"></i></a>
+            </div>
+            
+            <div class="premium-choose-footer">
+                <a href="{:cmf_url('portal/index/about')}" class="premium-explore-btn">Explore now</a>
             </div>
         </div>
     </div>
@@ -373,9 +381,9 @@
                     <div class="swiper-wrapper">
                         <foreach name="news_list" item="vo">
                             <div class="swiper-slide news-text-slide" style="cursor: pointer; padding: 15px 0; border-bottom: 1px solid #eee; display: flex; flex-direction: column; justify-content: center;">
-                                <div class="news-text-title" style="font-size: 20px; line-height: 1.4; margin-bottom: 8px; transition: color 0.3s; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{$vo.post_title}</div>
-                                <div class="news-text-desc" style="font-size: 14px; color: #777; line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{$vo.post_excerpt}</div>
-                                <div class="news-text-date" style="font-size: 12px; color: #555;"><php>echo date('Y/m/d', $vo['create_time']);</php></div>
+                                <div class="news-text-title" style="font-size: 24px; line-height: 1.4; margin-bottom: 8px; transition: color 0.3s; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{$vo.post_title}</div>
+                                <div class="news-text-desc" style="font-size: 16px; color: #777; line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{$vo.post_excerpt}</div>
+                                <div class="news-text-date" style="font-size: 14px; color: #555;"><php>echo date('Y/m/d', $vo['create_time']);</php></div>
                             </div>
                         </foreach>
                     </div>
@@ -401,30 +409,34 @@
             <php>
                 $faqContactLink = !empty($index_site['faq_contact_btn_link']) ? $index_site['faq_contact_btn_link'] :
                 cmf_url('portal/index/quote');
-                $faqContactTitle = !empty($index_site['faq_contact_title']) ? $index_site['faq_contact_title'] : 'Can
-                not Find Your Question?';
-                $faqContactDesc = !empty($index_site['faq_contact_desc']) ? $index_site['faq_contact_desc'] : 'If you
-                can not find the answer, contact us and let us know how we can help you.';
+                $faqContactTitle = !empty($index_site['faq_contact_title']) ? $index_site['faq_contact_title'] : 'Still Have Questions?';
+                $faqContactDesc = !empty($index_site['faq_contact_desc']) ? $index_site['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
                 $faqContactBtnText = !empty($index_site['faq_contact_btn_text']) ? $index_site['faq_contact_btn_text'] :
-                'Contact Us';
+                'Contact Engineers';
             </php>
             <div class="faq-wrap">
+                <!-- Left Side: Brand Endorsement (35%) -->
+                <div class="faq-contact" style="background: #181818 <notempty name='index_site.faq_bg_img'>url('{:cmf_get_image_url($index_site[\'faq_bg_img\'])}')<else/>url('__TMPL__/public/assets/images/choose-bg.webp')</notempty> no-repeat center center; background-size: cover;">
+                    <div class="faq-contact-overlay"></div>
+                    <div class="faq-contact-content">
+                        <div class="faq-contact-title">{$faqContactTitle}</div>
+                        <div class="faq-contact-desc">{$faqContactDesc}</div>
+                        <a class="faq-contact-btn" href="{$faqContactLink}">{$faqContactBtnText} <span>&rarr;</span></a>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Minimalist Accordion (65%) -->
                 <div class="faq-list">
                     <foreach name="index_site.faq" item="vo">
                         <div class="faq-item {$key==0 ? 'active' : ''}">
                             <div class="faq-question">
-                                <span>{$key+1}.{$vo.question}</span>
-                                <em>+</em>
+                                <span class="faq-index"><php>echo sprintf("%02d", $key+1);</php></span>
+                                <span class="faq-text">{$vo.question}</span>
+                                <em class="faq-toggle"></em>
                             </div>
                             <div class="faq-answer">{$vo.answer|nl2br}</div>
                         </div>
                     </foreach>
-                </div>
-                <div class="faq-contact">
-                    <div class="faq-contact-icon">?</div>
-                    <div class="faq-contact-title">{$faqContactTitle}</div>
-                    <div class="faq-contact-desc">{$faqContactDesc}</div>
-                    <a class="faq-contact-btn" href="{$faqContactLink}">{$faqContactBtnText}</a>
                 </div>
             </div>
         </div>

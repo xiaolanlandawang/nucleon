@@ -1,4 +1,4 @@
-<?php /*a:4:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\index.html";i:1779962846;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:4:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\index.html";i:1780037060;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1780024241;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1780024241;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -414,26 +414,32 @@
 
 
     <!-- CHOOSE START -->
-    <div class="choose-warp reveal">
-        <div class="choose">
-            <div class="title">WHY CHOOSE NUCLEON</div>
-            <div class="choose-desc"><?php echo (isset($index_site['choose_description']) && ($index_site['choose_description'] !== '')?$index_site['choose_description']:''); ?></div>
-            <ul class="choose-list">
-                <?php if(!(empty($index_site['choose']) || (($index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator ) && $index_site['choose']->isEmpty()))): if(is_array($index_site['choose']) || $index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator): if( count($index_site['choose'])==0 ) : echo "" ;else: foreach($index_site['choose'] as $key=>$vo): ?>
-                        <li class="choose-item">
-                            <div class="choose-item-icon">
-                                <img loading="lazy" src="<?php echo cmf_get_image_url($vo['choose_image']); ?>" alt="choose"
-                                    data-default_img="<?php echo cmf_get_image_url($vo['choose_image']); ?>"
-                                    data-active_img="<?php echo cmf_get_image_url($vo['choose_image_active']); ?>">
+    <div class="premium-choose-section reveal" style="background: #181818 <?php if(!(empty($index_site['choose_bg_img']) || (($index_site['choose_bg_img'] instanceof \think\Collection || $index_site['choose_bg_img'] instanceof \think\Paginator ) && $index_site['choose_bg_img']->isEmpty()))): ?>url('<?php echo cmf_get_image_url($index_site['choose_bg_img']); ?>')<?php else: ?>url('/themes/simpleboot3/public/assets/images/logo-white.svg')<?php endif; ?> no-repeat calc(100% - 120px) center; background-size: auto 100%;">
+        <div class="premium-choose-container">
+            <div class="premium-choose-header">
+                <div class="premium-choose-subtitle">WHY CHOOSE NUCLEON</div>
+                <h2 class="premium-choose-title">ENGINEERING EXCELLENCE,<br>LIFTING THE FUTURE.</h2>
+            </div>
+            
+            <div class="premium-choose-grid">
+                <?php if(!(empty($index_site['choose']) || (($index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator ) && $index_site['choose']->isEmpty()))): $c_count = 0; if(is_array($index_site['choose']) || $index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator): if( count($index_site['choose'])==0 ) : echo "" ;else: foreach($index_site['choose'] as $key=>$vo): if($c_count < 4): ?>
+                            <div class="premium-choose-card">
+                                <div class="choose-icon-wrap">
+                                    <img loading="lazy" src="<?php echo cmf_get_image_url($vo['choose_image_active'] ?: $vo['choose_image']); ?>" alt="<?php echo $vo['choose_name']; ?>">
+                                </div>
+                                <div class="choose-content-wrap">
+                                    <h3 class="choose-card-title"><?php echo $vo['choose_name']; ?></h3>
+                                    <p class="choose-card-desc"><?php echo $vo['choose_desc']; ?></p>
+                                </div>
                             </div>
-                            <div class="choose-item-title"><?php echo $vo['choose_name']; ?></div>
-                            <div class="choose-item-desc"><?php echo $vo['choose_desc']; ?></div>
-                        </li>
+                            <?php $c_count++; ?>
+                        <?php endif; ?>
                     <?php endforeach; endif; else: echo "" ;endif; ?>
                 <?php endif; ?>
-            </ul>
-            <div class="choose-btn-wrap">
-                <a href="javascript:;" class="choose-btn open-popover-btn">Get a free quote <i class="fa fa-hand-pointer-o"></i></a>
+            </div>
+            
+            <div class="premium-choose-footer">
+                <a href="<?php echo cmf_url('portal/index/about'); ?>" class="premium-explore-btn">Explore now</a>
             </div>
         </div>
     </div>
@@ -522,9 +528,9 @@
                     <div class="swiper-wrapper">
                         <?php if(is_array($news_list) || $news_list instanceof \think\Collection || $news_list instanceof \think\Paginator): if( count($news_list)==0 ) : echo "" ;else: foreach($news_list as $key=>$vo): ?>
                             <div class="swiper-slide news-text-slide" style="cursor: pointer; padding: 15px 0; border-bottom: 1px solid #eee; display: flex; flex-direction: column; justify-content: center;">
-                                <div class="news-text-title" style="font-size: 20px; line-height: 1.4; margin-bottom: 8px; transition: color 0.3s; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo $vo['post_title']; ?></div>
-                                <div class="news-text-desc" style="font-size: 14px; color: #777; line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?php echo $vo['post_excerpt']; ?></div>
-                                <div class="news-text-date" style="font-size: 12px; color: #555;"><?php echo date('Y/m/d', $vo['create_time']); ?></div>
+                                <div class="news-text-title" style="font-size: 24px; line-height: 1.4; margin-bottom: 8px; transition: color 0.3s; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo $vo['post_title']; ?></div>
+                                <div class="news-text-desc" style="font-size: 16px; color: #777; line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?php echo $vo['post_excerpt']; ?></div>
+                                <div class="news-text-date" style="font-size: 14px; color: #555;"><?php echo date('Y/m/d', $vo['create_time']); ?></div>
                             </div>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
                     </div>
@@ -558,22 +564,28 @@
                 'Contact Us';
              ?>
             <div class="faq-wrap">
+                <!-- Left Side: Brand Endorsement (35%) -->
+                <div class="faq-contact" style="background: #181818 <?php if(!(empty($index_site['faq_bg_img']) || (($index_site['faq_bg_img'] instanceof \think\Collection || $index_site['faq_bg_img'] instanceof \think\Paginator ) && $index_site['faq_bg_img']->isEmpty()))): ?>url('<?php echo cmf_get_image_url($index_site['faq_bg_img']); ?>')<?php else: ?>url('/themes/simpleboot3/public/assets/images/choose-bg.webp')<?php endif; ?> no-repeat center center; background-size: cover;">
+                    <div class="faq-contact-overlay"></div>
+                    <div class="faq-contact-content">
+                        <div class="faq-contact-title"><?php echo $faqContactTitle; ?></div>
+                        <div class="faq-contact-desc"><?php echo $faqContactDesc; ?></div>
+                        <a class="faq-contact-btn" href="<?php echo $faqContactLink; ?>"><?php echo $faqContactBtnText; ?> &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Minimalist Accordion (65%) -->
                 <div class="faq-list">
                     <?php if(is_array($index_site['faq']) || $index_site['faq'] instanceof \think\Collection || $index_site['faq'] instanceof \think\Paginator): if( count($index_site['faq'])==0 ) : echo "" ;else: foreach($index_site['faq'] as $key=>$vo): ?>
                         <div class="faq-item <?php echo $key==0 ? 'active'  :  ''; ?>">
                             <div class="faq-question">
-                                <span><?php echo $key+1; ?>.<?php echo $vo['question']; ?></span>
-                                <em>+</em>
+                                <span class="faq-index"><?php echo sprintf("%02d", $key+1); ?></span>
+                                <span class="faq-text"><?php echo $vo['question']; ?></span>
+                                <em class="faq-toggle"></em>
                             </div>
                             <div class="faq-answer"><?php echo nl2br($vo['answer']); ?></div>
                         </div>
                     <?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-                <div class="faq-contact">
-                    <div class="faq-contact-icon">?</div>
-                    <div class="faq-contact-title"><?php echo $faqContactTitle; ?></div>
-                    <div class="faq-contact-desc"><?php echo $faqContactDesc; ?></div>
-                    <a class="faq-contact-btn" href="<?php echo $faqContactLink; ?>"><?php echo $faqContactBtnText; ?></a>
                 </div>
             </div>
         </div>
