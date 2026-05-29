@@ -44,37 +44,45 @@ $(document).ready(function() {
         });
     }
 
-    if ($('.home-news-swiper .news-item').length) {
-        new Swiper('.home-news-swiper', {
-            slidesPerView: 4,
-            slidesPerGroup: 4,
-            spaceBetween: 18,
-            loop: false,
+    if ($('.home-news-text-swiper .news-text-slide').length) {
+        var newsImgSwiper = new Swiper('.home-news-img-swiper', {
+            slidesPerView: 1,
+            allowTouchMove: false,
+            loop: true,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+
+        var newsTextSwiper = new Swiper('.home-news-text-swiper', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
             watchOverflow: true,
-            navigation: {
-                nextEl: '.home-news-button-next',
-                prevEl: '.home-news-button-prev',
-            },
-            pagination: {
-                el: '.home-news-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                    slidesPerGroup: 1,
-                    spaceBetween: 12,
-                },
-                1000: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                    spaceBetween: 16,
-                },
-                1441: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4,
-                    spaceBetween: 18,
+            on: {
+                slideChange: function () {
+                    if (newsImgSwiper && typeof newsImgSwiper.slideToLoop === 'function') {
+                        newsImgSwiper.slideToLoop(this.realIndex, 0);
+                    } else if (newsImgSwiper) {
+                        newsImgSwiper.slideTo(this.activeIndex, 0);
+                    }
                 }
+            }
+        });
+
+        $('.home-news-text-swiper').on('click', '.news-text-slide', function() {
+            var slideIndex = $(this).attr('data-swiper-slide-index');
+            if (slideIndex !== undefined) {
+                newsTextSwiper.slideToLoop(parseInt(slideIndex));
+            } else {
+                newsTextSwiper.slideTo($(this).index());
             }
         });
     }

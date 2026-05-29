@@ -293,7 +293,7 @@ Route::get('WEIHUA-2500t/h-Bridge-Grab-Ship-Unloader', 'portal/index/industries_
 
 Route::get('550t-Gantry-Crane-Load-Test', 'portal/index/industries_info?id=23')->append(array('id' => '23',));
 
-Route::get('weihuaAdmin$', 'admin/Index/index');
+Route::get('admin$', 'admin/Index/index');
 
 Route::get('What-is-an-overhead-crane', 'portal/index/news_info?cid=2&id=26')->append(array('cid' => '2',  'id' => '26',));
 

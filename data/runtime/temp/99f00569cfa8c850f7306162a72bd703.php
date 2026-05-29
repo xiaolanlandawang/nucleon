@@ -1,4 +1,4 @@
-<?php /*a:4:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\index.html";i:1779784934;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:4:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\index.html";i:1779962846;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -325,56 +325,53 @@
     <!--HOT PRODUCTS  END-->
 
     <!--ABOUT START -->
-    <div class="about reveal">
-        <div class="about-wrap">
-            <div class="about-img">
-                <img loading="lazy" src="<?php echo cmf_get_image_url($index_site['about_img'] ?? ''); ?>" alt="<?php echo $site_info['site_name']; ?>">
+    <div class="home-about-section reveal">
+        <!-- The split background container -->
+        <div class="home-about-bg" style="background-image: url('<?php echo cmf_get_image_url($index_site['about_bg_img'] ?? ''); ?>');">
+            <div class="home-about-bg-overlay"></div>
+        </div>
+        
+        <div class="home-about-bg-red"></div>
+        <?php if(!(empty($index_site['about_right_bg_img']) || (($index_site['about_right_bg_img'] instanceof \think\Collection || $index_site['about_right_bg_img'] instanceof \think\Paginator ) && $index_site['about_right_bg_img']->isEmpty()))): ?>
+            <div class="home-about-bg-right-decor" style="background-image: url('<?php echo cmf_get_image_url($index_site['about_right_bg_img']); ?>');"></div>
+        <?php endif; ?>
+        
+        <div class="home-about-wrap">
+            <div class="home-about-left">
+                <div class="home-about-video-btn">
+                    <a class="xz-btn popup-video" href="<?php echo (isset($index_site['about_video']) && ($index_site['about_video'] !== '')?$index_site['about_video']:'javascript:void(0);'); ?>" target="_self">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </a>
+                </div>
+                <h2 class="home-about-heading"><?php echo (isset($index_site['about_title']) && ($index_site['about_title'] !== '')?$index_site['about_title']:'Introduction to Nucleon'); ?></h2>
+                <div class="home-about-desc">
+                    <?php echo (isset($index_site['about_description']) && ($index_site['about_description'] !== '')?$index_site['about_description']:''); ?>
+                </div>
+                <div class="home-about-actions">
+                    <a class="about-btn" href="<?php echo cmf_url('portal/index/about'); ?>">Learn More &rarr;</a>
+                </div>
             </div>
-            <div class="about-content">
-                <div class="about-heading">WHO WE ARE</div>
-                <div class="about-desc"><?php echo (isset($index_site['about_description']) && ($index_site['about_description'] !== '')?$index_site['about_description']:''); ?></div>
-                <ul>
-                    <?php if(!(empty($index_site['engineering']) || (($index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator ) && $index_site['engineering']->isEmpty()))): if(is_array($index_site['engineering']) || $index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator): if( count($index_site['engineering'])==0 ) : echo "" ;else: foreach($index_site['engineering'] as $key=>$vo): ?>
-                            <li class="about-content-item">
-                                <p class="about-content-num"><?php echo $vo['engineering_num']; ?></p>
-                                <div class="about-content-line"></div>
-                                <p class="about-content-item-title"><?php echo $vo['engineering_name']; ?></p>
-                                <p class="about-content-desc"><?php echo $vo['engineering_desc']; ?></p>
-                            </li>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                    <?php endif; ?>
-                </ul>
-                <div class="about-actions">
-                    <a class="about-btn" href="<?php echo cmf_url('portal/index/about'); ?>">LEARN MORE -&gt;</a>
+            
+            <div class="home-about-right">
+                <div class="home-about-img">
+                    <img loading="lazy" src="<?php echo cmf_get_image_url($index_site['about_img'] ?? ''); ?>" alt="<?php echo $site_info['site_name']; ?>">
                 </div>
             </div>
         </div>
     </div>
-    <!--ABOUT END -->
 
     <!-- STATS START -->
-    <div class="home-stats reveal">
+    <div class="home-stats reveal" style="<?php if(!(empty($index_site['stats_bg_img']) || (($index_site['stats_bg_img'] instanceof \think\Collection || $index_site['stats_bg_img'] instanceof \think\Paginator ) && $index_site['stats_bg_img']->isEmpty()))): ?>background-image: url('<?php echo cmf_get_image_url($index_site['stats_bg_img']); ?>'); background-size: cover; background-position: center;<?php endif; ?>">
         <div class="home-stats-wrap">
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="1988">0</span></div>
-                <div class="stat-text">Founded in China</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="3420">0</span>K</div>
-                <div class="stat-text">Square Meter Factory</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="1000">0</span></div>
-                <div class="stat-text">1000 R&D engineers team</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
-                <div class="stat-text">Export to over 170 countries</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
-                <div class="stat-text">500 honorary titles</div>
-            </div>
+            <?php if(!(empty($index_site['engineering']) || (($index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator ) && $index_site['engineering']->isEmpty()))): if(is_array($index_site['engineering']) || $index_site['engineering'] instanceof \think\Collection || $index_site['engineering'] instanceof \think\Paginator): if( count($index_site['engineering'])==0 ) : echo "" ;else: foreach($index_site['engineering'] as $key=>$vo): ?>
+                    <div class="stat-item">
+                        <div class="stat-num-wrap">
+                            <span class="stat-num counter" data-target="<?php echo $vo['engineering_num']; ?>">0</span><span class="stat-unit"><?php echo $vo['engineering_name']; ?></span>
+                        </div>
+                        <div class="stat-desc"><?php echo $vo['engineering_desc']; ?></div>
+                    </div>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <script>
@@ -387,14 +384,14 @@
                     const target = +counter.getAttribute('data-target');
 
                     const updateCount = () => {
-                        const count = +counter.innerText.replace(/,/g, '');
+                        const count = +counter.innerText;
                         const inc = target / speed;
 
                         if (count < target) {
-                            counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
+                            counter.innerText = Math.ceil(count + inc);
                             setTimeout(updateCount, 15);
                         } else {
-                            counter.innerText = target.toLocaleString('en-US');
+                            counter.innerText = target;
                         }
                     };
                     updateCount();
@@ -419,7 +416,7 @@
     <!-- CHOOSE START -->
     <div class="choose-warp reveal">
         <div class="choose">
-            <div class="title">WHY CHOOSE US</div>
+            <div class="title">WHY CHOOSE NUCLEON</div>
             <div class="choose-desc"><?php echo (isset($index_site['choose_description']) && ($index_site['choose_description'] !== '')?$index_site['choose_description']:''); ?></div>
             <ul class="choose-list">
                 <?php if(!(empty($index_site['choose']) || (($index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator ) && $index_site['choose']->isEmpty()))): if(is_array($index_site['choose']) || $index_site['choose'] instanceof \think\Collection || $index_site['choose'] instanceof \think\Paginator): if( count($index_site['choose'])==0 ) : echo "" ;else: foreach($index_site['choose'] as $key=>$vo): ?>
@@ -435,6 +432,9 @@
                     <?php endforeach; endif; else: echo "" ;endif; ?>
                 <?php endif; ?>
             </ul>
+            <div class="choose-btn-wrap">
+                <a href="javascript:;" class="choose-btn open-popover-btn">Get a free quote <i class="fa fa-hand-pointer-o"></i></a>
+            </div>
         </div>
     </div>
     <!-- CHOOSE END -->
@@ -444,13 +444,21 @@
         <!-- CERTIFICATE START -->
         <div class="certificate reveal">
             <div class="title">CERTIFICATE</div>
-            <div class="certificate-carousel">
+            <?php if(!(empty($about_site['cert_description']) || (($about_site['cert_description'] instanceof \think\Collection || $about_site['cert_description'] instanceof \think\Paginator ) && $about_site['cert_description']->isEmpty()))): ?>
+                <div class="certificate-main-desc" style="text-align: center; margin-top: 30px; font-size: 16px; color: #666666; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.6;"><?php echo $about_site['cert_description']; ?></div>
+            <?php endif; ?>
+            <div class="certificate-carousel" style="margin-top: 30px;">
                 <button class="certificate-nav certificate-button-prev" type="button" aria-label="Previous"></button>
                 <div class="certificate-swiper">
                     <div class="swiper-wrapper">
                         <?php if(is_array($about_site['cert']) || $about_site['cert'] instanceof \think\Collection || $about_site['cert'] instanceof \think\Paginator): if( count($about_site['cert'])==0 ) : echo "" ;else: foreach($about_site['cert'] as $key=>$vo): ?>
                             <div class="swiper-slide certificate-item">
-                                <img loading="lazy" src="<?php echo cmf_get_image_url($vo['url']); ?>" alt="<?php echo $vo['name']; ?>">
+                                <div class="certificate-img-wrap">
+                                    <img loading="lazy" src="<?php echo cmf_get_image_url($vo['url']); ?>" alt="<?php echo $vo['name']; ?>">
+                                </div>
+                                <?php if(!(empty($vo['desc']) || (($vo['desc'] instanceof \think\Collection || $vo['desc'] instanceof \think\Paginator ) && $vo['desc']->isEmpty()))): ?>
+                                    <div class="certificate-desc" style="text-align: center; margin-top: 10px; font-size: 20px; color: #1A1A1A; font-weight: bold;"><?php echo $vo['desc']; ?></div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
                     </div>
@@ -472,27 +480,30 @@
     <?php endif; if(!(empty($case_list) || (($case_list instanceof \think\Collection || $case_list instanceof \think\Paginator ) && $case_list->isEmpty()))): ?>
         <!-- CASE START -->
         <div class="home-case reveal">
-            <div class="title">CASE STUDY</div>
-            <div class="home-case-carousel">
-                <div class="swiper home-case-swiper">
-                    <div class="swiper-wrapper case-list">
-                        <?php if(is_array($case_list) || $case_list instanceof \think\Collection || $case_list instanceof \think\Paginator): if( count($case_list)==0 ) : echo "" ;else: foreach($case_list as $key=>$vo): ?>
-                            <div class="swiper-slide case-item" title="<?php echo $vo['post_title']; ?>">
-                                <a href="<?php echo cmf_url('portal/index/industries_info',array('id'=>$vo['id'])); ?>">
-                                    <div class="case-item-img">
-                                        <img loading="lazy" src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>"
-                                            alt="<?php echo $vo['post_title']; ?>">
-                                    </div>
-                                    <div class="case-item-title"><?php echo $vo['post_title']; ?></div>
-                                    <div class="case-item-desc"><?php echo $vo['post_excerpt']; ?></div>
-                                </a>
+            <div class="title" style="text-transform: uppercase;">Our Classic Cases</div>
+            <div class="home-case-main-desc" style="text-align: center; margin-top: 15px; font-size: 16px; color: #666; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.6; padding: 0 20px;">
+                Nuclon Has Provided Reliable Products And Solutions To Numerous Global Ship, Port And Industrial Equipment Customers. The Real-Life Application Cases Bear Witness To Our Quality And Service.
+            </div>
+            <div class="case-list home-case-grid" style="margin-top: 40px;">
+                <?php if(is_array($case_list) || $case_list instanceof \think\Collection || $case_list instanceof \think\Paginator): if( count($case_list)==0 ) : echo "" ;else: foreach($case_list as $key=>$vo): ?>
+                    <div class="case-item" title="<?php echo $vo['post_title']; ?>">
+                        <a href="<?php echo cmf_url('portal/index/industries_info',array('id'=>$vo['id'])); ?>">
+                            <div class="case-item-img">
+                                <img loading="lazy" src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>"
+                                    alt="<?php echo $vo['post_title']; ?>">
                             </div>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                            <div class="case-item-content">
+                                <div class="case-item-title"><?php echo $vo['post_title']; ?></div>
+                                <div class="case-item-desc"><?php echo $vo['post_excerpt']; ?></div>
+                                <div class="case-item-more">Read More&rarr;</div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="home-case-button-prev"></div>
-                <div class="home-case-button-next"></div>
-                <div class="home-case-pagination"></div>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </div>
+            <div class="home-case-actions" style="text-align: center; margin-top: 40px; padding-bottom: 20px;">
+                <a href="javascript:;" class="choose-btn open-popover-btn" style="display: inline-block; background-color: #f29b00; color: #fff; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 10px;">Get a free quote <i class="fa fa-hand-pointer-o"></i></a>
+                <a href="<?php echo cmf_url('portal/index/industries'); ?>" style="display: inline-block; background-color: #f29b00; color: #fff; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin: 10px;">View more cases</a>
             </div>
         </div>
         <!-- CASE END -->
@@ -500,26 +511,36 @@
 
 
     <div class="news reveal">
-        <div class="title">NEWS CENTER</div>
-        <div class="home-news-carousel">
-            <div class="swiper home-news-swiper">
-                <div class="swiper-wrapper news-list">
-                    <?php if(is_array($news_list) || $news_list instanceof \think\Collection || $news_list instanceof \think\Paginator): if( count($news_list)==0 ) : echo "" ;else: foreach($news_list as $key=>$vo): ?>
-                        <div class="swiper-slide news-item" title="<?php echo $vo['title']; ?>">
-                            <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['category_id'])); ?>">
-                                <div class="news-item-img">
-                                    <img loading="lazy" src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>">
-                                </div>
-                                <div class="news-item-title"><?php echo $vo['post_title']; ?></div>
-                                <div class="news-item-desc"><?php echo $vo['post_excerpt']; ?></div>
-                            </a>
-                        </div>
-                    <?php endforeach; endif; else: echo "" ;endif; ?>
+        <div class="news-header">
+            <h2 class="title h1" style="margin: 0; font-weight: bold; color: #333; text-transform: uppercase;">OUR NEWS</h2>
+            <a href="<?php echo cmf_url('portal/index/news'); ?>" class="all-news-btn">All News &rarr;</a>
+        </div>
+        
+        <div class="home-news-split">
+            <div class="home-news-text-col" style="flex: 1; min-width: 0; overflow: hidden;">
+                <div class="swiper home-news-text-swiper" style="height: 540px;">
+                    <div class="swiper-wrapper">
+                        <?php if(is_array($news_list) || $news_list instanceof \think\Collection || $news_list instanceof \think\Paginator): if( count($news_list)==0 ) : echo "" ;else: foreach($news_list as $key=>$vo): ?>
+                            <div class="swiper-slide news-text-slide" style="cursor: pointer; padding: 15px 0; border-bottom: 1px solid #eee; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="news-text-title" style="font-size: 20px; line-height: 1.4; margin-bottom: 8px; transition: color 0.3s; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><?php echo $vo['post_title']; ?></div>
+                                <div class="news-text-desc" style="font-size: 14px; color: #777; line-height: 1.6; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?php echo $vo['post_excerpt']; ?></div>
+                                <div class="news-text-date" style="font-size: 12px; color: #555;"><?php echo date('Y/m/d', $vo['create_time']); ?></div>
+                            </div>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                    </div>
                 </div>
             </div>
-            <div class="home-news-button-prev"></div>
-            <div class="home-news-button-next"></div>
-            <div class="home-news-pagination"></div>
+            <div class="home-news-img-col" style="flex: 1; min-width: 0;">
+                <div class="swiper home-news-img-swiper" style="width: 100%; height: 540px; border-radius: 8px; overflow: hidden; background: #f5f5f5;">
+                    <div class="swiper-wrapper">
+                        <?php if(is_array($news_list) || $news_list instanceof \think\Collection || $news_list instanceof \think\Paginator): if( count($news_list)==0 ) : echo "" ;else: foreach($news_list as $key=>$vo): ?>
+                            <div class="swiper-slide">
+                                <img src="<?php echo cmf_get_image_url($vo['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

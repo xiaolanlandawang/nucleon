@@ -31,7 +31,7 @@ class SlideItemModel extends Model
      */
     public function getContentAttr($value)
     {
-        return htmlspecialchars_decode($value);
+        return htmlspecialchars_decode((string)$value);
     }
 
     /**
@@ -41,6 +41,6 @@ class SlideItemModel extends Model
      */
     public function setContentAttr($value)
     {
-        return htmlspecialchars_decode($value, true);
+        return htmlspecialchars_decode((string)$value, true);
     }
 }

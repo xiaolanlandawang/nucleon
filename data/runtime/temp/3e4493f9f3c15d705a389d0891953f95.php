@@ -1,11 +1,11 @@
-<?php /*a:5:{s:66:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\news.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:5:{s:66:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\cert.html";i:1779949280;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo (isset($site_info['site_seo_title']) && ($site_info['site_seo_title'] !== '')?$site_info['site_seo_title']:''); ?></title>
-    <meta name="keywords" content="news,<?php echo (isset($site_info['site_seo_keywords']) && ($site_info['site_seo_keywords'] !== '')?$site_info['site_seo_keywords']:''); ?>">
-    <meta name="description" content="news-<?php echo (isset($site_info['site_seo_description']) && ($site_info['site_seo_description'] !== '')?$site_info['site_seo_description']:''); ?>">
+    <title><?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?></title>
+    <meta name="keywords" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
+    <meta name="description" content="<?php echo (isset($site_info['site_name']) && ($site_info['site_name'] !== '')?$site_info['site_name']:''); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
@@ -30,7 +30,8 @@
         max-height: 550px !important;
     }
 </style>
-    <link href="/themes/simpleboot3/public/assets/css/news.css" rel="stylesheet" type="text/css">
+    <link href="/themes/simpleboot3/public/assets/css/about.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/about.js"></script>
 </head>
 <body>
 
@@ -173,40 +174,49 @@
 </div>
 <!-- BANNER END -->
 
-<div class="main-content content reveal">
-    <div class="title">News Center</div>
 
-    <ul class="news-category">
-        <?php if(is_array($news_category) || $news_category instanceof \think\Collection || $news_category instanceof \think\Paginator): if( count($news_category)==0 ) : echo "" ;else: foreach($news_category as $key=>$vo): ?>
-            <li class="news-category-item <?php echo $vo['id']==input('id') ? 'active'  :  ''; ?>">
-                <a href="<?php echo cmf_url('portal/index/news',array('id'=>$vo['id'])); ?>"><?php echo $vo['name']; ?></a>
+<!-- CERTIFICATE START -->
+<div class="certificate">
+    <div class="title">CERTIFICATE</div>
+    <?php if(!(empty($about_site['cert_description']) || (($about_site['cert_description'] instanceof \think\Collection || $about_site['cert_description'] instanceof \think\Paginator ) && $about_site['cert_description']->isEmpty()))): ?>
+        <div class="certificate-main-desc" style="text-align: center; margin-top: 30px; font-size: 16px; color: #666666; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.6;"><?php echo $about_site['cert_description']; ?></div>
+    <?php endif; ?>
+    <ul class="certificate-list" style="margin-top: 30px;">
+        <?php if(is_array($about_site['cert']) || $about_site['cert'] instanceof \think\Collection || $about_site['cert'] instanceof \think\Paginator): if( count($about_site['cert'])==0 ) : echo "" ;else: foreach($about_site['cert'] as $key=>$vo): ?>
+            <li class="certificate-item">
+                <div class="certificate-img-wrap">
+                    <img src="<?php echo cmf_get_image_url($vo['url']); ?>" alt="<?php echo $vo['name']; ?>">
+                </div>
+                <?php if(!(empty($vo['desc']) || (($vo['desc'] instanceof \think\Collection || $vo['desc'] instanceof \think\Paginator ) && $vo['desc']->isEmpty()))): ?>
+                    <div class="certificate-desc" style="text-align: center; margin-top: 10px; font-size: 20px; color: #1A1A1A; font-weight: bold;"><?php echo $vo['desc']; ?></div>
+                <?php endif; ?>
             </li>
         <?php endforeach; endif; else: echo "" ;endif; ?>
     </ul>
-
-    <div class="news-list">
-        <ul>
-            <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): if( count($list)==0 ) : echo "" ;else: foreach($list as $key=>$vo): ?>
-                <li class="news-item" onclick="location.href='<?php echo cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['cid'])); ?>'">
-                    <div class="news-img">
-                        <img src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>" title="<?php echo $vo['post_title']; ?>">
-                    </div>
-                    <div class="news-content">
-                        <div class="news-title"><?php echo $vo['post_title']; ?></div>
-                        <div class="news-desc"><?php echo $vo['post_excerpt']; ?></div>
-                        <div class="news-time">
-                            <span class="news-time-day"><?php echo date('d',$vo['create_time']); ?></span>
-                            <span class="news-time-month">/<?php echo date('Y-m',$vo['create_time']); ?></span>
-                        </div>
-                    </div>
-                </li>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-        </ul>
-        <div class="pagination"><?php echo $page; ?></div>
-    </div>
-
 </div>
+<div class="certificate-preview" aria-hidden="true">
+    <button class="certificate-preview-close" type="button" aria-label="Close"></button>
+    <button class="certificate-preview-arrow certificate-preview-prev" type="button" aria-label="Previous"></button>
+    <div class="certificate-preview-content">
+        <img src="" alt="">
+    </div>
+    <button class="certificate-preview-arrow certificate-preview-next" type="button" aria-label="Next"></button>
+</div>
+<!-- CERTIFICATE END -->
 
+<div class="gallery">
+    <div class="title">WEIHUA GALLERY</div>
+    <div class="gallery-list">
+        <?php if(is_array($about_site['corporate_images']) || $about_site['corporate_images'] instanceof \think\Collection || $about_site['corporate_images'] instanceof \think\Paginator): if( count($about_site['corporate_images'])==0 ) : echo "" ;else: foreach($about_site['corporate_images'] as $key=>$vo): ?>
+            <div class="gallery-item">
+                <div class="gallery-item-img">
+                    <img src="<?php echo cmf_get_image_url($vo['url']); ?>" alt="gallery">
+                </div>
+                <div class="gallery-item-title"><?php echo $vo['name']; ?></div>
+            </div>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
+    </div>
+</div>
 
 
 <!--FOOT START-->

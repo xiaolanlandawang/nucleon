@@ -1,4 +1,4 @@
-<?php /*a:5:{s:66:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\news.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:5:{s:71:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\news-info.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,36 +173,45 @@
 </div>
 <!-- BANNER END -->
 
-<div class="main-content content reveal">
-    <div class="title">News Center</div>
 
-    <ul class="news-category">
-        <?php if(is_array($news_category) || $news_category instanceof \think\Collection || $news_category instanceof \think\Paginator): if( count($news_category)==0 ) : echo "" ;else: foreach($news_category as $key=>$vo): ?>
-            <li class="news-category-item <?php echo $vo['id']==input('id') ? 'active'  :  ''; ?>">
-                <a href="<?php echo cmf_url('portal/index/news',array('id'=>$vo['id'])); ?>"><?php echo $vo['name']; ?></a>
-            </li>
-        <?php endforeach; endif; else: echo "" ;endif; ?>
-    </ul>
+<div class="content">
+    <div class="post_title"><?php echo $post['post_title']; ?></div>
+    <div class="post_line"></div>
+    <div class="post_info clearfix">
+        <div class="post_info_left">
+            <span>Category: <?php echo $category['name']; ?></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>Release time: <?php echo date('Y-m-d H:i',$post['create_time']); ?></span>
+        </div>
+        <div class="post_info_right">Page view: <?php echo $post['post_hits']; ?></div>
+    </div>
+    <div class="post_content">
+        <?php echo $post['post_content']; ?>
+    </div>
 
-    <div class="news-list">
-        <ul>
-            <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): if( count($list)==0 ) : echo "" ;else: foreach($list as $key=>$vo): ?>
-                <li class="news-item" onclick="location.href='<?php echo cmf_url('portal/index/news_info',array('id'=>$vo['id'],'cid'=>$vo['cid'])); ?>'">
-                    <div class="news-img">
-                        <img src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>" title="<?php echo $vo['post_title']; ?>">
-                    </div>
-                    <div class="news-content">
-                        <div class="news-title"><?php echo $vo['post_title']; ?></div>
-                        <div class="news-desc"><?php echo $vo['post_excerpt']; ?></div>
-                        <div class="news-time">
-                            <span class="news-time-day"><?php echo date('d',$vo['create_time']); ?></span>
-                            <span class="news-time-month">/<?php echo date('Y-m',$vo['create_time']); ?></span>
-                        </div>
-                    </div>
-                </li>
-            <?php endforeach; endif; else: echo "" ;endif; ?>
-        </ul>
-        <div class="pagination"><?php echo $page; ?></div>
+    <div class="post_line"></div>
+    <div class="content-bottom clearfix">
+        <div class="prev">
+            Previous article:
+            <?php if(!(empty($prev_article) || (($prev_article instanceof \think\Collection || $prev_article instanceof \think\Paginator ) && $prev_article->isEmpty()))): ?>
+                <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$prev_article['id'])); ?>">
+                    <?php echo $prev_article['post_title']; ?>
+                </a>
+                <?php else: ?>
+                none
+            <?php endif; ?>
+
+        </div>
+        <div class="next">
+            Next article:
+            <?php if(!(empty($next_article) || (($next_article instanceof \think\Collection || $next_article instanceof \think\Paginator ) && $next_article->isEmpty()))): ?>
+                <a href="<?php echo cmf_url('portal/index/news_info',array('id'=>$next_article['id'])); ?>">
+                    <?php echo $next_article['post_title']; ?>
+                </a>
+                <?php else: ?>
+                none
+            <?php endif; ?>
+        </div>
     </div>
 
 </div>

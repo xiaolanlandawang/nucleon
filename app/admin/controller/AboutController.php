@@ -53,7 +53,8 @@ class AboutController extends AdminBaseController
             $site_info['cert'] = [];
             foreach ($data['cert_urls'] as $key => $url) {
                 $photoUrl = cmf_asset_relative_url($url);
-                $site_info['cert'][] = ["url" => $photoUrl, "name" => $data['cert_names'][$key]];
+                $desc = isset($data['cert_descs'][$key]) ? $data['cert_descs'][$key] : '';
+                $site_info['cert'][] = ["url" => $photoUrl, "name" => $data['cert_names'][$key], "desc" => $desc];
             }
         }
 

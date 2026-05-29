@@ -1,4 +1,4 @@
-<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\service.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779777503;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
+<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\service.html";i:1779431578;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1779778657;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1736500544;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1779758927;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,13 +39,12 @@
 <?php endif; 
     $cleanNumber = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);
     if (strpos($cleanNumber, '0') === 0) {
-        $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
+    $cleanNumber = preg_replace('/^0+/', '', $cleanNumber);
     }
-    $is_home = (app('request')->controller() == 'Index' && app('request')->action() == 'index');
  ?>
 <!--NAV START-->
 
-<div class="header <?php echo !empty($is_home) ? 'header-home'  :  ''; ?>">
+<div class="header">
     <div class="header-top">
         <div class="header-container">
             <div class="header-contact">

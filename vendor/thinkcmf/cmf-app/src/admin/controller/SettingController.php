@@ -410,6 +410,15 @@ class SettingController extends AdminBaseController
         if (!empty($params['about_img'])){
             $index_site['about_img'] = $params['about_img'];
         }
+        if (!empty($params['about_bg_img'])){
+            $index_site['about_bg_img'] = $params['about_bg_img'];
+        }
+        if (!empty($params['about_right_bg_img'])){
+            $index_site['about_right_bg_img'] = $params['about_right_bg_img'];
+        }
+        if (!empty($params['stats_bg_img'])){
+            $index_site['stats_bg_img'] = $params['stats_bg_img'];
+        }
         // 选择我们设置
         if (!empty($params['choose_description'])){
             $index_site['choose_description'] = $params['choose_description'];

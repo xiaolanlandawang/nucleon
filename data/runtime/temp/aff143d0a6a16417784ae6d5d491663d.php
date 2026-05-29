@@ -1,4 +1,4 @@
-<?php /*a:2:{s:78:"C:\laragon\www\nucleon\public/themes/admin_simpleboot3/admin\setting\site.html";i:1779090617;s:73:"C:\laragon\www\nucleon\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
+<?php /*a:2:{s:78:"C:\laragon\www\nucleon\public/themes/admin_simpleboot3/admin\setting\site.html";i:1779869427;s:73:"C:\laragon\www\nucleon\public/themes/admin_simpleboot3/public\header.html";i:1730268636;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -362,34 +362,7 @@
                                 <textarea class="form-control" id="input-about_description" name="about_description" style="height: 100px"><?php echo (isset($index_setting['about_description']) && ($index_setting['about_description'] !== '')?$index_setting['about_description']:''); ?></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                关于我们设置
-                            </label>
-                            <div class="col-md-8 col-sm-10">
-                                <ul id="engineering" class="pic-list list-unstyled form-inline">
-                                    <?php if(!(empty($index_setting['engineering']) || (($index_setting['engineering'] instanceof \think\Collection || $index_setting['engineering'] instanceof \think\Paginator ) && $index_setting['engineering']->isEmpty()))): if(is_array($index_setting['engineering']) || $index_setting['engineering'] instanceof \think\Collection || $index_setting['engineering'] instanceof \think\Paginator): if( count($index_setting['engineering'])==0 ) : echo "" ;else: foreach($index_setting['engineering'] as $key=>$vo): ?>
-                                            <li id="saved-engineering<?php echo $key; ?>">
-                                                名称：<input class="form-control" type="text"
-                                                                name="engineering_name[]"
-                                                                value="<?php echo (isset($vo['engineering_name']) && ($vo['engineering_name'] !== '')?$vo['engineering_name']:''); ?>" style="width: 300px;">
-                                                &nbsp;&nbsp;&nbsp;
-                                                描述：<input class="form-control" type="text"
-                                                            name="engineering_desc[]"
-                                                            value="<?php echo (isset($vo['engineering_desc']) && ($vo['engineering_desc'] !== '')?$vo['engineering_desc']:''); ?>" style="width: 300px;">
-                                                &nbsp;&nbsp;&nbsp;
-                                                数量：<input class="form-control" type="number"
-                                                                name="engineering_num[]"
-                                                                value="<?php echo (isset($vo['engineering_num']) && ($vo['engineering_num'] !== '')?$vo['engineering_num']:''); ?>" style="width: 100px;" >
-                                                &nbsp;&nbsp;&nbsp;
-                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-engineering<?php echo $key; ?>').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
-                                            </li>
-                                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                                    <?php endif; ?>
-                                </ul>
-                                <a href="javascript:engineering_add();" class="btn btn-default">Add</a>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">关于我们图片</label>
                             <div class="col-md-6 col-sm-10">
@@ -404,9 +377,94 @@
                                     <?php endif; ?>
                                 </a>
                                 <input type="button" class="btn btn-sm"
-                                       onclick="$('#about_img').attr('src','/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');$('#about_img').val('');return false;"
+                                       onclick="$('#about_img-preview').attr('src','/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');$('#about_img').val('');return false;"
                                        value="取消图片">
                                 <p class="help-block">图片尺寸：440*320</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">关于我们左侧背景</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="hidden" name="about_bg_img" id="about_bg_img" value="<?php echo (isset($index_setting['about_bg_img']) && ($index_setting['about_bg_img'] !== '')?$index_setting['about_bg_img']:''); ?>">
+                                <a href="javascript:uploadOneImage('图片上传','#about_bg_img');">
+                                    <?php if(empty($index_setting['about_bg_img'])): ?>
+                                        <img src="/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png"
+                                             id="about_bg_img-preview" width="135" style="cursor: hand"/>
+                                        <?php else: ?>
+                                        <img src="<?php echo cmf_get_image_preview_url($index_setting['about_bg_img']); ?>" id="about_bg_img-preview"
+                                             width="135" style="cursor: hand"/>
+                                    <?php endif; ?>
+                                </a>
+                                <input type="button" class="btn btn-sm"
+                                       onclick="$('#about_bg_img-preview').attr('src','/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');$('#about_bg_img').val('');return false;"
+                                       value="取消图片">
+                                <p class="help-block">用于 ABOUT 模块左侧的深色背景图，不上传则默认纯黑工业风背景。</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">关于我们右侧背景</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="hidden" name="about_right_bg_img" id="about_right_bg_img" value="<?php echo (isset($index_setting['about_right_bg_img']) && ($index_setting['about_right_bg_img'] !== '')?$index_setting['about_right_bg_img']:''); ?>">
+                                <a href="javascript:uploadOneImage('图片上传','#about_right_bg_img');">
+                                    <?php if(empty($index_setting['about_right_bg_img'])): ?>
+                                        <img src="/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png"
+                                             id="about_right_bg_img-preview" width="135" style="cursor: hand"/>
+                                        <?php else: ?>
+                                        <img src="<?php echo cmf_get_image_preview_url($index_setting['about_right_bg_img']); ?>" id="about_right_bg_img-preview"
+                                             width="135" style="cursor: hand"/>
+                                    <?php endif; ?>
+                                </a>
+                                <input type="button" class="btn btn-sm"
+                                       onclick="$('#about_right_bg_img-preview').attr('src','/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');$('#about_right_bg_img').val('');return false;"
+                                       value="取消图片">
+                                <p class="help-block">用于 ABOUT 模块右侧的红色背景图替换，不上传则默认纯红背景。</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">工程数字统计背景</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="hidden" name="stats_bg_img" id="stats_bg_img" value="<?php echo (isset($index_setting['stats_bg_img']) && ($index_setting['stats_bg_img'] !== '')?$index_setting['stats_bg_img']:''); ?>">
+                                <a href="javascript:uploadOneImage('图片上传','#stats_bg_img');">
+                                    <?php if(empty($index_setting['stats_bg_img'])): ?>
+                                        <img src="/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png"
+                                             id="stats_bg_img-preview" width="135" style="cursor: hand"/>
+                                        <?php else: ?>
+                                        <img src="<?php echo cmf_get_image_preview_url($index_setting['stats_bg_img']); ?>" id="stats_bg_img-preview"
+                                             width="135" style="cursor: hand"/>
+                                    <?php endif; ?>
+                                </a>
+                                <input type="button" class="btn btn-sm"
+                                       onclick="$('#stats_bg_img-preview').attr('src','/themes/admin_simpleboot3/public/assets/images/default-thumbnail.png');$('#stats_bg_img').val('');return false;"
+                                       value="取消图片">
+                                <p class="help-block">工程数字统计模块（4个大红数字）的背景图。不上传默认白底。</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">
+                                工程数字统计数据
+                            </label>
+                            <div class="col-md-10 col-sm-10">
+                                <ul id="engineering" class="pic-list list-unstyled form-inline">
+                                    <?php if(!(empty($index_setting['engineering']) || (($index_setting['engineering'] instanceof \think\Collection || $index_setting['engineering'] instanceof \think\Paginator ) && $index_setting['engineering']->isEmpty()))): if(is_array($index_setting['engineering']) || $index_setting['engineering'] instanceof \think\Collection || $index_setting['engineering'] instanceof \think\Paginator): if( count($index_setting['engineering'])==0 ) : echo "" ;else: foreach($index_setting['engineering'] as $key=>$vo): ?>
+                                            <li id="saved-engineering<?php echo $key; ?>">
+                                                单位(如Million)：<input class="form-control" type="text"
+                                                                name="engineering_name[]"
+                                                                value="<?php echo (isset($vo['engineering_name']) && ($vo['engineering_name'] !== '')?$vo['engineering_name']:''); ?>" style="width: 150px;">
+                                                &nbsp;&nbsp;
+                                                数值(如80)：<input class="form-control" type="number"
+                                                                name="engineering_num[]"
+                                                                value="<?php echo (isset($vo['engineering_num']) && ($vo['engineering_num'] !== '')?$vo['engineering_num']:''); ?>" style="width: 100px;" >
+                                                &nbsp;&nbsp;
+                                                底部描述：<input class="form-control" type="text"
+                                                            name="engineering_desc[]"
+                                                            value="<?php echo (isset($vo['engineering_desc']) && ($vo['engineering_desc'] !== '')?$vo['engineering_desc']:''); ?>" style="width: 350px;">
+                                                &nbsp;&nbsp;
+                                                <a class="btn btn-danger" href="javascript:(function(){$('#saved-engineering<?php echo $key; ?>').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                            </li>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    <?php endif; ?>
+                                </ul>
+                                <a href="javascript:engineering_add();" class="btn btn-default">Add</a>
                             </div>
                         </div>
                         <div class="form-group">
@@ -684,11 +742,8 @@
 <script type="text/javascript" src="/static/js/admin.js?v=<?php echo $_static_version; ?>"></script>
 <script type="text/javascript">
     function engineering_add() {
-        var timestamp = new Date().getTime();
-        var randomNum = Math.random();
-        var scaledRandomNum = Math.floor(randomNum * 1000);
-        var id = timestamp.toString() + scaledRandomNum.toString();
-        $('#engineering').append('<li id="saved-engineering'+id+'">名称：<input class="form-control" type="text" name="engineering_name[]" value="" style="width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：<input class="form-control" type="text" name="engineering_desc[]" style="width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量：<input class="form-control" type="number" name="engineering_num[]" value="" style="width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-engineering'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+        var id = new Date().getTime();
+        $('#engineering').append('<li id="saved-engineering'+id+'">单位(如Million)：<input class="form-control" type="text" name="engineering_name[]" value="" style="width: 150px;">&nbsp;&nbsp;数值(如80)：<input class="form-control" type="number" name="engineering_num[]" value="" style="width: 100px;">&nbsp;&nbsp;底部描述：<input class="form-control" type="text" name="engineering_desc[]" style="width: 350px;">&nbsp;&nbsp;<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-engineering'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
     }
 
 

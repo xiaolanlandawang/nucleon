@@ -1,4 +1,4 @@
 <?php
 //000000000000
  exit();?>
-a:1:{s:14:"admin_password";s:11:"weihuaAdmin";}
+a:1:{s:14:"admin_password";s:5:"admin";}
