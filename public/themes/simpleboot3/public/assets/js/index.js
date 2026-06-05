@@ -204,7 +204,8 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click','#inquiry',function (){
+    $(document).on('click','#inquiry',function (e){
+        e.preventDefault();
         $('#feedback_type').val(1);
         $('.popover_wrap').show();
     })
@@ -215,7 +216,7 @@ $(document).ready(function() {
         $('.popover_wrap').show();
     })
 
-    $(document).on('click', '.faq-contact-btn', function (e) {
+    $(document).on('click', '.faq-contact-btn, .btn-quote', function (e) {
         e.preventDefault();
         $('#feedback_type').val(2);
         $('#file').val('');
