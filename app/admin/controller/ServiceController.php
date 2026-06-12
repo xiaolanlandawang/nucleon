@@ -50,25 +50,4 @@ class ServiceController extends AdminBaseController
     }
 
 
-    // 优质服务
-    public function excellent_service()
-    {
-        $site_info = cmf_get_option('excellent_service_site');
-        $this->assign("site_info", $site_info);
-        return $this->fetch();
-    }
-
-    public function serviceSitePost()
-    {
-        if (!$this->request->isPost()) {
-            $this->error('请求错误');
-        }
-        $data = $this->request->post();
-
-        cmf_set_option('excellent_service_site', $data);
-
-        $this->success('保存成功');
-
-    }
-
 }

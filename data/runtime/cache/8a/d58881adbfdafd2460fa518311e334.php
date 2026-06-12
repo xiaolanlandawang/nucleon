@@ -1,4 +1,4 @@
 <?php
 //000000000000
  exit();?>
-a:1:{s:5:"image";s:52:"admin/20260507/37b85d2ed91b2b3502b7ab3a646042c9.webp";}
+a:2:{s:5:"image";s:52:"admin/20260507/37b85d2ed91b2b3502b7ab3a646042c9.webp";s:11:"commitments";a:5:{i:0;a:3:{s:5:"title";s:3:"60S";s:4:"desc";s:48:"Inquiry arrives at the manager within 60 seconds";s:5:"image";s:0:"";}i:1;a:3:{s:5:"title";s:3:"30M";s:4:"desc";s:35:"Technical Q&amp;A within 30 minutes";s:5:"image";s:0:"";}i:2;a:3:{s:5:"title";s:3:"24H";s:4:"desc";s:35:"Provide design plan within 24 hours";s:5:"image";s:0:"";}i:3;a:3:{s:5:"title";s:3:"72H";s:4:"desc";s:33:"Engineer dispatch within 72 hours";s:5:"image";s:0:"";}i:4;a:3:{s:5:"title";s:4:"365D";s:4:"desc";s:30:"Accept service demand 365 days";s:5:"image";s:0:"";}}}

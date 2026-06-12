@@ -42,8 +42,8 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    alert('submit success');
                     $('input[name=footer-name], input[name=footer-email], input[name=footer-phone], input[name=footer-message]').val('');
+                    window.location.href = '/thankyou';
                 } else {
                     alert('submit failed:'+res.msg);
                 }
@@ -173,7 +173,6 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    alert('submit success');
                     //谷歌点击转化
                     gtag_report_conversion();
                     $('#feedback_type').val(2);
@@ -181,8 +180,9 @@ $(document).ready(function () {
                     $('body').css('overflow', '');
                     if(file_url!==''){
                         $('#file').val('');
-                        window.location.href=file_url;
+                        window.open(file_url);
                     }
+                    window.location.href = '/thankyou';
                 } else {
                     alert('submit failed:'+res.msg);
                 }
@@ -207,13 +207,13 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    alert('submit success');
                     $('#feedback_type').val(2);
                     $('#session').val(res.data.session)
                     $('.popover_wrap').hide();
                     $('body').css('overflow', '');
                     $file_url.val('');
-                    window.open(file)
+                    window.open(file);
+                    window.location.href = '/thankyou';
                 } else {
                     alert('submit failed:'+res.msg);
                 }
@@ -235,10 +235,10 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (res) {
                 if (res.code == 1) {
-                    alert('submit success');
                     $('#feedback_type').val(2);
                     $('.popover_wrap').hide();
                     $('body').css('overflow', '');
+                    window.location.href = '/thankyou';
                 } else {
                     alert('submit failed:'+res.msg);
                 }

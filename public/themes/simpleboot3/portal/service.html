@@ -14,38 +14,314 @@
 
 <include file="public@banner"/>
 
-<div class="content">
-    <div class="title">GLOBAL SERVICE</div>
+<style>
+    /* Make the banner automatically scale based on the original image ratio so it displays completely without cropping */
+    .banner {
+        min-height: auto !important;
+        height: auto !important;
+        display: grid !important;
+    }
+    .banner > * {
+        grid-area: 1 / 1;
+    }
+    .banner img {
+        position: relative !important;
+        height: auto !important;
+    }
+    .banner-container {
+        min-height: auto !important;
+        height: 100% !important;
+    }
 
-    <div class="service-desc">{$service_site.internationalization}</div>
+    /* Cool Hover Effects for Modules */
+    .hover-module-item {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .hover-module-item:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(203, 42, 41, 0.15);
+    }
+    .hover-module-item .img-wrap {
+        overflow: hidden;
+        flex-grow: 1;
+    }
+    .hover-module-item .img-wrap img {
+        transition: transform 0.6s ease;
+        display: block;
+    }
+    .hover-module-item:hover .img-wrap img {
+        transform: scale(1.1);
+    }
+    .hover-module-item .title-text {
+        transition: color 0.3s ease;
+    }
+    .hover-module-item:hover .title-text {
+        color: #cb2a29 !important;
+    }
+    .packaging-section .hover-module-item, .support-section .hover-module-item {
+        padding-bottom: 20px;
+    }
 
-    <div class="service-img">
-        <img src="{:cmf_get_image_url($service_site.internationalization_image)}">
+    /* Cooperation Process Icon Redesign */
+    .coop-icon-wrap {
+        width: 76px;
+        height: 76px;
+        margin: -38px auto 20px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 8px 25px rgba(203, 42, 41, 0.15);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .coop-icon-wrap::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        border: 2px dashed rgba(203, 42, 41, 0.2);
+        border-radius: 50%;
+        transition: all 0.5s ease;
+        animation: spin 15s linear infinite;
+    }
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
+    }
+    .hover-module-item:hover .coop-icon-wrap {
+        background: #cb2a29;
+        box-shadow: 0 12px 30px rgba(203, 42, 41, 0.3);
+    }
+    .hover-module-item:hover .coop-icon-wrap::before {
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-style: solid;
+        border-color: rgba(203, 42, 41, 0.8);
+        animation-play-state: paused;
+    }
+    .hover-module-item:hover .coop-icon-wrap i {
+        color: #fff !important;
+        transform: scale(1.1) rotate(y);
+    }
+    .coop-icon-wrap i {
+        font-size: 32px;
+        color: #cb2a29;
+        transition: all 0.4s ease;
+    }
+
+    /* Typography Overrides */
+    .card-title { font-size: 28px !important; }
+    .card-text { font-size: 16px !important; line-height: 1.6; }
+    .title-text { font-size: 25px !important; }
+</style>
+
+<div class="service-cards-section reveal">
+    <div class="service-cards-container">
+        <!-- Top Row -->
+            <div class="service-card">
+                <div class="card-header-wrap">
+                    <h3 class="card-title">Customization<br>Design</h3>
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+                </div>
+                <p class="card-text">Nucleon Crane has professional engineer department, offering tailored lifting solution based on your actual requirements.</p>
+                <a href="#" class="card-link">&rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="card-header-wrap">
+                    <h3 class="card-title">Installation<br>Guidance</h3>
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
+                <p class="card-text">For heavy lifting overhead cranes or gantry cranes, we could offer on-site installation service or guidance to make sure the equipment work smoothly.</p>
+                <a href="#" class="card-link">&rarr;</a>
+            </div>
+            <div class="service-card empty-card"></div>
+            
+            <!-- Bottom Row -->
+            <div class="service-card">
+                <div class="card-header-wrap">
+                    <h3 class="card-title">Free Spare<br>Parts</h3>
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+                <p class="card-text">If your crane equipment needs spare parts to replace, we could provide you with free spare parts for the first year.</p>
+                <a href="#" class="card-link">&rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="card-header-wrap">
+                    <h3 class="card-title">Warranty<br>Service</h3>
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <p class="card-text">Quality is always the most important concern of the crane equipment. Our overhead cranes and gantry cranes have 5-year warranty service to guarantee safe operation of each product.</p>
+                <a href="#" class="card-link">&rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="card-header-wrap">
+                    <h3 class="card-title">Online<br>Communication</h3>
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <p class="card-text">We provide 24 Hours online communication service for each client. For more information or product details, feel free to contact us anytime.</p>
+                <a href="#" class="card-link">&rarr;</a>
+            </div>
     </div>
+</div>
 
-    <ul class="service-area">
-        <foreach name="service_site.areas" item="vo">
-            <li class="service-area-item" style="background-color: {$vo.color}">
-                <div class="service-area-title">{$vo.area}</div>
-                <div class="service-area-line"></div>
-                <div class="service-area-country">({$vo.country} Country)</div>
-            </li>
+<notempty name="service_site.packaging_items">
+<div class="packaging-section" style="max-width: 1400px; width: 94%; margin: 60px auto;">
+    <h2 style="text-align: center; font-size: 32px; font-weight: bold; color: #333; margin-bottom: 40px;">
+        {$service_site.packaging_title|default='Packaging & Shipping'}
+    </h2>
+    <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <foreach name="service_site.packaging_items" item="vo">
+            <div style="flex: 1; min-width: 200px; text-align: center;">
+                <div class="hover-module-item">
+                    <div class="img-wrap" style="margin-bottom: 15px;">
+                        <img src="{:cmf_get_image_url($vo['img'])}" alt="{$vo.name|default=''}" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+                    </div>
+                    <div class="title-text" style="font-size: 28px; font-weight: bold; color: #333;">{$vo.name|default=''}</div>
+                </div>
+            </div>
         </foreach>
-    </ul>
+    </div>
+</div>
+</notempty>
 
-    <div class="service-intro">
-        <div class="service-intro-item">
-            <div class="service-intro-title">{$service_site.left_title}</div>
-            <div class="service-intro-desc">{$service_site.left_desc}</div>
+<notempty name="service_site.cooperation_items">
+<div class="cooperation-section" style="max-width: 1400px; width: 94%; margin: 60px auto;">
+    <h2 style="text-align: center; font-size: 32px; font-weight: bold; color: #333; margin-bottom: 40px;">
+        {$service_site.cooperation_title|default='Cooperation Process'}
+    </h2>
+    <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <foreach name="service_site.cooperation_items" item="vo" key="k">
+            <div style="flex: 1; min-width: 200px; padding-top: 38px;">
+                <div class="hover-module-item" style="background: #fafafa; overflow: visible;">
+                    <div style="text-align: center; padding: 0 20px 25px; position: relative; z-index: 2; background: transparent;">
+                        <div class="coop-icon-wrap">
+                            <i class="{$vo.icon|default=''}" style="position: relative; z-index: 3;"></i>
+                        </div>
+                        <div class="title-text" style="font-size: 28px; font-weight: bold; color: #333;">
+                            {$vo.name|default=''}
+                        </div>
+                    </div>
+                    <div class="img-wrap" style="border-radius: 0 0 12px 12px; overflow: hidden;">
+                        <img src="{:cmf_get_image_url($vo['img'])}" alt="{$vo.name|default=''}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+</notempty>
+
+<notempty name="service_site.support_items">
+<div class="support-section" style="max-width: 1400px; width: 94%; margin: 60px auto;">
+    <h2 style="text-align: center; font-size: 32px; font-weight: bold; color: #333; margin-bottom: 40px;">
+        {$service_site.support_title|default='Technical Support'}
+    </h2>
+    <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <foreach name="service_site.support_items" item="vo">
+            <div style="flex: 1; min-width: 200px; text-align: center;">
+                <div class="hover-module-item">
+                    <div class="img-wrap" style="margin-bottom: 15px;">
+                        <img src="{:cmf_get_image_url($vo['img'])}" alt="{$vo.name|default=''}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+                    </div>
+                    <div class="title-text" style="font-size: 28px; font-weight: bold; color: #333;">{$vo.name|default=''}</div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+</notempty>
+
+<notempty name="service_site.aftersales_img_left">
+<div class="aftersales-section" style="max-width: 1400px; width: 94%; margin: 60px auto;">
+    <h2 style="text-align: center; font-size: 32px; font-weight: bold; color: #333; margin-bottom: 40px;">
+        {$service_site.aftersales_title|default='After-sales Service'}
+    </h2>
+    <div style="display: flex; gap: 20px;">
+        <!-- Left Column -->
+        <div style="flex: 1;" class="hover-module-item">
+            <div class="img-wrap" style="height: 100%;">
+                <img src="{:cmf_get_image_url($service_site.aftersales_img_left)}" alt="After-sales Left" style="width: 100%; height: 100%; object-fit: cover; min-height: 400px;">
+            </div>
         </div>
-        <div class="service-intro-item">
-            <div class="service-intro-title">{$service_site.left_title}</div>
-            <div class="service-intro-desc">{$service_site.left_desc}</div>
+
+        <!-- Middle Column -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Top -->
+            <div class="hover-module-item" style="flex: 1; position: relative;">
+                <div class="img-wrap" style="height: 100%; position: absolute; inset: 0;">
+                    <img src="{:cmf_get_image_url($service_site.aftersales_img_mt)}" alt="{$service_site.aftersales_text_mt|default=''}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); pointer-events: none; z-index: 1;"></div>
+                <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; font-size: 28px; font-weight: bold; z-index: 10;">
+                    {$service_site.aftersales_text_mt|default=''}
+                </div>
+            </div>
+            <!-- Bottom -->
+            <div class="hover-module-item" style="flex: 1; position: relative; min-height: 200px;">
+                <div class="img-wrap" style="height: 100%; position: absolute; inset: 0;">
+                    <img src="{:cmf_get_image_url($service_site.aftersales_img_mb)}" alt="{$service_site.aftersales_text_mb|default=''}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); pointer-events: none; z-index: 1;"></div>
+                <div style="position: absolute; bottom: 20px; left: 20px; color: #fff; font-size: 28px; font-weight: bold; z-index: 10;">
+                    {$service_site.aftersales_text_mb|default=''}
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div style="flex: 1;" class="hover-module-item">
+            <div class="img-wrap" style="height: 100%; border: 1px solid #eaeaea;">
+                <img src="{:cmf_get_image_url($service_site.aftersales_img_right)}" alt="After-sales Certificate" style="width: 100%; height: 100%; object-fit: cover; min-height: 400px; padding: 10px;">
+            </div>
         </div>
     </div>
+</div>
+</notempty>
+
+<div class="content" style="padding-top: 0;">
+
+    <notempty name="download_list">
+    <div class="download-section" style="max-width: 1400px; width: 94%; margin: 60px auto;">
+        <h2 style="text-align: center; font-size: 32px; font-weight: bold; color: #333; margin-bottom: 40px;">
+            Product Brochures
+        </h2>
+        <ul class="download-list">
+            <foreach name="download_list" item="vo">
+                <li class="download-item">
+                    <a href="{:cmf_get_image_preview_url($vo.more.file.url)}" target="_blank" download>
+                        <div class="download-item-title">{$vo.post_title}</div>
+                        <div class="download-item-line"></div>
+                        <div class="download-item-bottom">
+                            <div class="download-item-bottom-left">
+                                <img src="__TMPL__/public/assets/images/pdf.png" alt="pdf">
+                                Download PDF
+                            </div>
+                            <div class="download-item-bottom-right">
+                                <img src="__TMPL__/public/assets/images/download.png" alt="download">
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    </notempty>
 
     <div class="service-partner">
-        <div class="title">Companies that have established cooperation</div>
+        <div class="title" style="font-size: 32px; font-weight: bold; color: #333; text-align: center; margin-bottom: 40px;">Companies that have established cooperation</div>
         <ul class="service-partner-list">
             <foreach name="service_site.companies" item="vo">
                 <li class="service-partner-item">

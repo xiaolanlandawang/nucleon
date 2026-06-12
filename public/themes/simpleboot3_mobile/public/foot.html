@@ -7,7 +7,7 @@
     <div class="footer-content">
         <div class="footer-contact clearfix">
             <div class="footer-contact-item">
-                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-email.webp" alt="email">
+                <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-email.png" alt="email">
                 <p class="footer-contact-item-content">
                     <a onclick="gtag_report_conversion('mailto:{$site_info.email}');">{$site_info.email}</a>
                 </p>
@@ -25,7 +25,7 @@
             </php>
             <if condition="!empty($site_info.whatsapp)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/quote-whatsapp.webp"
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/quote-whatsapp.png"
                         alt="whatsapp">
                     <p class="footer-contact-item-content">
                         <a onclick="gtag_report_conversion('https://api.whatsapp.com/send?phone={$cleanNumber}');"
@@ -35,7 +35,7 @@
             </if>
             <if condition="!empty($site_info.sale_tel)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-phone.webp"
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-phone.png"
                         alt="phone">
                     <p class="footer-contact-item-content">
                         <a onclick="gtag_report_conversion('tel:{$site_info.sale_tel}');">{$site_info.sale_tel}</a>
@@ -44,7 +44,7 @@
             </if>
             <if condition="!empty($site_info.wechat)">
                 <div class="footer-contact-item">
-                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-wechat.webp"
+                    <img loading="lazy" decoding="async" src="__TMPL__/public/assets/images/foot-wechat.png"
                         alt="wechat">
                     <p class="footer-contact-item-content">
                         <a target="_blank">{$site_info.wechat}</a>
@@ -53,13 +53,13 @@
             </if>
             <div class="footer-contact-social">
                 <a href="{$site_info.linkedin|default='javascript:;'}"><img loading="lazy" decoding="async"
-                        src="__TMPL__/public/assets/images/linkedin.webp" alt="linkedin"></a>
+                        src="__TMPL__/public/assets/images/linkedin.png" alt="linkedin"></a>
                 <a href="{$site_info.facebook|default='javascript:;'}"><img loading="lazy" decoding="async"
-                        src="__TMPL__/public/assets/images/facebook.webp" alt="facebook"></a>
+                        src="__TMPL__/public/assets/images/facebook.png" alt="facebook"></a>
                 <a href="{$site_info.youtube|default='javascript:;'}"><img loading="lazy" decoding="async"
-                        src="__TMPL__/public/assets/images/youtube.webp" alt="youtube"></a>
-                <a class="vk-social" href="{$site_info.vk|default='javascript:;'}"><img loading="lazy" decoding="async"
-                        src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
+                        src="__TMPL__/public/assets/images/youtube.png" alt="youtube"></a>
+                <a href="{$site_info.vk|default='javascript:;'}"><img loading="lazy" decoding="async"
+                        src="__TMPL__/public/assets/images/vk.png" alt="vk"></a>
             </div>
         </div>
 
@@ -86,10 +86,9 @@
             <div class="footer-feedback-line"></div>
             <button class="footer-feedback-btn">Submit Your Request</button>
         </div>
-        <div class="footer-bottom"
-            style="text-align: center; color: rgba(255,255,255,0.6); font-size: 1.2rem; margin-top: 2rem; padding-bottom: 2rem;">
-            Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
-        </div>
+    </div>
+    <div class="footer-bottom">
+        Copyright &copy; Nucleon (Xinxiang) Crane Co., Ltd. | <a href="{:cmf_url('portal/index/privacy_policy')}" target="_blank">Privacy Policy</a>
     </div>
     <div class="right_fix">
         <div class="right_fix_connect">

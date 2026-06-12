@@ -6,7 +6,7 @@
     <meta name="keywords" content="{$site_info.site_name|default=''}">
     <meta name="description" content="{$site_info.site_name|default=''}">
     <include file="public@head"/>
-    <link href="__TMPL__/public/assets/css/quote.css" rel="stylesheet" type="text/css">
+    <link href="__TMPL__/public/assets/css/quote.css?v=20260612.14" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -15,31 +15,83 @@
 <include file="public@banner"/>
 
 <div class="main-content">
+    <!-- Commitments Section -->
+    <notempty name="quote_site.commitments">
+        <div class="commitments-section reveal">
+            <div class="commitments-list">
+                <foreach name="quote_site.commitments" item="vo">
+                    <div class="commitment-card">
+                        <h3 class="commitment-title">{$vo.title}</h3>
+                        <div class="commitment-line"></div>
+                        <p class="commitment-desc">{$vo.desc}</p>
+                        <notempty name="vo.image">
+                            <div class="commitment-img-wrapper">
+                                <img src="{:cmf_get_image_url($vo.image)}" alt="{$vo.title}">
+                            </div>
+                        </notempty>
+                    </div>
+                </foreach>
+            </div>
+        </div>
+    </notempty>
+
     <div class="contact-container">
         <div class="contact-left">
-            <div class="quote-intro">
-                <h2 class="intro-title">Need a Quick Quote? Help Us Serve You Better!</h2>
-                <p class="intro-subtitle">To ensure we provide the most accurate solution, please share:</p>
-                <ul class="intro-list">
-                    <li>
-                        <strong>1. Application:</strong> What will the crane be used for? 
-                        <span>(e.g., warehouse logistics, port container handling)</span>
-                    </li>
-                    <li>
-                        <strong>2. Key Specs:</strong> Lifting capacity (ton), span (m), and lifting height (m) required.
-                    </li>
-                    <li>
-                        <strong>3. Project Details:</strong> Site conditions (indoor/outdoor), budget range, and timeline.
-                    </li>
+            <div class="quote-intro-new">
+                <span class="intro-tag">Get Quick</span>
+                <h2 class="intro-main-title">RESPONSE</h2>
+                <p class="intro-main-subtitle">Share your needs with us, We'll contact you in very short time.</p>
+                
+                <div class="intro-separator"></div>
+                
+                <ul class="intro-contact-list">
+                    <notempty name="site_info.email">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/quote-email.webp" alt="Email">
+                            <a href="mailto:{$site_info.email}">{$site_info.email}</a>
+                        </li>
+                    </notempty>
+                    <notempty name="site_info.address">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/quote-location.webp" alt="Address">
+                            <span>{$site_info.address}</span>
+                        </li>
+                    </notempty>
+                    <notempty name="site_info.sale_tel">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/quote-tel.webp" alt="Tel">
+                            <a href="tel:{$site_info.sale_tel}">{$site_info.sale_tel}</a>
+                        </li>
+                    </notempty>
+                    <notempty name="site_info.whatsapp">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/quote-whatsapp.webp" alt="WhatsApp">
+                            <php>$cleanWhatsapp = preg_replace('/[^0-9]/', '', $site_info['whatsapp']);</php>
+                            <a href="https://api.whatsapp.com/send?phone={$cleanWhatsapp}" target="_blank">{$site_info.whatsapp}</a>
+                        </li>
+                    </notempty>
+                    <notempty name="site_info.wechat">
+                        <li>
+                            <img src="__TMPL__/public/assets/images/fix-wechat.webp" alt="WeChat">
+                            <span>{$site_info.wechat}</span>
+                        </li>
+                    </notempty>
                 </ul>
-                <div class="intro-footer">
-                    Our team will recommend the most suitable and cost-effective solution for your project.
+                
+                <div class="intro-quote-box">
+                    <span class="quote-mark open">“</span>
+                    <p class="quote-text">
+                        <strong>Working hours:</strong><br>
+                        We offer 24-hour professional crane consultation services around the clock.
+                    </p>
+                    <span class="quote-mark close">”</span>
                 </div>
             </div>
         </div>
 
         <div class="quote-form-section">
-            <h2 class="form-title">Customize Your Lifting Solutions</h2>
+            <h2 class="form-title">CUSTOMIZE YOUR LIFTING SOLUTION</h2>
+            <p class="form-subtitle">Please Contact Us Immediately Via Email At <a href="mailto:{$site_info.email|default=''}">{$site_info.email|default=''}</a>, Or Fill Out The Following Form.</p>
             <div class="quote">
                 <div class="quote-field">
                     <label>Name</label>

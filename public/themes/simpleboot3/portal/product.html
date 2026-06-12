@@ -6,7 +6,7 @@
     <meta name="keywords" content="{$page_keywords|default=$site_info.site_name}">
     <meta name="description" content="{$page_description|default=$site_info.site_name}">
     <include file="public@head"/>
-    <link href="__TMPL__/public/assets/css/product.css" rel="stylesheet" type="text/css">
+    <link href="__TMPL__/public/assets/css/product.css?v=20260612.16" rel="stylesheet" type="text/css">
     <link href="__TMPL__/public/assets/css/crane-selector.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="__TMPL__/public/assets/js/product.js"></script>
 </head>
@@ -81,7 +81,8 @@
                             </div>
                         </a>
                         <div class="product_item__footer">
-                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
+                            <div class="product_list_item_btn quote-btn" id="inquiry">Get Solution Quote<span class="btn-arrow"></span></div>
+                            <a class="product_list_item_btn detail-btn" href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">View Details<span class="btn-arrow"></span></a>
                         </div>
                     </li>
                 </foreach>
@@ -114,8 +115,11 @@
                                     <div class="case-item-img">
                                         <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
                                     </div>
-                                    <div class="case-item-title">{$vo.post_title}</div>
-                                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                    <div class="case-item-content">
+                                        <div class="case-item-title">{$vo.post_title}</div>
+                                        <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                        <div class="case-item-more">Read More&rarr;</div>
+                                    </div>
                                 </a>
                             </div>
                         </foreach>
@@ -128,39 +132,40 @@
         </div>
     </notempty>
 
-    <if condition="$is_category_page">
-        <notempty name="category_faq.faq">
-            <php>
-                $categoryFaqTitle = !empty($category_faq['faq_title']) ? $category_faq['faq_title'] : 'FAQ';
-                $categoryFaqContactLink = !empty($category_faq['faq_contact_btn_link']) ? $category_faq['faq_contact_btn_link'] : cmf_url('portal/index/quote');
-                $categoryFaqContactTitle = !empty($category_faq['faq_contact_title']) ? $category_faq['faq_contact_title'] : 'Can not Find Your Question?';
-                $categoryFaqContactDesc = !empty($category_faq['faq_contact_desc']) ? $category_faq['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
-                $categoryFaqContactBtnText = !empty($category_faq['faq_contact_btn_text']) ? $category_faq['faq_contact_btn_text'] : 'Contact Us';
-            </php>
-            <div class="faq reveal product-faq">
-                <div class="title">{$categoryFaqTitle}</div>
-                <div class="faq-wrap">
-                    <div class="faq-list">
-                        <foreach name="category_faq.faq" item="vo">
-                            <div class="faq-item {$key==0 ? 'active' : ''}">
-                                <div class="faq-question">
-                                    <span>{$key+1}.{$vo.question}</span>
-                                    <em>+</em>
-                                </div>
-                                <div class="faq-answer">{$vo.answer|nl2br}</div>
-                            </div>
-                        </foreach>
-                    </div>
-                    <div class="faq-contact">
-                        <div class="faq-contact-icon">?</div>
+    <notempty name="category_faq.faq">
+        <php>
+            $categoryFaqTitle = !empty($category_faq['faq_title']) ? $category_faq['faq_title'] : 'FAQ';
+            $categoryFaqContactLink = !empty($category_faq['faq_contact_btn_link']) ? $category_faq['faq_contact_btn_link'] : cmf_url('portal/index/quote');
+            $categoryFaqContactTitle = !empty($category_faq['faq_contact_title']) ? $category_faq['faq_contact_title'] : 'Can not Find Your Question?';
+            $categoryFaqContactDesc = !empty($category_faq['faq_contact_desc']) ? $category_faq['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
+            $categoryFaqContactBtnText = !empty($category_faq['faq_contact_btn_text']) ? $category_faq['faq_contact_btn_text'] : 'Contact Us';
+        </php>
+        <div class="faq reveal product-faq">
+            <div class="title">{$categoryFaqTitle}</div>
+            <div class="faq-wrap">
+                <div class="faq-contact" style="background: #181818 <notempty name='category_faq.faq_bg_img'>url('{:cmf_get_image_url($category_faq[\'faq_bg_img\'])}')<else/>url('__TMPL__/public/assets/images/choose-bg.webp')</notempty> no-repeat center center; background-size: cover;">
+                    <div class="faq-contact-overlay"></div>
+                    <div class="faq-contact-content">
                         <div class="faq-contact-title">{$categoryFaqContactTitle}</div>
                         <div class="faq-contact-desc">{$categoryFaqContactDesc}</div>
-                        <a class="faq-contact-btn" href="{$categoryFaqContactLink}">{$categoryFaqContactBtnText}</a>
+                        <a class="faq-contact-btn" href="{$categoryFaqContactLink}">{$categoryFaqContactBtnText} <span>&rarr;</span></a>
                     </div>
                 </div>
+                <div class="faq-list">
+                    <foreach name="category_faq.faq" item="vo">
+                        <div class="faq-item {$key==0 ? 'active' : ''}">
+                            <div class="faq-question">
+                                <span class="faq-index"><php>echo sprintf("%02d", $key+1);</php></span>
+                                <span class="faq-text">{$vo.question}</span>
+                                <em class="faq-toggle"></em>
+                            </div>
+                            <div class="faq-answer">{$vo.answer|nl2br}</div>
+                        </div>
+                    </foreach>
+                </div>
             </div>
-        </notempty>
-    </if>
+        </div>
+    </notempty>
 
     <section class="product-collect-section reveal">
         <div class="home-collect">

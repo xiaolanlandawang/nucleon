@@ -13,15 +13,44 @@
 
 <include file="public@nav"/>
 
+<php>
+    $page_title = 'Certificate';
+    $parent_title = 'About Us';
+</php>
 <include file="public@banner"/>
 
 
 <!-- CERTIFICATE START -->
+<style>
+    @media (max-width: 768px) {
+        .cert-header {
+            flex-direction: column;
+            gap: 20px !important;
+            padding: 0 20px;
+        }
+        .cert-header-left {
+            flex: auto !important;
+        }
+    }
+</style>
 <div class="certificate">
-    <div class="title">CERTIFICATE</div>
-    <notempty name="about_site.cert_description">
-        <div class="certificate-main-desc" style="text-align: center; margin-top: 30px; font-size: 16px; color: #666666; max-width: 1000px; margin-left: auto; margin-right: auto; line-height: 1.6;">{$about_site.cert_description}</div>
-    </notempty>
+    <div class="cert-header" style="display: flex; justify-content: space-between; max-width: 1400px; margin: 0 auto 50px auto; align-items: flex-start; gap: 80px;">
+        <div class="cert-header-left" style="flex: 0 0 350px;">
+            <div class="cert-header-title" style="font-size: 40px; font-weight: bold; color: #333; margin-bottom: 20px;">Quality & Safety</div>
+            <div class="cert-header-subtitle" style="font-size: 16px; color: #999; line-height: 1.6;">
+                <notempty name="about_site.cert_description">
+                    {:explode('.', $about_site['cert_description'])[0]}.
+                </notempty>
+            </div>
+        </div>
+        <div class="cert-header-right" style="flex: 1;">
+            <notempty name="about_site.cert_description">
+                <div class="certificate-main-desc" style="font-size: 16px; color: #666; line-height: 1.8;">
+                    {$about_site.cert_description}
+                </div>
+            </notempty>
+        </div>
+    </div>
     <ul class="certificate-list" style="margin-top: 30px;">
         <foreach name="about_site.cert" item="vo">
             <li class="certificate-item">
@@ -45,19 +74,7 @@
 </div>
 <!-- CERTIFICATE END -->
 
-<div class="gallery">
-    <div class="title">WEIHUA GALLERY</div>
-    <div class="gallery-list">
-        <foreach name="about_site.corporate_images" item="vo">
-            <div class="gallery-item">
-                <div class="gallery-item-img">
-                    <img src="{:cmf_get_image_url($vo.url)}" alt="gallery">
-                </div>
-                <div class="gallery-item-title">{$vo.name}</div>
-            </div>
-        </foreach>
-    </div>
-</div>
+
 
 
 <include file="public@foot"/>

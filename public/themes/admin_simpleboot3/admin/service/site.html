@@ -24,106 +24,66 @@
         <a class="btn btn-success" href="javascript:(function(){$('#saved-company{id}').before($('#saved-company{id}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
     </li>
 </script>
+
+<script type="text/html" id="packaging-item-tpl">
+    <li id="saved-packaging{id}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+        <div style="margin-bottom: 10px;">
+            <input id="packaging-img-{id}" type="hidden" name="service[packaging_items][{id}][img]" value="">
+            <img id="packaging-img-{id}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+            <div style="margin-top: 5px;">
+                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#packaging-img-{id}');">上传图片</a>
+            </div>
+        </div>
+        <div style="margin-bottom: 10px;">
+            名称：<input class="form-control" type="text" name="service[packaging_items][{id}][name]" value="" style="width: 100%;">
+        </div>
+        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-packaging{id}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+    </li>
+</script>
+<script type="text/html" id="cooperation-item-tpl">
+    <li id="saved-cooperation{id}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+        <div style="margin-bottom: 10px;">
+            大图：<input id="cooperation-img-{id}" type="hidden" name="service[cooperation_items][{id}][img]" value="">
+            <img id="cooperation-img-{id}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+            <div style="margin-top: 5px;">
+                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#cooperation-img-{id}');">上传大图</a>
+            </div>
+        </div>
+        <div style="margin-bottom: 10px;">
+            图标class名：<input class="form-control" type="text" name="service[cooperation_items][{id}][icon]" value="" style="width: 100%;" placeholder="例如: fa fa-handshake-o">
+        </div>
+        <div style="margin-bottom: 10px;">
+            名称：<input class="form-control" type="text" name="service[cooperation_items][{id}][name]" value="" style="width: 100%;">
+        </div>
+        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-cooperation{id}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+    </li>
+</script>
+<script type="text/html" id="support-item-tpl">
+    <li id="saved-support{id}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+        <div style="margin-bottom: 10px;">
+            <input id="support-img-{id}" type="hidden" name="service[support_items][{id}][img]" value="">
+            <img id="support-img-{id}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+            <div style="margin-top: 5px;">
+                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#support-img-{id}');">上传图片</a>
+            </div>
+        </div>
+        <div style="margin-bottom: 10px;">
+            名称：<input class="form-control" type="text" name="service[support_items][{id}][name]" value="" style="width: 100%;">
+        </div>
+        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-support{id}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+    </li>
+</script>
 </head>
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
         <li class="active"><a href="javascript:;">服务设置</a></li>
-        <li><a href="{:url('service/excellent_service')}">优质服务</a></li>
     </ul>
     <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('Service/sitePost')}"
           method="post">
         <div class="tabbable">
             <div class="tab-content">
-                <div class="form-group">
-                    <label for="input-internationalization" class="col-sm-2 control-label"><span
-                            class="form-required">*</span>国际化描述</label>
-                    <div class="col-md-6 col-sm-10">
-                        <textarea class="form-control" id="input-internationalization" name="service[internationalization]" style="height: 100px;"
-                                  placeholder="请填写描述">{$site_info.internationalization|default=''}</textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">国际化图片</label>
-                    <div class="col-md-6 col-sm-10">
-                        <input type="hidden" name="service[internationalization_image]" id="internationalization_image"
-                               value="{$site_info.internationalization_image|default=''}">
-                        <a href="javascript:uploadOneImage('图片上传','#internationalization_image');">
-                            <if condition="empty($site_info.internationalization_image)">
-                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
-                                     id="internationalization_image-preview"
-                                     width="135" style="cursor: pointer"/>
-                                <else/>
-                                <img src="{:cmf_get_image_preview_url($site_info.internationalization_image)}"
-                                     id="internationalization_image-preview"
-                                     width="135" style="cursor: pointer"/>
-                            </if>
-                        </a>
-                        <input type="button" class="btn btn-sm" onclick="$('#internationalization_image-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#internationalization_image').val('');return false;"
-                               value="取消图片">
-                        <p class="help-block">建议尺寸：1440*527</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">
-                        地区
-                    </label>
-                    <div class="col-md-8 col-sm-10">
-                        <ul id="areas" class="pic-list list-unstyled form-inline">
-                            <notempty name="site_info.areas">
-                                <foreach name="site_info.areas" item="vo">
-                                    <li id="saved-areas{$key}">
-                                        地区名称：<input class="form-control" type="text"
-                                                        name="area[]"
-                                                        value="{$vo.area|default=''}" style="width: 300px;">
-                                        &nbsp;&nbsp;&nbsp;
-                                        国家数量：<input class="form-control" type="number"
-                                                        name="country[]"
-                                                        value="{$vo.country|default=''}" style="width: 100px;" >
-                                        &nbsp;&nbsp;&nbsp;
-                                        颜色：<input class="form-control" type="text"
-                                                    name="color[]"
-                                                    value="{$vo.color|default=''}" style="width: 150px;" >
-                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-areas{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
-                                    </li>
-                                </foreach>
-                            </notempty>
-                        </ul>
-                        <a href="javascript:areas_add();" class="btn btn-default">添加地区</a>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="input-left_title" class="col-sm-2 control-label"><span
-                            class="form-required">*</span>左侧标题</label>
-                    <div class="col-md-6 col-sm-10">
-                        <input class="form-control" id="input-left_title" name="service[left_title]" value="{$site_info.left_title|default=''}"
-                               placeholder="请填写描述">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="input-left_desc" class="col-sm-2 control-label"><span
-                            class="form-required">*</span>左侧描述</label>
-                    <div class="col-md-6 col-sm-10">
-                        <textarea class="form-control" id="input-left_desc" name="service[left_desc]" style="height: 100px;"
-                                  placeholder="请填写描述">{$site_info.left_desc|default=''}</textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="input-right_title" class="col-sm-2 control-label"><span
-                            class="form-required">*</span>右侧标题</label>
-                    <div class="col-md-6 col-sm-10">
-                        <input class="form-control" id="input-right_title" name="service[right_title]" value="{$site_info.right_title|default=''}"
-                               placeholder="请填写描述">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="input-right_desc" class="col-sm-2 control-label"><span
-                            class="form-required">*</span>右侧描述</label>
-                    <div class="col-md-6 col-sm-10">
-                        <textarea class="form-control" id="input-right_desc" name="service[right_desc]" style="height: 100px;"
-                                  placeholder="请填写描述">{$site_info.right_desc|default=''}</textarea>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">
                         合作公司
@@ -155,6 +115,217 @@
                         <p class="help-block">建议尺寸：240*240</p>
                     </div>
                 </div>
+                
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">包装与运输模块标题</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input class="form-control" type="text" name="service[packaging_title]" value="{$site_info.packaging_title|default='Packaging & Shipping'}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">包装与运输列表</label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="packagings" class="list-unstyled">
+                            <notempty name="site_info.packaging_items">
+                                <foreach name="site_info.packaging_items" item="vo">
+                                    <li id="saved-packaging{$key}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+                                        <div style="margin-bottom: 10px;">
+                                            <input id="packaging-img-{$key}" type="hidden" name="service[packaging_items][{$key}][img]" value="{$vo.img|default=''}">
+                                            <if condition="empty($vo['img'])">
+                                                <img id="packaging-img-{$key}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            <else/>
+                                                <img id="packaging-img-{$key}-preview" src="{:cmf_get_image_preview_url($vo['img'])}" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            </if>
+                                            <div style="margin-top: 5px;">
+                                                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#packaging-img-{$key}');">上传图片</a>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            名称：<input class="form-control" type="text" name="service[packaging_items][{$key}][name]" value="{$vo.name|default=''}" style="width: 100%;">
+                                        </div>
+                                        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-packaging{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:packagings_add();" class="btn btn-default">添加项</a>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Cooperation Process -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">合作流程模块标题</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input class="form-control" type="text" name="service[cooperation_title]" value="{$site_info.cooperation_title|default='Cooperation Process'}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">合作流程列表</label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="cooperations" class="list-unstyled">
+                            <notempty name="site_info.cooperation_items">
+                                <foreach name="site_info.cooperation_items" item="vo">
+                                    <li id="saved-cooperation{$key}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+                                        <div style="margin-bottom: 10px;">
+                                            大图：<input id="cooperation-img-{$key}" type="hidden" name="service[cooperation_items][{$key}][img]" value="{$vo.img|default=''}">
+                                            <if condition="empty($vo['img'])">
+                                                <img id="cooperation-img-{$key}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            <else/>
+                                                <img id="cooperation-img-{$key}-preview" src="{:cmf_get_image_preview_url($vo['img'])}" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            </if>
+                                            <div style="margin-top: 5px;">
+                                                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#cooperation-img-{$key}');">上传大图</a>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            图标class名：<input class="form-control" type="text" name="service[cooperation_items][{$key}][icon]" value="{$vo.icon|default=''}" style="width: 100%;" placeholder="例如: fa fa-handshake-o">
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            名称：<input class="form-control" type="text" name="service[cooperation_items][{$key}][name]" value="{$vo.name|default=''}" style="width: 100%;">
+                                        </div>
+                                        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-cooperation{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:cooperations_add();" class="btn btn-default">添加项</a>
+                    </div>
+                </div>
+
+                <!-- Technical Support -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">技术支持模块标题</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input class="form-control" type="text" name="service[support_title]" value="{$site_info.support_title|default='Technical Support'}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">技术支持列表</label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="supports" class="list-unstyled">
+                            <notempty name="site_info.support_items">
+                                <foreach name="site_info.support_items" item="vo">
+                                    <li id="saved-support{$key}" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; display: inline-block; width: 23%; margin-right: 1%; vertical-align: top;">
+                                        <div style="margin-bottom: 10px;">
+                                            <input id="support-img-{$key}" type="hidden" name="service[support_items][{$key}][img]" value="{$vo.img|default=''}">
+                                            <if condition="empty($vo['img'])">
+                                                <img id="support-img-{$key}-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            <else/>
+                                                <img id="support-img-{$key}-preview" src="{:cmf_get_image_preview_url($vo['img'])}" style="height:100px;width: 100%; object-fit: cover; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                            </if>
+                                            <div style="margin-top: 5px;">
+                                                <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#support-img-{$key}');">上传图片</a>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 10px;">
+                                            名称：<input class="form-control" type="text" name="service[support_items][{$key}][name]" value="{$vo.name|default=''}" style="width: 100%;">
+                                        </div>
+                                        <a class="btn btn-danger btn-sm" href="javascript:(function(){$('#saved-support{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i>删除</a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:supports_add();" class="btn btn-default">添加项</a>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- After-sales Service -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">售后服务模块标题</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input class="form-control" type="text" name="service[aftersales_title]" value="{$site_info.aftersales_title|default='After-sales Service'}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">售后服务图文配置</label>
+                    <div class="col-md-8 col-sm-10">
+                        <div style="border: 1px solid #ddd; padding: 20px; background: #f9f9f9;">
+                            <!-- 左侧大图 -->
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="col-sm-2 control-label">左侧客服大图</label>
+                                <div class="col-md-10">
+                                    <input id="aftersales-img-left" type="hidden" name="service[aftersales_img_left]" value="{$site_info.aftersales_img_left|default=''}">
+                                    <if condition="empty($site_info['aftersales_img_left'])">
+                                        <img id="aftersales-img-left-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    <else/>
+                                        <img id="aftersales-img-left-preview" src="{:cmf_get_image_preview_url($site_info['aftersales_img_left'])}" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    </if>
+                                    <div style="margin-top: 5px;">
+                                        <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#aftersales-img-left');">上传图片</a>
+                                        <a class="btn btn-sm" href="javascript:;" onclick="$('#aftersales-img-left-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#aftersales-img-left').val('');">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 中间顶部 -->
+                            <div class="form-group" style="margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                                <label class="col-sm-2 control-label">中间上图</label>
+                                <div class="col-md-10">
+                                    <input id="aftersales-img-mt" type="hidden" name="service[aftersales_img_mt]" value="{$site_info.aftersales_img_mt|default=''}">
+                                    <if condition="empty($site_info['aftersales_img_mt'])">
+                                        <img id="aftersales-img-mt-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    <else/>
+                                        <img id="aftersales-img-mt-preview" src="{:cmf_get_image_preview_url($site_info['aftersales_img_mt'])}" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    </if>
+                                    <div style="margin-top: 5px;">
+                                        <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#aftersales-img-mt');">上传图片</a>
+                                        <a class="btn btn-sm" href="javascript:;" onclick="$('#aftersales-img-mt-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#aftersales-img-mt').val('');">取消</a>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        图片上的文字：<input class="form-control" type="text" name="service[aftersales_text_mt]" value="{$site_info.aftersales_text_mt|default='Free Spare Parts'}" style="width: 300px; display: inline-block;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 中间底部 -->
+                            <div class="form-group" style="margin-bottom: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                                <label class="col-sm-2 control-label">中间下图</label>
+                                <div class="col-md-10">
+                                    <input id="aftersales-img-mb" type="hidden" name="service[aftersales_img_mb]" value="{$site_info.aftersales_img_mb|default=''}">
+                                    <if condition="empty($site_info['aftersales_img_mb'])">
+                                        <img id="aftersales-img-mb-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    <else/>
+                                        <img id="aftersales-img-mb-preview" src="{:cmf_get_image_preview_url($site_info['aftersales_img_mb'])}" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    </if>
+                                    <div style="margin-top: 5px;">
+                                        <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#aftersales-img-mb');">上传图片</a>
+                                        <a class="btn btn-sm" href="javascript:;" onclick="$('#aftersales-img-mb-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#aftersales-img-mb').val('');">取消</a>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        图片上的文字：<input class="form-control" type="text" name="service[aftersales_text_mb]" value="{$site_info.aftersales_text_mb|default='Warranty Serivce'}" style="width: 300px; display: inline-block;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 右侧证书 -->
+                            <div class="form-group" style="margin-bottom: 0; border-top: 1px solid #eee; padding-top: 20px;">
+                                <label class="col-sm-2 control-label">右侧证书图片</label>
+                                <div class="col-md-10">
+                                    <input id="aftersales-img-right" type="hidden" name="service[aftersales_img_right]" value="{$site_info.aftersales_img_right|default=''}">
+                                    <if condition="empty($site_info['aftersales_img_right'])">
+                                        <img id="aftersales-img-right-preview" src="__TMPL__/public/assets/images/default-thumbnail.png" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    <else/>
+                                        <img id="aftersales-img-right-preview" src="{:cmf_get_image_preview_url($site_info['aftersales_img_right'])}" style="height:100px;width: auto; cursor: pointer;" onclick="parent.imagePreviewDialog(this.src);">
+                                    </if>
+                                    <div style="margin-top: 5px;">
+                                        <a class="btn btn-default btn-sm" href="javascript:uploadOneImage('图片上传','#aftersales-img-right');">上传图片</a>
+                                        <a class="btn btn-sm" href="javascript:;" onclick="$('#aftersales-img-right-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#aftersales-img-right').val('');">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
@@ -169,12 +340,29 @@
 </div>
 <script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
 <script type="text/javascript">
-    function areas_add() {
+    function packagings_add() {
         var timestamp = new Date().getTime();
         var randomNum = Math.random();
         var scaledRandomNum = Math.floor(randomNum * 1000);
         var id = timestamp.toString() + scaledRandomNum.toString();
-        $('#areas').append('<li id="saved-areas'+id+'">地区名称：<input class="form-control" type="text" name="area[]" value="" style="width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;国家数量：<input class="form-control" type="number" name="country[]" value="" style="width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;颜色：<input class="form-control" type="text" name="color[]" value="" style="width: 150px;"><a class="btn btn-danger" href="javascript:(function(){$(\'#saved-areas'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a></li>');
+        var tpl = $('#packaging-item-tpl').html().replace(/\{id\}/g, id);
+        $('#packagings').append(tpl);
+    }
+    function cooperations_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var tpl = $('#cooperation-item-tpl').html().replace(/\{id\}/g, id);
+        $('#cooperations').append(tpl);
+    }
+    function supports_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var tpl = $('#support-item-tpl').html().replace(/\{id\}/g, id);
+        $('#supports').append(tpl);
     }
 </script>
 </body>

@@ -1,0 +1,87 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminProductCategory/index')}">产品分类</a></li>
+        <li><a href="{:url('AdminProductCategory/add')}">添加分类</a></li>
+        <li class="active"><a href="{:url('AdminProductCategory/productsFaq')}">产品主页 FAQ 设置</a></li>
+    </ul>
+    <div class="row margin-top-20">
+        <div class="col-md-6">
+            <form class="js-ajax-form" action="{:url('AdminProductCategory/productsFaqPost')}" method="post">
+                <div class="form-group">
+                    <label for="input-faq_title">FAQ模块标题</label>
+                    <div>
+                        <input type="text" class="form-control" id="input-faq_title" name="faq_title" value="{$faq_title|default=''}">
+                        <p class="help-block">用于产品总览页底部 FAQ 标题，留空默认显示 FAQ。</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-faq_items_text">FAQ问题列表</label>
+                    <div>
+                        <textarea class="form-control" name="faq_items_text" id="input-faq_items_text" rows="8">{$faq_items_text|default=''}</textarea>
+                        <p class="help-block">每行一条，格式：问题 | 答案</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-faq_contact_title">FAQ联系区标题</label>
+                    <div>
+                        <input type="text" class="form-control" id="input-faq_contact_title" name="faq_contact_title" value="{$faq_contact_title|default=''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-faq_contact_desc">FAQ联系区描述</label>
+                    <div>
+                        <textarea class="form-control" name="faq_contact_desc" id="input-faq_contact_desc">{$faq_contact_desc|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-faq_contact_btn_text">FAQ联系区按钮文案</label>
+                    <div>
+                        <input type="text" class="form-control" id="input-faq_contact_btn_text" name="faq_contact_btn_text" value="{$faq_contact_btn_text|default=''}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-faq_contact_btn_link">FAQ联系区按钮链接</label>
+                    <div>
+                        <input type="text" class="form-control" id="input-faq_contact_btn_link" name="faq_contact_btn_link" value="{$faq_contact_btn_link|default=''}">
+                        <p class="help-block">例如：/portal/index/quote</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>FAQ联系区背景图片</label>
+                    <div>
+                        <input type="hidden" name="faq_bg_img" id="faq_bg_img" value="{$faq_bg_img|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#faq_bg_img');">
+                            <if condition="empty($faq_bg_img)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="faq_bg_img-preview" width="180" style="cursor: pointer"/>
+                            <else/>
+                                <img src="{:cmf_get_image_preview_url($faq_bg_img)}" id="faq_bg_img-preview" width="180" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <div>
+                            <input type="button" class="btn btn-sm btn-cancel-faq_bg_img" value="取消图片">
+                        </div>
+                        <p class="help-block">用于产品总览页底部 FAQ 左侧联系区域的背景图</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                    <a class="btn btn-default" href="{:url('AdminProductCategory/index')}">{:lang('BACK')}</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.btn-cancel-faq_bg_img').click(function () {
+            $('#faq_bg_img').val('');
+            $('#faq_bg_img-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+        });
+    });
+</script>
+</body>
+</html>

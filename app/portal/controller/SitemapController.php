@@ -1,0 +1,138 @@
+<?php
+namespace app\portal\controller;
+
+use cmf\controller\HomeBaseController;
+use app\portal\model\ProductModel;
+use app\portal\model\PortalPostModel;
+use think\facade\Db;
+use think\facade\Cache;
+
+class SitemapController extends HomeBaseController
+{
+    private $domain = '';
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->domain = $this->request->domain();
+    }
+
+    public function index()
+    {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
+        $xml .= '   <sitemap><loc>' . $this->domain . '/sitemap-pages.xml</loc></sitemap>' . PHP_EOL;
+        $xml .= '   <sitemap><loc>' . $this->domain . '/sitemap-products.xml</loc></sitemap>' . PHP_EOL;
+        $xml .= '   <sitemap><loc>' . $this->domain . '/sitemap-cases.xml</loc></sitemap>' . PHP_EOL;
+        $xml .= '   <sitemap><loc>' . $this->domain . '/sitemap-news.xml</loc></sitemap>' . PHP_EOL;
+        $xml .= '</sitemapindex>';
+        
+        return response($xml)->contentType('text/xml');
+    }
+
+    public function pages()
+    {
+        // Actual page rewrites on this website
+        $pages = ['/', '/about.html', '/cert.html', '/innovation.html', '/products.html', '/service.html', '/case.html', '/news.html', '/quote.html'];
+        
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
+        foreach ($pages as $page) {
+            $xml .= '   <url>' . PHP_EOL;
+            $xml .= '      <loc>' . $this->domain . $page . '</loc>' . PHP_EOL;
+            $xml .= '      <lastmod>' . date('Y-m-d') . '</lastmod>' . PHP_EOL;
+            $xml .= '   </url>' . PHP_EOL;
+        }
+        $xml .= '</urlset>';
+        
+        return response($xml)->contentType('text/xml');
+    }
+
+    public function products()
+    {
+        $xml = Cache::get('sitemap_products');
+        if (!$xml) {
+            $productModel = new ProductModel();
+            $list = $productModel->field('id, alias, update_time, create_time')
+                ->whereRaw('delete_time IS NULL OR delete_time = 0')
+                ->where('alias', '<>', '')
+                ->select();
+
+            $xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+            $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
+            foreach ($list as $item) {
+                $slug = !empty($item['alias']) ? str_replace(' ', '%20', $item['alias']) : $item['id'];
+                $url = rtrim($this->domain, '/') . '/' . $slug . '.html';
+                $lastmod = !empty($item['update_time']) ? date('Y-m-d', $item['update_time']) : (!empty($item['create_time']) ? date('Y-m-d', $item['create_time']) : date('Y-m-d'));
+                $xml .= '   <url>' . PHP_EOL;
+                $xml .= '      <loc>' . $url . '</loc>' . PHP_EOL;
+                $xml .= '      <lastmod>' . $lastmod . '</lastmod>' . PHP_EOL;
+                $xml .= '   </url>' . PHP_EOL;
+            }
+            $xml .= '</urlset>';
+            Cache::set('sitemap_products', $xml, 3600);
+        }
+        
+        return response($xml)->contentType('text/xml');
+    }
+
+    public function news()
+    {
+        return $this->generatePostSitemap('sitemap_news', 8, 'news', 'news_info');
+    }
+
+    public function cases()
+    {
+        return $this->generatePostSitemap('sitemap_cases', 3, 'cases', 'industries_info');
+    }
+
+    private function generatePostSitemap($cacheKey, $postType, $routePrefix, $action)
+    {
+        $xml = Cache::get($cacheKey);
+        if (!$xml) {
+            $postModel = new PortalPostModel();
+            
+            // Query posts of specified type
+            $list = $postModel->field('id, post_title, update_time, create_time')
+                ->where('post_type', $postType)
+                ->whereRaw('delete_time IS NULL OR delete_time = 0')
+                ->select();
+
+            // Fetch active route aliases from cmf_route
+            $routeType = $postType == 8 ? 'portal/index/news_info%' : 'portal/index/industries_info%';
+            $routes = Db::name('route')->where('full_url', 'like', $routeType)->select()->toArray();
+            
+            $routeMap = [];
+            foreach ($routes as $route) {
+                $parts = parse_url($route['full_url']);
+                if (isset($parts['query'])) {
+                    parse_str($parts['query'], $query);
+                    if (isset($query['id'])) {
+                        $routeMap[$query['id']] = $route['url'];
+                    }
+                }
+            }
+
+            $xml = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+            $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
+            foreach ($list as $item) {
+                if (isset($routeMap[$item['id']])) {
+                    $slug = str_replace(' ', '%20', $routeMap[$item['id']]);
+                } else {
+                    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $item['post_title']), '-'));
+                }
+                
+                $url = rtrim($this->domain, '/') . '/' . $slug . '.html';
+                $lastmod = !empty($item['update_time']) ? date('Y-m-d', $item['update_time']) : (!empty($item['create_time']) ? date('Y-m-d', $item['create_time']) : date('Y-m-d'));
+                $xml .= '   <url>' . PHP_EOL;
+                $xml .= '      <loc>' . $url . '</loc>' . PHP_EOL;
+                $xml .= '      <lastmod>' . $lastmod . '</lastmod>' . PHP_EOL;
+                $xml .= '   </url>' . PHP_EOL;
+            }
+            $xml .= '</urlset>';
+            Cache::set($cacheKey, $xml, 3600);
+        }
+        
+        return response($xml)->contentType('text/xml');
+    }
+}

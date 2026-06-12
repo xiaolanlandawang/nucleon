@@ -8,8 +8,8 @@
     <meta name="description" content="{$site_info.site_name|default=''}">
     <meta name="google-site-verification" content="xq1U9Wx4JsDxE2JtMVkiWU4bMGKhuJOgiHulcoo4Wy4" />
     <include file="public@head" />
-    <link href="__TMPL__/public/assets/css/index.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="__TMPL__/public/assets/js/index.js"></script>
+    <link href="__TMPL__/public/assets/css/index.css?v=20260612.16" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/index.js?v=2.0"></script>
 </head>
 
 <body>
@@ -120,7 +120,8 @@
                                             </div>
                                         </a>
                                         <div class="product_item__footer">
-                                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
+                                            <div class="product_list_item_btn quote-btn" id="inquiry">Get Solution Quote<span class="btn-arrow"></span></div>
+                                            <a class="product_list_item_btn detail-btn" href="{:cmf_url('portal/index/product_info',array('id'=>$v['id']))}">View Details<span class="btn-arrow"></span></a>
                                         </div>
                                     </li>
                                 </foreach>

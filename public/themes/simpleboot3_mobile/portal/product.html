@@ -9,7 +9,7 @@
     <link rel="preload" as="image" href="{$hero_image}" fetchpriority="high">
 
     <include file="public@head"/>
-    <link href="__TMPL__/public/assets/css/products.css" rel="stylesheet" type="text/css">
+    <link href="__TMPL__/public/assets/css/products.css?v=20260611.5" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="__TMPL__/public/assets/js/product.js" defer></script>
 </head>
 <body>
@@ -207,8 +207,11 @@
                                     <div class="case-item-img">
                                         <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}">
                                     </div>
-                                    <div class="case-item-title">{$vo.post_title}</div>
-                                    <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                    <div class="case-item-content">
+                                        <div class="case-item-title">{$vo.post_title}</div>
+                                        <div class="case-item-desc">{$vo.post_excerpt}</div>
+                                        <div class="case-item-more">Read More&rarr;</div>
+                                    </div>
                                 </a>
                             </div>
                         </if>

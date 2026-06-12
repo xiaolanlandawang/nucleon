@@ -32,6 +32,38 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">服务承诺</label>
+                    <div class="col-md-10 col-sm-10">
+                        <ul id="commitments" class="pic-list list-unstyled form-inline" style="padding-left: 0;">
+                            <notempty name="site_info.commitments">
+                                <foreach name="site_info.commitments" item="vo">
+                                    <li id="saved-commitment{$key}" style="margin-bottom: 10px;">
+                                        标题(如60S)：
+                                        <input class="form-control" type="text" name="commitment_title[]" value="{$vo.title|default=''}" style="width: 150px;">
+                                        &nbsp;&nbsp;
+                                        描述：
+                                        <input class="form-control" type="text" name="commitment_desc[]" value="{$vo.desc|default=''}" style="width: 350px;">
+                                        &nbsp;&nbsp;
+                                        小图：
+                                        <input type="hidden" name="commitment_image[]" id="commitment_image{$key}" value="{$vo.image|default=''}">
+                                        <a href="javascript:uploadOneImage('图片上传','#commitment_image{$key}');">
+                                            <if condition="empty($vo['image'])">
+                                                <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="commitment_image{$key}-preview" width="30" style="cursor: pointer"/>
+                                            <else/>
+                                                <img src="{:cmf_get_image_preview_url($vo['image'])}" id="commitment_image{$key}-preview" width="30" style="cursor: pointer"/>
+                                            </if>
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-commitment{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:commitment_add();" class="btn btn-default">添加承诺</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
                             {:lang('SAVE')}
@@ -44,5 +76,27 @@
 
 </div>
 <script type="text/javascript" src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+<script type="text/javascript">
+    function commitment_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-commitment' + id + '" style="margin-bottom: 10px;">' +
+            '标题(如60S)：' +
+            '<input class="form-control" type="text" name="commitment_title[]" value="" style="width: 150px;">' +
+            '&nbsp;&nbsp;描述：' +
+            '<input class="form-control" type="text" name="commitment_desc[]" value="" style="width: 350px;">' +
+            '&nbsp;&nbsp;小图：' +
+            '<input type="hidden" name="commitment_image[]" id="commitment_image' + id + '" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#commitment_image' + id + '\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="commitment_image' + id + '-preview" width="30" style="cursor: pointer"/>' +
+            '</a>' +
+            '&nbsp;&nbsp;' +
+            '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-commitment' + id + '\').remove();})();"><i class="fa fa-trash fa-fw"></i></a>' +
+            '</li>';
+        $('#commitments').append(html);
+    }
+</script>
 </body>
 </html>

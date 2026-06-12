@@ -27,6 +27,24 @@ class QuoteController extends AdminBaseController
             $site_info['image'] = $data['image'];
         }
 
+        // Parse commitments
+        $commitments = [];
+        if (!empty($data['commitment_title']) && is_array($data['commitment_title'])) {
+            foreach ($data['commitment_title'] as $key => $title) {
+                $title = trim((string)$title);
+                $desc = trim((string)($data['commitment_desc'][$key] ?? ''));
+                $img = trim((string)($data['commitment_image'][$key] ?? ''));
+                if ($title !== '' || $desc !== '' || $img !== '') {
+                    $commitments[] = [
+                        'title' => $title,
+                        'desc' => $desc,
+                        'image' => $img
+                    ];
+                }
+            }
+        }
+        $site_info['commitments'] = $commitments;
+
         cmf_set_option('quote_site', $site_info);
 
         $this->success('保存成功');

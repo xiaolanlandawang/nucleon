@@ -14,15 +14,9 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:{$site_info.email}">
+                    <a href="mailto:{$site_info.email}" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="__TMPL__/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> {$site_info.email}
-                    </a>
-                </div>
-                <div class="header-contact-item">
-                    <a href="tel:{$site_info.sale_tel}">
-                        <img src="__TMPL__/public/assets/images/header-tel.svg" alt="tel">
-                        <span class="contact-label">Tel:</span> {$site_info.sale_tel}
                     </a>
                 </div>
                 <div class="header-contact-item">
@@ -30,10 +24,6 @@
                         <img src="__TMPL__/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> {$site_info.whatsapp}
                     </a>
-                </div>
-                <div class="header-contact-item">
-                    <img src="__TMPL__/public/assets/images/header-wechat.png" alt="wechat">
-                    <span class="contact-label">Wechat:</span> {$site_info.wechat}
                 </div>
             </div>
             <div class="header-link">
@@ -47,7 +37,7 @@
                     <a href="{$site_info.linkedin}"><img src="__TMPL__/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="{$site_info.vk}"><img src="__TMPL__/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="{$site_info.vk}"><img src="__TMPL__/public/assets/images/header-vk.svg" alt="vk"></a>
                 </div>
             </div>
         </div>
@@ -63,7 +53,7 @@
             <li class="nav-item">
                 <a class="nav-title" href="/">Home</a>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item nav-item-about has-sub">
                 <a class="nav-title" href="{:cmf_url('portal/index/about')}">About Us</a>
                 <div class="nav-sub about-nav">
                     <div class="nav-sub-item">
@@ -77,7 +67,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item nav-item-product">
+            <li class="nav-item nav-item-product has-sub">
                 <a class="nav-title" href="{:cmf_url('portal/index/product')}">Products</a>
                 <div class="nav-sub product-nav">
                     <foreach name="category_list" item="vo">
@@ -89,24 +79,13 @@
                     </foreach>
                 </div>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item">
                 <a class="nav-title" href="{:cmf_url('portal/index/service')}">Service</a>
-                <div class="nav-sub about-nav">
-                    <div class="nav-sub-item">
-                        <a href="{:cmf_url('portal/index/service')}">Global Market</a>
-                    </div>
-                    <div class="nav-sub-item">
-                        <a href="{:cmf_url('portal/index/excellent_service')}">Excellent Service</a>
-                    </div>
-                    <div class="nav-sub-item">
-                        <a href="{:cmf_url('portal/index/download')}">Download</a>
-                    </div>
-                </div>
             </li>
             <li class="nav-item nav-item-about">
-                <a class="nav-title" href="{:cmf_url('portal/index/industries')}">Case</a>
+                <a class="nav-title" href="{:cmf_url('portal/index/industries')}">Cases</a>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item nav-item-about has-sub">
                 <a class="nav-title" href="{:cmf_url('portal/index/news')}">News Center</a>
                 <div class="nav-sub about-nav">
                     <foreach name="news_category" item="vo">

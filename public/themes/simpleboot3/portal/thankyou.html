@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$page_title} - {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/public/assets/css/thankyou.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<div class="thankyou-wrapper">
+    <div class="thankyou-card reveal">
+        <div class="thankyou-header">
+            <div class="thankyou-header-subtitle">INQUIRY SUBMITTED</div>
+            <h1 class="thankyou-header-title">Thank You for Your Inquiry</h1>
+            <p class="thankyou-header-desc">
+                Your message has been successfully submitted. Our team will review your lifting requirements and contact you as soon as possible by email or WhatsApp.
+            </p>
+        </div>
+        <div class="thankyou-body">
+            <div class="thankyou-notice">
+                <h3>We Have Received Your Request</h3>
+                <p>For urgent projects, you can contact us directly on WhatsApp. You can also continue browsing our crane product categories while our team reviews your inquiry.</p>
+            </div>
+            
+            <div class="thankyou-actions">
+                <notempty name="site_info.whatsapp">
+                    <a href="https://wa.me/{$site_info.whatsapp}" target="_blank" class="thankyou-btn primary">WhatsApp Us</a>
+                </notempty>
+                <a href="{:cmf_url('portal/index/product')}" class="thankyou-btn secondary">Back to Products</a>
+            </div>
+
+            <div class="thankyou-divider"></div>
+
+            <div class="thankyou-contacts">
+                <notempty name="site_info.email">
+                <div class="thankyou-contact-card">
+                    <div class="label">Email</div>
+                    <div class="value">{$site_info.email}</div>
+                </div>
+                </notempty>
+                <notempty name="site_info.whatsapp">
+                <div class="thankyou-contact-card">
+                    <div class="label">WhatsApp</div>
+                    <div class="value">{$site_info.whatsapp}</div>
+                </div>
+                </notempty>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

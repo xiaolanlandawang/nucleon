@@ -17,6 +17,29 @@ $(document).ready(function () {
         },
     });
 
+    var hotProductsSwiper = new Swiper(".hot-products-swiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: ".hot-products-swiper .swiper-button-next",
+            prevEl: ".hot-products-swiper .swiper-button-prev",
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 20
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            }
+        }
+    });
+
     $(document).on('click', '#inquiry', function () {
         $('#feedback_type').val(1);
         $('#product-id').val($('#product-id').val() || $('input[name="product_id"]').val() || '');

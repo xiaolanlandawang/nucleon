@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>{$page_title} - {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}">
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <link href="__TMPL__/../simpleboot3/public/assets/css/thankyou.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<include file="public@nav"/>
+
+<div class="thankyou-wrapper" style="padding: 20px 15px; min-height: 70vh; margin-top: 60px;">
+    <div class="thankyou-card reveal">
+        <div class="thankyou-header" style="padding: 30px 20px;">
+            <div class="thankyou-header-subtitle" style="font-size: 12px;">INQUIRY SUBMITTED</div>
+            <h1 class="thankyou-header-title" style="font-size: 24px; margin-bottom: 15px;">Thank You for Your Inquiry</h1>
+            <p class="thankyou-header-desc" style="font-size: 14px;">
+                Your message has been successfully submitted. Our team will review your lifting requirements and contact you as soon as possible by email or WhatsApp.
+            </p>
+        </div>
+        <div class="thankyou-body" style="padding: 30px 20px;">
+            <div class="thankyou-notice" style="padding: 20px; margin-bottom: 30px;">
+                <h3 style="font-size: 18px;">We Have Received Your Request</h3>
+                <p style="font-size: 14px;">For urgent projects, you can contact us directly on WhatsApp. You can also continue browsing our crane product categories while our team reviews your inquiry.</p>
+            </div>
+            
+            <div class="thankyou-actions" style="flex-direction: column; gap: 15px; margin-bottom: 40px;">
+                <notempty name="site_info.whatsapp">
+                    <a href="https://wa.me/{$site_info.whatsapp}" target="_blank" class="thankyou-btn primary" style="width: 100%;">WhatsApp Us</a>
+                </notempty>
+                <a href="{:cmf_url('portal/index/product')}" class="thankyou-btn secondary" style="width: 100%;">Back to Products</a>
+            </div>
+
+            <div class="thankyou-divider" style="margin-bottom: 30px;"></div>
+
+            <div class="thankyou-contacts" style="flex-direction: column; gap: 15px;">
+                <notempty name="site_info.email">
+                <div class="thankyou-contact-card" style="padding: 15px;">
+                    <div class="label" style="font-size: 13px;">Email</div>
+                    <div class="value" style="font-size: 16px; word-break: break-all;">{$site_info.email}</div>
+                </div>
+                </notempty>
+                <notempty name="site_info.whatsapp">
+                <div class="thankyou-contact-card" style="padding: 15px;">
+                    <div class="label" style="font-size: 13px;">WhatsApp</div>
+                    <div class="value" style="font-size: 16px;">{$site_info.whatsapp}</div>
+                </div>
+                </notempty>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="public@foot"/>
+
+</body>
+</html>

@@ -68,6 +68,7 @@
         <li><a href="#B" data-toggle="tab">{:lang('SEO_SETTING')}</a></li>
         <li><a href="#C" data-toggle="tab">主页设置</a></li>
         <li><a href="#D" data-toggle="tab">产品设置</a></li>
+        <li><a href="#E" data-toggle="tab">专家设置</a></li>
     </ul>
     <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('Setting/sitePost')}"
           method="post">
@@ -664,6 +665,60 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0" data-action="{:url('productSitePost')}">
+                                    {:lang('SAVE')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="E">
+                        <div class="form-group">
+                            <label for="input-expert-photo" class="col-sm-2 control-label">专家头像</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="hidden" name="options[expert_photo]" id="input-expert-photo" value="{$site_info.expert_photo|default=''}">
+                                <a href="javascript:uploadOneImage('图片上传','#input-expert-photo');">
+                                    <if condition="empty($site_info['expert_photo'])">
+                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="input-expert-photo-preview" width="135" style="cursor: pointer"/>
+                                        <else/>
+                                        <img src="{:cmf_get_image_preview_url($site_info['expert_photo'])}" id="input-expert-photo-preview" width="135" style="cursor: pointer"/>
+                                    </if>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-expert-name" class="col-sm-2 control-label">专家姓名</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-expert-name" name="options[expert_name]" value="{$site_info.expert_name|default='Zora Zhao'}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-expert-title" class="col-sm-2 control-label">专家头衔</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-expert-title" name="options[expert_title]" value="{$site_info.expert_title|default='Expert in Overhead Crane/Gantry Crane/Jib Crane/Crane Parts Solutions'}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-expert-desc" class="col-sm-2 control-label">专家简介</label>
+                            <div class="col-md-6 col-sm-10">
+                                <textarea class="form-control" id="input-expert-desc" name="options[expert_desc]" rows="4">{$site_info.expert_desc|default='With 10+ years of experience in the Crane Overseas Export Industry, helped 10,000+ customers with their pre-sales questions and concerns, if you have any related needs, please feel free to contact me!'}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-expert-whatsapp" class="col-sm-2 control-label">WhatsApp</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-expert-whatsapp" name="options[expert_whatsapp]" value="{$site_info.expert_whatsapp|default=''}">
+                                <p class="help-block">留空则使用网站基础设置的WhatsApp</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-expert-email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-md-6 col-sm-10">
+                                <input type="text" class="form-control" id="input-expert-email" name="options[expert_email]" value="{$site_info.expert_email|default=''}">
+                                <p class="help-block">留空则使用网站基础设置的Email</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="1">
                                     {:lang('SAVE')}
                                 </button>
                             </div>

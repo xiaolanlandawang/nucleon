@@ -123,10 +123,11 @@ class AdminProductCategoryController extends AdminBaseController
         $faqContactTitle = '',
         $faqContactDesc = '',
         $faqContactBtnText = '',
-        $faqContactBtnLink = ''
+        $faqContactBtnLink = '',
+        $faqBgImg = ''
     ) {
         $categoryId = (int)$categoryId;
-        if ($categoryId <= 0) {
+        if ($categoryId < 0) {
             return;
         }
 
@@ -137,7 +138,8 @@ class AdminProductCategoryController extends AdminBaseController
             'faq_contact_title'    => trim((string)$faqContactTitle),
             'faq_contact_desc'     => trim((string)$faqContactDesc),
             'faq_contact_btn_text' => trim((string)$faqContactBtnText),
-            'faq_contact_btn_link' => trim((string)$faqContactBtnLink)
+            'faq_contact_btn_link' => trim((string)$faqContactBtnLink),
+            'faq_bg_img'           => trim((string)$faqBgImg)
         ];
 
         $this->saveFaqSettings($settings);
@@ -146,7 +148,7 @@ class AdminProductCategoryController extends AdminBaseController
     private function deleteCategoryFaqContent($categoryId)
     {
         $categoryId = (int)$categoryId;
-        if ($categoryId <= 0) {
+        if ($categoryId < 0) {
             return;
         }
 
@@ -308,6 +310,7 @@ class AdminProductCategoryController extends AdminBaseController
         $this->assign('faq_contact_desc', '');
         $this->assign('faq_contact_btn_text', '');
         $this->assign('faq_contact_btn_link', '');
+        $this->assign('faq_bg_img', '');
 
         return $this->fetch();
     }
@@ -363,7 +366,8 @@ class AdminProductCategoryController extends AdminBaseController
             $data['faq_contact_title'] ?? '',
             $data['faq_contact_desc'] ?? '',
             $data['faq_contact_btn_text'] ?? '',
-            $data['faq_contact_btn_link'] ?? ''
+            $data['faq_contact_btn_link'] ?? '',
+            $data['faq_bg_img'] ?? ''
         );
 
         $routeModel = new RouteModel();
@@ -404,6 +408,7 @@ class AdminProductCategoryController extends AdminBaseController
         $category['faq_contact_desc'] = $faqContent['faq_contact_desc'] ?? '';
         $category['faq_contact_btn_text'] = $faqContent['faq_contact_btn_text'] ?? '';
         $category['faq_contact_btn_link'] = $faqContent['faq_contact_btn_link'] ?? '';
+        $category['faq_bg_img'] = $faqContent['faq_bg_img'] ?? '';
 
         $this->assign($category);
 
@@ -468,7 +473,8 @@ class AdminProductCategoryController extends AdminBaseController
             $data['faq_contact_title'] ?? '',
             $data['faq_contact_desc'] ?? '',
             $data['faq_contact_btn_text'] ?? '',
-            $data['faq_contact_btn_link'] ?? ''
+            $data['faq_contact_btn_link'] ?? '',
+            $data['faq_bg_img'] ?? ''
         );
 
         cmf_clear_cache();
@@ -507,6 +513,48 @@ class AdminProductCategoryController extends AdminBaseController
         } else {
             $this->error('鍒犻櫎澶辫触');
         }
+    }
+
+    public function productsFaq()
+    {
+        $id = 0; // Category ID 0 represents the main products page
+
+        $faqSettings = $this->getFaqSettings();
+        $faqContent = $faqSettings[$id] ?? [];
+        $category = [];
+        $category['faq_title'] = $faqContent['faq_title'] ?? '';
+        $category['faq_items_text'] = $this->buildFaqItemsText($faqContent['faq'] ?? []);
+        $category['faq_contact_title'] = $faqContent['faq_contact_title'] ?? '';
+        $category['faq_contact_desc'] = $faqContent['faq_contact_desc'] ?? '';
+        $category['faq_contact_btn_text'] = $faqContent['faq_contact_btn_text'] ?? '';
+        $category['faq_contact_btn_link'] = $faqContent['faq_contact_btn_link'] ?? '';
+        $category['faq_bg_img'] = $faqContent['faq_bg_img'] ?? '';
+
+        $this->assign($category);
+        return $this->fetch('products_faq');
+    }
+
+    public function productsFaqPost()
+    {
+        if (!$this->request->isPost()) {
+            $this->error('Request error');
+        }
+
+        $data = $this->request->post();
+        
+        $this->saveCategoryFaqContent(
+            0, // Category ID 0 represents the main products page
+            $data['faq_title'] ?? '',
+            $data['faq_items_text'] ?? '',
+            $data['faq_contact_title'] ?? '',
+            $data['faq_contact_desc'] ?? '',
+            $data['faq_contact_btn_text'] ?? '',
+            $data['faq_contact_btn_link'] ?? '',
+            $data['faq_bg_img'] ?? ''
+        );
+
+        cmf_clear_cache();
+        $this->success('保存成功!', url('AdminProductCategory/productsFaq'));
     }
 }
 

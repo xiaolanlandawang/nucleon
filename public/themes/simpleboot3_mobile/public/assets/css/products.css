@@ -454,7 +454,7 @@
     background: #fff;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     border: 1px solid #ececec;
     box-sizing: border-box;
 }
@@ -462,13 +462,12 @@
 .product-case-swiper .case-item a {
     text-decoration: none;
     display: block;
-    padding: 0.8rem;
+    color: inherit;
 }
 
 .product-case-swiper .case-item-img {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 0.6rem;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
 }
 
@@ -478,46 +477,56 @@
     object-fit: cover;
 }
 
-.product-case-swiper .case-item-title {
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: #1a1a1a;
-    margin-top: 0.8rem;
-    line-height: 1.3;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    height: 3.2rem;
+.product-case-swiper .case-item-content {
+    padding: 1.5rem 1.2rem;
+    background: #fff;
 }
 
-.product-case-swiper .case-item-desc {
-    font-size: 1.1rem;
-    color: #666;
-    margin-top: 0.4rem;
+.product-case-swiper .case-item-title {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #1a1a1a;
     line-height: 1.4;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    height: 3rem;
+}
+
+.product-case-swiper .case-item-desc {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 0.6rem;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.product-case-swiper .case-item-more {
+    font-size: 1.2rem;
+    color: #f39c12;
+    margin-top: 1rem;
+    display: block;
+    font-weight: bold;
 }
 
 .product-case-pagination {
     display: flex;
     justify-content: center;
     gap: 0.6rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .product-case-pagination .swiper-pagination-bullet {
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 2.4rem;
+    height: 0.4rem;
+    border-radius: 0;
+    margin: 0 0.3rem !important;
     background: #ccc;
     opacity: 0.6;
-    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 .product-case-pagination .swiper-pagination-bullet-active {

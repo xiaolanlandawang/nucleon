@@ -75,13 +75,7 @@
                                value="取消图片">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="input-do_desc" class="col-sm-2 control-label">公司介绍</label>
-                    <div class="col-md-6 col-sm-10">
-                        <textarea class="form-control" id="input-do_desc" name="about[do_desc]" style="height: 100px;"
-                                  placeholder="请填写描述">{$site_info.do_desc|default=''}</textarea>
-                    </div>
-                </div>
+
                 <div class="form-group">
                     <label for="input-service_desc" class="col-sm-2 control-label">客户服务描述</label>
                     <div class="col-md-6 col-sm-10">
@@ -147,14 +141,15 @@
                                 <foreach name="site_info.market" item="vo">
                                     <li id="saved-market{$key}">
                                         标题：<input class="form-control" type="text"
-                                                        name="market_name[]"
-                                                        value="{$vo.market_name|default=''}" style="width: 200px;">
+                                                    name="market_name[]"
+                                                    value="{$vo.market_name|default=''}" style="width: 200px;">
                                         &nbsp;&nbsp;&nbsp;
-                                        描述：<input class="form-control" type="text"
-                                                        name="market_num[]"
-                                                        value="{$vo.market_num|default=''}" style="width: 500px;" >
+                                        数量：<input class="form-control" type="text"
+                                                    name="market_num[]"
+                                                    value="{$vo.market_num|default=''}" style="width: 100px;">
                                         &nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-danger" href="javascript:(function(){$('#saved-market{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                        <a class="btn btn-success" href="javascript:(function(){$('#saved-market{$key}').before($('#saved-market{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
                                     </li>
                                 </foreach>
                             </notempty>
@@ -162,6 +157,7 @@
                         <a href="javascript:market_add();" class="btn btn-default">添加市场</a>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">
                         优势设置
@@ -171,13 +167,17 @@
                             <notempty name="site_info.advantage">
                                 <foreach name="site_info.advantage" item="vo">
                                     <li id="saved-advantage{$key}">
-                                        名称：<input class="form-control" type="text"
-                                                    name="advantage_name[]"
-                                                    value="{$vo.advantage_name|default=''}" style="width: 400px;">
+                                        单位(如Million)：<input class="form-control" type="text"
+                                                    name="advantage_unit[]"
+                                                    value="{$vo.advantage_unit|default=''}" style="width: 150px;">
                                         &nbsp;&nbsp;&nbsp;
-                                        数目：<input class="form-control" type="text"
+                                        数值(如80)：<input class="form-control" type="text"
                                                     name="advantage_num[]"
                                                     value="{$vo.advantage_num|default=''}" style="width: 100px;" >
+                                        &nbsp;&nbsp;&nbsp;
+                                        底部描述：<input class="form-control" type="text"
+                                                    name="advantage_name[]"
+                                                    value="{$vo.advantage_name|default=''}" style="width: 400px;">
                                         &nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-danger" href="javascript:(function(){$('#saved-advantage{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
                                     </li>
@@ -188,33 +188,46 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">企业形象</label>
+                    <label class="col-sm-2 control-label">企业文化背景</label>
                     <div class="col-md-6 col-sm-10">
-                        <ul id="photos" class="pic-list list-unstyled form-inline">
-                            <notempty name="site_info.corporate_images">
-                                <foreach name="site_info.corporate_images" item="vo">
-                                    <php>$img_url=cmf_get_image_preview_url($vo['url']);</php>
-                                    <li id="saved-image{$key}">
-                                        <input id="photo-{$key}" type="hidden" name="photo_urls[]"
-                                               value="{$vo.url}">
-                                        <input class="form-control" id="photo-{$key}-name" type="text"
-                                               name="photo_names[]"
-                                               value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
-                                        <img id="photo-{$key}-preview"
-                                             src="{:cmf_get_image_preview_url($vo['url'])}"
-                                             style="height:34px;width: 44px;"
-                                             onclick="parent.imagePreviewDialog(this.src);">
-                                        <a class="btn btn-default"  href="javascript:uploadOneImage('图片上传','#photo-{$key}');"><i class="fa fa-upload fa-fw"></i></a>
-                                        <a class="btn btn-danger"  href="javascript:(function(){$('#saved-image{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
-                                        <a class="btn btn-success"  href="javascript:(function(){$('#saved-image{$key}').before($('#saved-image{$key}').next());})();"><i class="fa fa-arrow-down fa-fw"></i></a>
-                                    </li>
-                                </foreach>
-                            </notempty>
-                        </ul>
-                        <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
-                           class="btn btn-default">选择图片</a>
+                        <input type="hidden" name="about[culture_bg]" id="culture_bg"
+                               value="{$site_info.culture_bg|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#culture_bg');">
+                            <if condition="empty($site_info.culture_bg)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="culture_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.culture_bg)}"
+                                     id="culture_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#culture_bg-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#culture_bg').val('');return false;"
+                               value="取消图片">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">卡片悬浮背景</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="hidden" name="about[culture_card_bg]" id="culture_card_bg"
+                               value="{$site_info.culture_card_bg|default=''}">
+                        <a href="javascript:uploadOneImage('图片上传','#culture_card_bg');">
+                            <if condition="empty($site_info.culture_card_bg)">
+                                <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                     id="culture_card_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                                <else/>
+                                <img src="{:cmf_get_image_preview_url($site_info.culture_card_bg)}"
+                                     id="culture_card_bg-preview"
+                                     width="135" style="cursor: pointer"/>
+                            </if>
+                        </a>
+                        <input type="button" class="btn btn-sm" onclick="$('#culture_card_bg-preview').attr('src','__TMPL__/public/assets/images/default-thumbnail.png');$('#culture_card_bg').val('');return false;"
+                               value="取消图片">
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="input-cert_description" class="col-sm-2 control-label">证书描述</label>
@@ -294,6 +307,78 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">服务中心描述</label>
+                    <div class="col-md-6 col-sm-10">
+                        <textarea class="form-control" id="input-service_description" name="about[service_description]" style="height: 100px;" placeholder="请填写描述">{$site_info.service_description|default=''}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务中心(上侧圆圈图文)</label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="engineering" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.engineering">
+                                <foreach name="site_info.engineering" item="vo">
+                                    <li id="saved-eng{$key}">
+                                        标题：<input class="form-control" type="text" name="engineering_title[]" value="{$vo.title|default=''}" style="width: 150px;">
+                                        &nbsp;&nbsp;&nbsp;
+                                        默认图片：<input type="hidden" name="engineering_image_normal[]" id="eng_img_n_{$key}" value="{$vo.image_normal}">
+                                        <a href="javascript:uploadOneImage('图片上传','#eng_img_n_{$key}');">
+                                            <if condition="empty($vo.image_normal)">
+                                                <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="eng_img_n_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            <else/>
+                                                <img src="{:cmf_get_image_preview_url($vo.image_normal)}" id="eng_img_n_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            </if>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        高亮图片：<input type="hidden" name="engineering_image_active[]" id="eng_img_a_{$key}" value="{$vo.image_active}">
+                                        <a href="javascript:uploadOneImage('图片上传','#eng_img_a_{$key}');">
+                                            <if condition="empty($vo.image_active)">
+                                                <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="eng_img_a_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            <else/>
+                                                <img src="{:cmf_get_image_preview_url($vo.image_active)}" id="eng_img_a_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            </if>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-eng{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:eng_add();" class="btn btn-default">添加</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务中心(下侧列表)</label>
+                    <div class="col-md-8 col-sm-10">
+                        <ul id="service_items" class="pic-list list-unstyled form-inline">
+                            <notempty name="site_info.service_items">
+                                <foreach name="site_info.service_items" item="vo">
+                                    <li id="saved-srv{$key}">
+                                        标题：<input class="form-control" type="text" name="service_item_title[]" value="{$vo.title|default=''}" style="width: 150px;">
+                                        &nbsp;&nbsp;&nbsp;
+                                        描述：<textarea class="form-control" type="text" name="service_item_text[]" style="height: 100px;width: 300px">{$vo.text|default=''}</textarea>
+                                        &nbsp;&nbsp;&nbsp;
+                                        图片：<input type="hidden" name="service_item_image[]" id="srv_img_{$key}" value="{$vo.image}">
+                                        <a href="javascript:uploadOneImage('图片上传','#srv_img_{$key}');">
+                                            <if condition="empty($vo.image)">
+                                                <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="srv_img_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            <else/>
+                                                <img src="{:cmf_get_image_preview_url($vo.image)}" id="srv_img_{$key}-preview" width="60" style="cursor: pointer"/>
+                                            </if>
+                                        </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-danger" href="javascript:(function(){$('#saved-srv{$key}').remove();})();"><i class="fa fa-trash fa-fw"></i></a>
+                                    </li>
+                                </foreach>
+                            </notempty>
+                        </ul>
+                        <a href="javascript:srv_add();" class="btn btn-default">添加</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
                             {:lang('SAVE')}
@@ -348,16 +433,52 @@
         $('#market').append(html);
     }
 
+    function eng_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-eng'+id+'">' +
+            '标题：<input class="form-control" type="text" name="engineering_title[]" value="" style="width: 150px;">' +
+            '&nbsp;&nbsp;&nbsp;默认图片：<input type="hidden" name="engineering_image_normal[]" id="eng_img_n_'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#eng_img_n_'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="eng_img_n_'+id+'-preview" width="60" style="cursor: pointer"/>' +
+            '</a>&nbsp;&nbsp;&nbsp;高亮图片：<input type="hidden" name="engineering_image_active[]" id="eng_img_a_'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#eng_img_a_'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="eng_img_a_'+id+'-preview" width="60" style="cursor: pointer"/>' +
+            '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-eng'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a>' +
+            '</li>';
+        $('#engineering').append(html);
+    }
+
+    function srv_add() {
+        var timestamp = new Date().getTime();
+        var randomNum = Math.random();
+        var scaledRandomNum = Math.floor(randomNum * 1000);
+        var id = timestamp.toString() + scaledRandomNum.toString();
+        var html = '<li id="saved-srv'+id+'">' +
+            '标题：<input class="form-control" type="text" name="service_item_title[]" value="" style="width: 150px;">' +
+            '&nbsp;&nbsp;&nbsp;描述：<textarea class="form-control" type="text" name="service_item_text[]" style="height: 100px;width: 300px"></textarea>' +
+            '&nbsp;&nbsp;&nbsp;图片：<input type="hidden" name="service_item_image[]" id="srv_img_'+id+'" value="">' +
+            '<a href="javascript:uploadOneImage(\'图片上传\',\'#srv_img_'+id+'\');">' +
+            '<img src="__TMPL__/public/assets/images/default-thumbnail.png" id="srv_img_'+id+'-preview" width="60" style="cursor: pointer"/>' +
+            '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-srv'+id+'\').remove();})();"><i class="fa fa-trash fa-fw"></i></a>' +
+            '</li>';
+        $('#service_items').append(html);
+    }
+
     function advantage_add() {
         var timestamp = new Date().getTime();
         var randomNum = Math.random();
         var scaledRandomNum = Math.floor(randomNum * 1000);
         var id = timestamp.toString() + scaledRandomNum.toString();
         var html = '<li id="saved-advantage'+id+'">' +
-            '标题：' +
-            '<input class="form-control" type="text" name="advantage_name[]" value="" style="width: 400px;">' +
-            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;描述：' +
+            '单位(如Million)：' +
+            '<input class="form-control" type="text" name="advantage_unit[]" value="" style="width: 150px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数值(如80)：' +
             '<input class="form-control" type="text" name="advantage_num[]" value="" style="width: 100px;">' +
+            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;底部描述：' +
+            '<input class="form-control" type="text" name="advantage_name[]" value="" style="width: 400px;">' +
             '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' +
             '<a class="btn btn-danger" href="javascript:(function(){$(\'#saved-advantage'+id+'\').remove();})();">' +
             '<i class="fa fa-trash fa-fw"></i>' +

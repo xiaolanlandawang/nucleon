@@ -1,4 +1,4 @@
-<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product.html";i:1779784941;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1779703611;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1780024241;s:75:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1780024241;}*/ ?>
+<?php /*a:5:{s:69:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\product.html";i:1781252737;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1781168937;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1781085184;s:75:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\crane_selector.html";i:1778987227;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1781167044;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,10 @@
 <link rel="shortcut icon" type="image/x-icon" href="/themes/simpleboot3/public/assets/images/logo.ico">
 <link href="/themes/simpleboot3/public/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="/themes/simpleboot3/public/assets/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
-<link href="/themes/simpleboot3/public/assets/css/common.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="/themes/simpleboot3/public/assets/css/common.css?v=20260611.9" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/swiper-bundle.min.js"></script>
@@ -30,7 +33,7 @@
         max-height: 550px !important;
     }
 </style>
-    <link href="/themes/simpleboot3/public/assets/css/product.css" rel="stylesheet" type="text/css">
+    <link href="/themes/simpleboot3/public/assets/css/product.css?v=20260612.16" rel="stylesheet" type="text/css">
     <link href="/themes/simpleboot3/public/assets/css/crane-selector.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/themes/simpleboot3/public/assets/js/product.js"></script>
 </head>
@@ -51,15 +54,9 @@
         <div class="header-container">
             <div class="header-contact">
                 <div class="header-contact-item">
-                    <a href="mailto:<?php echo $site_info['email']; ?>">
+                    <a href="mailto:<?php echo $site_info['email']; ?>" onclick="return confirm('Ready to get in touch? Click OK to open your email app. 📬');">
                         <img src="/themes/simpleboot3/public/assets/images/header-email.png" alt="email">
                         <span class="contact-label">E-Mail:</span> <?php echo $site_info['email']; ?>
-                    </a>
-                </div>
-                <div class="header-contact-item">
-                    <a href="tel:<?php echo $site_info['sale_tel']; ?>">
-                        <img src="/themes/simpleboot3/public/assets/images/header-tel.svg" alt="tel">
-                        <span class="contact-label">Tel:</span> <?php echo $site_info['sale_tel']; ?>
                     </a>
                 </div>
                 <div class="header-contact-item">
@@ -67,10 +64,6 @@
                         <img src="/themes/simpleboot3/public/assets/images/header-whatsapp.png" alt="whatsapp">
                         <span class="contact-label">WhatsApp:</span> <?php echo $site_info['whatsapp']; ?>
                     </a>
-                </div>
-                <div class="header-contact-item">
-                    <img src="/themes/simpleboot3/public/assets/images/header-wechat.png" alt="wechat">
-                    <span class="contact-label">Wechat:</span> <?php echo $site_info['wechat']; ?>
                 </div>
             </div>
             <div class="header-link">
@@ -84,7 +77,7 @@
                     <a href="<?php echo $site_info['linkedin']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-linkedin.png" alt="linkedin"></a>
                 </div>
                 <div class="header-link-item">
-                    <a href="<?php echo $site_info['vk']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk"></a>
+                    <a href="<?php echo $site_info['vk']; ?>"><img src="/themes/simpleboot3/public/assets/images/header-vk.svg" alt="vk"></a>
                 </div>
             </div>
         </div>
@@ -100,7 +93,7 @@
             <li class="nav-item">
                 <a class="nav-title" href="/">Home</a>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item nav-item-about has-sub">
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/about'); ?>">About Us</a>
                 <div class="nav-sub about-nav">
                     <div class="nav-sub-item">
@@ -114,7 +107,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item nav-item-product">
+            <li class="nav-item nav-item-product has-sub">
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/product'); ?>">Products</a>
                 <div class="nav-sub product-nav">
                     <?php if(is_array($category_list) || $category_list instanceof \think\Collection || $category_list instanceof \think\Paginator): if( count($category_list)==0 ) : echo "" ;else: foreach($category_list as $key=>$vo): ?>
@@ -126,24 +119,13 @@
                     <?php endforeach; endif; else: echo "" ;endif; ?>
                 </div>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item">
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/service'); ?>">Service</a>
-                <div class="nav-sub about-nav">
-                    <div class="nav-sub-item">
-                        <a href="<?php echo cmf_url('portal/index/service'); ?>">Global Market</a>
-                    </div>
-                    <div class="nav-sub-item">
-                        <a href="<?php echo cmf_url('portal/index/excellent_service'); ?>">Excellent Service</a>
-                    </div>
-                    <div class="nav-sub-item">
-                        <a href="<?php echo cmf_url('portal/index/download'); ?>">Download</a>
-                    </div>
-                </div>
             </li>
             <li class="nav-item nav-item-about">
-                <a class="nav-title" href="<?php echo cmf_url('portal/index/industries'); ?>">Case</a>
+                <a class="nav-title" href="<?php echo cmf_url('portal/index/industries'); ?>">Cases</a>
             </li>
-            <li class="nav-item nav-item-about">
+            <li class="nav-item nav-item-about has-sub">
                 <a class="nav-title" href="<?php echo cmf_url('portal/index/news'); ?>">News Center</a>
                 <div class="nav-sub about-nav">
                     <?php if(is_array($news_category) || $news_category instanceof \think\Collection || $news_category instanceof \think\Paginator): if( count($news_category)==0 ) : echo "" ;else: foreach($news_category as $key=>$vo): ?>
@@ -234,7 +216,8 @@
                             </div>
                         </a>
                         <div class="product_item__footer">
-                            <div class="product_list_item_btn" id="inquiry">Get Solution Quote</div>
+                            <div class="product_list_item_btn quote-btn" id="inquiry">Get Solution Quote<span class="btn-arrow"></span></div>
+                            <a class="product_list_item_btn detail-btn" href="<?php echo cmf_url('portal/index/product_info',array('id'=>$vo['id'])); ?>">View Details<span class="btn-arrow"></span></a>
                         </div>
                     </li>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
@@ -322,8 +305,11 @@
                                     <div class="case-item-img">
                                         <img loading="lazy" decoding="async" src="<?php echo cmf_get_image_url($vo['more']['thumbnail']); ?>" alt="<?php echo $vo['post_title']; ?>">
                                     </div>
-                                    <div class="case-item-title"><?php echo $vo['post_title']; ?></div>
-                                    <div class="case-item-desc"><?php echo $vo['post_excerpt']; ?></div>
+                                    <div class="case-item-content">
+                                        <div class="case-item-title"><?php echo $vo['post_title']; ?></div>
+                                        <div class="case-item-desc"><?php echo $vo['post_excerpt']; ?></div>
+                                        <div class="case-item-more">Read More&rarr;</div>
+                                    </div>
                                 </a>
                             </div>
                         <?php endforeach; endif; else: echo "" ;endif; ?>
@@ -334,36 +320,38 @@
                 <div class="product-case-pagination"></div>
             </div>
         </div>
-    <?php endif; if($is_category_page): if(!(empty($category_faq['faq']) || (($category_faq['faq'] instanceof \think\Collection || $category_faq['faq'] instanceof \think\Paginator ) && $category_faq['faq']->isEmpty()))): 
-                $categoryFaqTitle = !empty($category_faq['faq_title']) ? $category_faq['faq_title'] : 'FAQ';
-                $categoryFaqContactLink = !empty($category_faq['faq_contact_btn_link']) ? $category_faq['faq_contact_btn_link'] : cmf_url('portal/index/quote');
-                $categoryFaqContactTitle = !empty($category_faq['faq_contact_title']) ? $category_faq['faq_contact_title'] : 'Can not Find Your Question?';
-                $categoryFaqContactDesc = !empty($category_faq['faq_contact_desc']) ? $category_faq['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
-                $categoryFaqContactBtnText = !empty($category_faq['faq_contact_btn_text']) ? $category_faq['faq_contact_btn_text'] : 'Contact Us';
-             ?>
-            <div class="faq reveal product-faq">
-                <div class="title"><?php echo $categoryFaqTitle; ?></div>
-                <div class="faq-wrap">
-                    <div class="faq-list">
-                        <?php if(is_array($category_faq['faq']) || $category_faq['faq'] instanceof \think\Collection || $category_faq['faq'] instanceof \think\Paginator): if( count($category_faq['faq'])==0 ) : echo "" ;else: foreach($category_faq['faq'] as $key=>$vo): ?>
-                            <div class="faq-item <?php echo $key==0 ? 'active'  :  ''; ?>">
-                                <div class="faq-question">
-                                    <span><?php echo $key+1; ?>.<?php echo $vo['question']; ?></span>
-                                    <em>+</em>
-                                </div>
-                                <div class="faq-answer"><?php echo nl2br($vo['answer']); ?></div>
-                            </div>
-                        <?php endforeach; endif; else: echo "" ;endif; ?>
-                    </div>
-                    <div class="faq-contact">
-                        <div class="faq-contact-icon">?</div>
+    <?php endif; if(!(empty($category_faq['faq']) || (($category_faq['faq'] instanceof \think\Collection || $category_faq['faq'] instanceof \think\Paginator ) && $category_faq['faq']->isEmpty()))): 
+            $categoryFaqTitle = !empty($category_faq['faq_title']) ? $category_faq['faq_title'] : 'FAQ';
+            $categoryFaqContactLink = !empty($category_faq['faq_contact_btn_link']) ? $category_faq['faq_contact_btn_link'] : cmf_url('portal/index/quote');
+            $categoryFaqContactTitle = !empty($category_faq['faq_contact_title']) ? $category_faq['faq_contact_title'] : 'Can not Find Your Question?';
+            $categoryFaqContactDesc = !empty($category_faq['faq_contact_desc']) ? $category_faq['faq_contact_desc'] : 'If you can not find the answer, contact us and let us know how we can help you.';
+            $categoryFaqContactBtnText = !empty($category_faq['faq_contact_btn_text']) ? $category_faq['faq_contact_btn_text'] : 'Contact Us';
+         ?>
+        <div class="faq reveal product-faq">
+            <div class="title"><?php echo $categoryFaqTitle; ?></div>
+            <div class="faq-wrap">
+                <div class="faq-contact" style="background: #181818 <?php if(!(empty($category_faq['faq_bg_img']) || (($category_faq['faq_bg_img'] instanceof \think\Collection || $category_faq['faq_bg_img'] instanceof \think\Paginator ) && $category_faq['faq_bg_img']->isEmpty()))): ?>url('<?php echo cmf_get_image_url($category_faq['faq_bg_img']); ?>')<?php else: ?>url('/themes/simpleboot3/public/assets/images/choose-bg.webp')<?php endif; ?> no-repeat center center; background-size: cover;">
+                    <div class="faq-contact-overlay"></div>
+                    <div class="faq-contact-content">
                         <div class="faq-contact-title"><?php echo $categoryFaqContactTitle; ?></div>
                         <div class="faq-contact-desc"><?php echo $categoryFaqContactDesc; ?></div>
-                        <a class="faq-contact-btn" href="<?php echo $categoryFaqContactLink; ?>"><?php echo $categoryFaqContactBtnText; ?></a>
+                        <a class="faq-contact-btn" href="<?php echo $categoryFaqContactLink; ?>"><?php echo $categoryFaqContactBtnText; ?> <span>&rarr;</span></a>
                     </div>
                 </div>
+                <div class="faq-list">
+                    <?php if(is_array($category_faq['faq']) || $category_faq['faq'] instanceof \think\Collection || $category_faq['faq'] instanceof \think\Paginator): if( count($category_faq['faq'])==0 ) : echo "" ;else: foreach($category_faq['faq'] as $key=>$vo): ?>
+                        <div class="faq-item <?php echo $key==0 ? 'active'  :  ''; ?>">
+                            <div class="faq-question">
+                                <span class="faq-index"><?php echo sprintf("%02d", $key+1); ?></span>
+                                <span class="faq-text"><?php echo $vo['question']; ?></span>
+                                <em class="faq-toggle"></em>
+                            </div>
+                            <div class="faq-answer"><?php echo nl2br($vo['answer']); ?></div>
+                        </div>
+                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                </div>
             </div>
-        <?php endif; ?>
+        </div>
     <?php endif; ?>
 
     <section class="product-collect-section reveal">
@@ -427,10 +415,7 @@
                 <img src="/themes/simpleboot3/public/assets/images/logo.webp" alt="logo">
             </div>
             <div class="footer-about-desc">
-                HENAN WEIHUA CO., LTD. is a leading professional industry crane manufacturer and exporter located in the
-                crane hometown of China. As a trusted name in the industry, we cover more than 2/3 of the crane market
-                in China. Our expertise lies in designing, manufacturing, installation, sales, and consultation for
-                overhead cranes, gantry cranes, port cranes, electric hoists, and other related equipment.
+                Nucleon is a large-scale equipment manufacturing enterprise that provides high-quality customized solutions for key industries such as metallurgy, energy, and power worldwide. Nucleon's products are exported to various countries and regions across Europe, Asia, Africa, the Middle East, and beyond.
             </div>
             <div class="footer-social">
                 <a href="<?php echo $site_info['facebook']; ?>" target="_blank" title="Facebook">
@@ -443,7 +428,7 @@
                     <img src="/themes/simpleboot3/public/assets/images/header-youtube.png" alt="youtube">
                 </a>
                 <a href="<?php echo $site_info['vk']; ?>" target="_blank" title="VK">
-                    <img src="/themes/simpleboot3/public/assets/images/header-vk.png" alt="vk">
+                    <img src="/themes/simpleboot3/public/assets/images/vk.png" alt="vk">
                 </a>
             </div>
         </div>
@@ -502,7 +487,7 @@
     </div>
 
     <div class="footer-bottom">
-        Copyright &copy; HENAN WEIHUA CO.,LTD. All Rights Reserved.
+        Copyright &copy; Nucleon (Xinxiang) Crane Co., Ltd. | <a href="<?php echo cmf_url('portal/index/privacy_policy'); ?>" target="_blank" style="color: #ffffff; text-decoration: none; margin-left: 10px; transition: color 0.2s;" onmouseover="this.style.color='#ea222d';" onmouseout="this.style.color='#ffffff';">Privacy Policy</a>
     </div>
 </div>
 <!--FOOT END-->

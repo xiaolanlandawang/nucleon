@@ -6,8 +6,8 @@
     <meta name="keywords" content="{$site_info.site_name|default=''}">
     <meta name="description" content="{$site_info.site_name|default=''}">
     <include file="public@head"/>
-    <link href="__TMPL__/public/assets/css/product-info.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="__TMPL__/public/assets/js/product-info.js"></script>
+    <link href="__TMPL__/public/assets/css/product-info.css?v=20260612.19" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__TMPL__/public/assets/js/product-info.js?v=20260612.19"></script>
 </head>
 <body>
 
@@ -260,34 +260,175 @@
         </div>
         <!-- PRODUCT CONTENT END -->
 
-
-
         <!-- HOT PRODUCTS START -->
         <notempty name="recommended_list">
             <div class="hot-products">
                 <div class="hot-products-title">HOT PRODUCTS</div>
-                <div class="hot-products-list">
-                    <ul>
+                <div class="swiper hot-products-swiper hot-products-list">
+                    <div class="swiper-wrapper">
                         <foreach name="recommended_list" item="vo">
-                            <li class="product_item">
-                                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                            <div class="swiper-slide product_item">
+                                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}" class="product_item__link">
                                     <div class="product_list_item_img">
                                         <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.title}" title="{$vo.title}">
                                     </div>
-                                    <div class="product_list_item_title">{$vo.title}</div>
-                                    <div class="product_list_item_category">{$vo.industry}</div>
+                                    <div class="product_item__content">
+                                        <div class="product_list_item_title">{$vo.title}</div>
+                                        <div class="product_list_item_category">{$vo.industry}</div>
+                                    </div>
                                 </a>
-                            </li>
+                                <div class="product_item__footer">
+                                    <div class="product_list_item_btn quote-btn" id="inquiry">Get Solution Quote<span class="btn-arrow"></span></div>
+                                    <a class="product_list_item_btn detail-btn" href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">View Details<span class="btn-arrow"></span></a>
+                                </div>
+                            </div>
                         </foreach>
-                    </ul>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
         </notempty>
         <!-- HOT PRODUCTS END -->
 
+        <!-- INQUIRY FORM START -->
+        <div class="product-inquiry-section animate-on-scroll">
+            <h2 class="form-title">CUSTOMIZE YOUR LIFTING SOLUTION</h2>
+            <p class="form-subtitle">Please contact us via email at <a href="mailto:{$site_info.email|default='sale@nucleoncranes.global'}">{$site_info.email|default='sale@nucleoncranes.global'}</a>, or fill out the form below to get a free solution proposal and quote.</p>
+            <div class="quote">
+                <div class="quote-grid">
+                    <div class="quote-field">
+                        <input type="text" name="name" class="quote-name" placeholder="Name">
+                    </div>
+                    <div class="quote-field">
+                        <input type="text" name="email" class="quote-email" placeholder="Email">
+                    </div>
+                    <div class="quote-field full-width">
+                        <input type="text" name="phone" class="quote-phone" placeholder="Phone/Whatsapp">
+                    </div>
+                    <div class="quote-field full-width">
+                        <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    </div>
+                </div>
+                <div class="quote-btn" onclick="submitDetailInquiry()">SEND MESSAGE</div>
+            </div>
+        </div>
+        <!-- INQUIRY FORM END -->
+
+        <!-- EXPERT CONTACT START -->
+        <php>
+            $expertWhatsapp = !empty($site_info['expert_whatsapp']) ? $site_info['expert_whatsapp'] : $site_info['whatsapp'];
+            $expertCleanNumber = '';
+            if (!empty($expertWhatsapp)) {
+                $expertCleanNumber = preg_replace('/[^0-9]/', '', $expertWhatsapp);
+            }
+            $expertEmail = !empty($site_info['expert_email']) ? $site_info['expert_email'] : $site_info['email'];
+        </php>
+        <div class="expert-contact-block">
+            <div class="expert-photo">
+                <if condition="empty($site_info['expert_photo'])">
+                    <img src="__TMPL__/public/assets/images/expert-zora.png" alt="{$site_info.expert_name|default='Zora Zhao'}" onerror="this.src='https://via.placeholder.com/200x250?text=Expert+Photo'">
+                    <else/>
+                    <img src="{:cmf_get_image_url($site_info['expert_photo'])}" alt="{$site_info.expert_name|default='Zora Zhao'}">
+                </if>
+            </div>
+            <div class="expert-info">
+                <div class="expert-name">{$site_info.expert_name|default='Zora Zhao'}</div>
+                <div class="expert-title">{$site_info.expert_title|default='Expert in Overhead Crane/Gantry Crane/Jib Crane/Crane Parts Solutions'}</div>
+                <div class="expert-desc">
+                    {$site_info.expert_desc|default='With 10+ years of experience in the Crane Overseas Export Industry, helped 10,000+ customers with their pre-sales questions and concerns, if you have any related needs, please feel free to contact me!'}
+                </div>
+                <div class="expert-contact-details">
+                    <p>WhatsApp: <a href="https://api.whatsapp.com/send?phone={$expertCleanNumber}" target="_blank">{$expertWhatsapp|default='+86 189 3735 0200'}</a></p>
+                    <p>Email: <a href="mailto:{$expertEmail|default='zorazhao@dgcrane.com'}">{$expertEmail|default='zorazhao@dgcrane.com'}</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- EXPERT CONTACT END -->
+
     </div>
     <!--PRODUCT END-->
 
     <include file="public@foot"/>
+
+    <script>
+        let detailQuoteSubmitting = false;
+
+        function showDetailQuoteMessage(title, message, type) {
+            if (typeof window.showFormMessage === 'function') {
+                window.showFormMessage(title, message, type);
+            } else {
+                alert(message || title);
+            }
+        }
+
+        function clearDetailQuoteForm() {
+            $('.product-inquiry-section .quote-name, .product-inquiry-section .quote-email, .product-inquiry-section .quote-phone, .product-inquiry-section .quote-message').val('');
+        }
+
+        function getDetailFormattedPhoneNumber($input) {
+            let rawValue = $input.val();
+            if ($input[0] && $input[0]._iti) {
+                let iti = $input[0]._iti;
+                let fullNumber = iti.getNumber();
+                if (fullNumber && fullNumber.indexOf('+') === -1) {
+                    let countryData = iti.getSelectedCountryData();
+                    if (countryData && countryData.dialCode) {
+                        return '+' + countryData.dialCode + ' ' + rawValue;
+                    }
+                }
+                return fullNumber || rawValue;
+            }
+            return rawValue;
+        }
+
+        function submitDetailInquiry() {
+            let name = $('.product-inquiry-section .quote-name').val();
+            let phone = getDetailFormattedPhoneNumber($('.product-inquiry-section .quote-phone'));
+            let email = $('.product-inquiry-section .quote-email').val();
+            let content = $('.product-inquiry-section .quote-message').val();
+            let productId = '{$product.id}';
+
+            if (detailQuoteSubmitting) {
+                return;
+            }
+
+            let $button = $('.product-inquiry-section .quote-btn');
+            let data = {
+                name: name,
+                phone: phone,
+                email: email,
+                content: content,
+                product_id: productId,
+                type: 2,
+            }
+            detailQuoteSubmitting = true;
+            $button.addClass('is-loading').text('SUBMITTING...');
+            $.ajax({
+                url: '/portal/index/inquiry',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 1) {
+                        if (typeof gtag_report_conversion === 'function') {
+                            gtag_report_conversion();
+                        }
+                        window.location.href = '/thankyou';
+                    } else {
+                        showDetailQuoteMessage('Submit Failed', res.msg || 'Please try again later.', 'error');
+                    }
+                },
+                error: function () {
+                    showDetailQuoteMessage('Submit Failed', 'Network error. Please try again later.', 'error');
+                },
+                complete: function () {
+                    detailQuoteSubmitting = false;
+                    $button.removeClass('is-loading').text('SEND MESSAGE');
+                }
+            })
+        }
+    </script>
 </body>
 </html>

@@ -1,7 +1,18 @@
 <!-- BANNER START -->
 <div class="banner">
+    <div class="banner-overlay"></div>
     <img src="{:cmf_get_image_url($banner.image)}" alt="{$banner.title}">
-    <div class="banner-text">
+    <div class="banner-container">
+        <div class="banner-text">
+            <h1 class="banner-text-title">{$page_title|default=$banner.title}</h1>
+            <div class="banner-breadcrumb">
+                <a href="/"><svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;"><path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L477.5 105.2 77.5 505c-12 12-18.8 28.3-18.8 45.3 0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h128v224h249.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8 24.9-25 24.9-65.5-10.1-100.5z" fill="currentColor"/></svg> Home</a> 
+                <notempty name="parent_title">
+                    &raquo; <span>{$parent_title}</span>
+                </notempty>
+                &raquo; <span>{$page_title|default=$banner.title}</span>
+            </div>
+        </div>
     </div>
 </div>
 <!-- BANNER END -->

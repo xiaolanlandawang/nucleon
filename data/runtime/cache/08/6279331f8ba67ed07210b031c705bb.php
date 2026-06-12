@@ -1,0 +1,34 @@
+<?php
+//000000003600
+ exit();?>
+s:1279:"<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>http://localhost/weihua-group-nominated-for-china-quality-award.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/acf-ic-expert-group-visits-weihua-for-one-enterprise-one-policy-pilot-study.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/beliefs-forge-the-soul-weihuas-new-year-training-session-held-successfully.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/liu-ning-secretary-of-the-henan-provincial-party-committee-visited-weihua-for-research.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/remembering-revolutionary-martyrs-and-cultivating-a-deep-sense-of-patriotism.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/international-exhibition-showcases-weihuas-11-years-of-intelligent-manufacturing-achievements.html</loc>
+      <lastmod>2026-05-22</lastmod>
+   </url>
+   <url>
+      <loc>http://localhost/What-is-an-overhead-crane.html</loc>
+      <lastmod>2026-05-28</lastmod>
+   </url>
+</urlset>";

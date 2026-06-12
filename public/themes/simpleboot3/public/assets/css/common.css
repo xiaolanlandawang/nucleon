@@ -107,10 +107,13 @@ a:focus {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    font-size: 16px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
 }
 .header .header-top .header-contact .header-contact-item img{
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -120,18 +123,50 @@ a:focus {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: color 0.3s ease;
+    font-size: 16px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+}
+.header .header-top .header-contact .header-contact-item:hover a,
+.header .header-top .header-contact .header-contact-item a:hover{
+    color: #ea222d;
+}
+.header .header-top .header-contact .header-contact-item a img{
+    transition: filter 0.3s ease;
+}
+.header .header-top .header-contact .header-contact-item:hover a img,
+.header .header-top .header-contact .header-contact-item a:hover img{
+    filter: invert(21%) sepia(93%) saturate(6007%) hue-rotate(349deg) brightness(96%) contrast(93%);
 }
 .header .header-top .header-link{
     display: flex;
+    align-items: center;
 }
 .header .header-top .header-link .header-link-item{
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .header-top .header-link .header-link-item a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 .header .header-top .header-link .header-link-item img{
     width: 100%;
     height: 100%;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+.header .header-top .header-link .header-link-item:hover img,
+.header .header-top .header-link .header-link-item a:hover img{
+    filter: invert(21%) sepia(93%) saturate(6007%) hue-rotate(349deg) brightness(96%) contrast(93%);
 }
 
 .header .header-container{
@@ -164,6 +199,7 @@ a:focus {
     color: #FFFFFF;
     margin-right: 40px;
     position: relative;
+    white-space: nowrap;
 }
 .header .header-nav .nav-item:last-child{
     margin-right: 0;
@@ -172,10 +208,28 @@ a:focus {
     color: #1A1A1A;
     display: block;
     border-bottom: 2px solid transparent;
+    white-space: nowrap;
 }
 .header .header-nav .nav-item:hover>a{
     color: #ea222d;
     border-color: #ea222d;
+}
+.header .header-nav .nav-item.has-sub>a::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    transition: transform 0.3s ease;
+    position: relative;
+    top: -1px;
+}
+.header .header-nav .nav-item.has-sub:hover>a::after {
+    transform: rotate(180deg);
 }
 
 
@@ -232,7 +286,7 @@ a:focus {
         width: 200px;
     }
     .header .header-nav .nav-item{
-        margin-right: 30px;
+        margin-right: 18px;
     }
     .sub-nav .sub-nav-content{
         width: 900px;
@@ -260,8 +314,8 @@ a:focus {
         width: 150px;
     }
     .header .header-nav .nav-item{
-        margin-right: 20px;
-        font-size: 14px;
+        margin-right: 10px;
+        font-size: 13px;
         line-height: 60px;
     }
     .sub-nav{
@@ -292,31 +346,74 @@ a:focus {
     width: 100%;
     position: relative;
     overflow: hidden;
+    min-height: 200px;
+    background: #111;
 }
 
-.banner img{
+.banner img {
     width: 100%;
-}
-
-.banner .banner-text {
+    height: 100%;
+    object-fit: cover;
+    display: block;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    color: #fff;
-    font-weight: 700;
-    text-align: center;
+    top: 0;
+    left: 0;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    display: none;
     z-index: 1;
 }
 
+.banner-container {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    min-height: 380px; /* Adjust based on typical banner height */
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.banner .banner-text {
+    width: 100%;
+    padding: 0 20px;
+}
+
 .banner .banner-text .banner-text-title {
+    font-size: 48px;
     font-weight: bold;
-    color: #FFFFFF;
-    line-height: 60px;
+    color: #ea222d;
+    line-height: 1.2;
+    margin-bottom: 20px;
     font-style: normal;
-    text-transform: none;
+    text-transform: capitalize;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.banner .banner-breadcrumb {
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+.banner .banner-breadcrumb a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.banner .banner-breadcrumb a:hover {
+    color: #ea222d;
+}
+
+.banner .banner-breadcrumb span {
+    color: #ffffff;
 }
 
 .title{
@@ -327,11 +424,25 @@ a:focus {
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1440px) {
+    .banner-container {
+        width: 900px;
+        min-height: 280px;
+    }
+    .banner .banner-text .banner-text-title {
+        font-size: 38px;
+    }
     .title{
         font-size: 36px;
     }
 }
 @media only screen and (max-width: 1000px) {
+    .banner-container {
+        width: 92%;
+        min-height: 200px;
+    }
+    .banner .banner-text .banner-text-title {
+        font-size: 28px;
+    }
     .title{
         font-size: 30px;
     }
@@ -342,8 +453,8 @@ a:focus {
 
 .footer{
     width: 100%;
-    background: #111111;
-    padding: 70px 0 40px;
+    background: #1C1C1C;
+    padding: 70px 0 0;
 }
 .footer .footer-content{
     width: 1400px;
@@ -394,6 +505,8 @@ a:focus {
 .footer .footer-content .footer-about .footer-social a img{
     width: 18px;
     height: 18px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease;
 }
 
 .footer .footer-content .footer-news{
@@ -446,10 +559,30 @@ a:focus {
     line-height: 1.6;
     margin-top: 12px;
     padding-left: 28px;
-    background: url(../images/foot-email.webp) no-repeat left 3px;
-    background-size: 18px 18px;
     cursor: pointer;
     opacity: 0.65;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+.footer .footer-content .footer-contact .footer-contact-item::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+.footer .footer-content .footer-contact .footer-contact-item:hover{
+    opacity: 1;
+    color: #ea222d;
+}
+.footer .footer-content .footer-contact .footer-contact-item:hover::before{
+    filter: invert(21%) sepia(93%) saturate(6007%) hue-rotate(349deg) brightness(96%) contrast(93%);
 }
 .footer .footer-content .footer-contact .footer-contact-item:first-of-type{
     margin-top: 0;
@@ -457,17 +590,20 @@ a:focus {
 .footer .footer-content .footer-contact .footer-contact-item.footer-contact-email{
     margin-top: 0;
 }
-.footer .footer-content .footer-contact .footer-contact-item.footer-contact-address{
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-email::before{
+    background-image: url(../images/header-email.png);
+}
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-address::before{
     background-image: url(../images/foot-address.webp);
 }
-.footer .footer-content .footer-contact .footer-contact-item.footer-contact-tel{
-    background-image: url(../images/foot-tel.webp);
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-tel::before{
+    background-image: url(../images/foot-tel.png);
 }
-.footer .footer-content .footer-contact .footer-contact-item.footer-contact-wechat{
-    background-image: url(../images/foot-wechat.webp);
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-wechat::before{
+    background-image: url(../images/foot-wechat.png);
 }
-.footer .footer-content .footer-contact .footer-contact-item.footer-contact-whatsapp{
-    background-image: url(../images/quote-whatsapp.webp);
+.footer .footer-content .footer-contact .footer-contact-item.footer-contact-whatsapp::before{
+    background-image: url(../images/header-whatsapp.png);
 }
 
 .footer .footer-content .footer-form{
@@ -543,13 +679,13 @@ a:focus {
     background-color: #c91922;
 }
 .footer-bottom{
-    width: 1400px;
-    margin: 40px auto 0;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+    background-color: #000000;
+    padding: 24px 0;
+    margin-top: 60px;
     text-align: center;
     font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    color: #FFFFFF;
 }
 
 .form-message-modal{
@@ -645,7 +781,7 @@ a:focus {
         gap: 30px;
     }
     .footer-bottom {
-        width: 90%;
+        width: 100%;
     }
     .footer .footer-content .footer-about .footer-logo{
         width: 180px;
@@ -659,7 +795,7 @@ a:focus {
         gap: 30px 24px;
     }
     .footer-bottom {
-        width: 90%;
+        width: 100%;
     }
     .footer .footer-content .footer-about{
         grid-column: 1 / -1;
@@ -999,6 +1135,47 @@ a:focus {
 }
 
 
+
+/* Animated button arrow styles */
+.btn-arrow {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+    transition: width 0.3s ease, transform 0.3s ease;
+}
+.btn-arrow::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 2px;
+    height: 2px;
+    background-color: currentColor;
+    transition: inherit;
+}
+.btn-arrow::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: inherit;
+}
+/* Trigger state when the parent button or item is hovered */
+.product_item:hover .btn-arrow,
+.product_list_item_btn:hover .btn-arrow,
+li:hover .btn-arrow,
+a:hover .btn-arrow {
+    width: 48px !important;
+    transform: translateX(8px) !important;
+}
 
 /* old */
 

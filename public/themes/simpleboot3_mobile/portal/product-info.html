@@ -276,7 +276,40 @@
             </div>
 
 
-
+            <!-- EXPERT CONTACT START -->
+            <php>
+                $expertWhatsapp = !empty($site_info['expert_whatsapp']) ? $site_info['expert_whatsapp'] : $site_info['whatsapp'];
+                $expertCleanNumber = '';
+                if (!empty($expertWhatsapp)) {
+                    $expertCleanNumber = preg_replace('/[^0-9]/', '', $expertWhatsapp);
+                }
+                $expertEmail = !empty($site_info['expert_email']) ? $site_info['expert_email'] : $site_info['email'];
+            </php>
+            <div class="expert-contact-block">
+                <div class="expert-top">
+                    <div class="expert-photo">
+                        <if condition="empty($site_info['expert_photo'])">
+                            <img src="/themes/simpleboot3/public/assets/images/expert-zora.png" alt="{$site_info.expert_name|default='Zora Zhao'}" onerror="this.src='https://via.placeholder.com/200x250?text=Expert+Photo'">
+                            <else/>
+                            <img src="{:cmf_get_image_url($site_info['expert_photo'])}" alt="{$site_info.expert_name|default='Zora Zhao'}">
+                        </if>
+                    </div>
+                    <div class="expert-top-info">
+                        <div class="expert-name">{$site_info.expert_name|default='Zora Zhao'}</div>
+                        <div class="expert-title">{$site_info.expert_title|default='Expert in Overhead Crane/Gantry Crane/Jib Crane/Crane Parts Solutions'}</div>
+                    </div>
+                </div>
+                <div class="expert-bottom">
+                    <div class="expert-desc">
+                        {$site_info.expert_desc|default='With 10+ years of experience in the Crane Overseas Export Industry, helped 10,000+ customers with their pre-sales questions and concerns, if you have any related needs, please feel free to contact me!'}
+                    </div>
+                    <div class="expert-contact-details">
+                        <p>WhatsApp: <a href="https://api.whatsapp.com/send?phone={$expertCleanNumber}" target="_blank">{$expertWhatsapp|default='+86 189 3735 0200'}</a></p>
+                        <p>Email: <a href="mailto:{$expertEmail|default='zorazhao@dgcrane.com'}">{$expertEmail|default='zorazhao@dgcrane.com'}</a></p>
+                    </div>
+                </div>
+            </div>
+            <!-- EXPERT CONTACT END -->
 
             <!-- PRODUCT RECOMMENDATION -->
             <notempty name="recommended_list">

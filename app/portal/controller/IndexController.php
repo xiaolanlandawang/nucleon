@@ -65,6 +65,11 @@ class IndexController extends HomeBaseController
 
         $portalCategoryModel = new PortalCategoryModel();
         $news_category = $portalCategoryModel->where('type', 8)->order('list_order asc')->select();
+        foreach ($news_category as $vo) {
+            if ($vo->name === 'Campany News') {
+                $vo->name = 'Company News';
+            }
+        }
         $this->assign('news_category', $news_category);
 
         $site_info = cmf_get_site_info();
@@ -226,8 +231,6 @@ class IndexController extends HomeBaseController
         $selectorDescription = '';
         $selectorButtonText = '';
         $selectorItems = [];
-        $categoryFaq = [];
-
         if (!empty($currentCategory)) {
             $heroSettings = cmf_get_option('product_category_hero_settings');
             $heroSettings = is_array($heroSettings) ? $heroSettings : [];
@@ -250,29 +253,31 @@ class IndexController extends HomeBaseController
             $selectorDescription = trim((string)($heroContent['selector_description'] ?? ''));
             $selectorButtonText = trim((string)($heroContent['selector_button_text'] ?? ''));
             $selectorItems = $this->normalizeSelectorItems($heroContent['selector_items'] ?? []);
-
-            $faqSettings = cmf_get_option('product_category_faq_settings');
-            $faqSettings = is_array($faqSettings) ? $faqSettings : [];
-            $faqContent = $faqSettings[$currentCategory['id']] ?? [];
-            $faqItems = is_array($faqContent['faq'] ?? null) ? $faqContent['faq'] : [];
-            $faqItems = array_values(array_filter($faqItems, function ($item) {
-                if (!is_array($item)) {
-                    return false;
-                }
-                $question = trim((string)($item['question'] ?? ''));
-                $answer = trim((string)($item['answer'] ?? ''));
-                return $question !== '' || $answer !== '';
-            }));
-
-            $categoryFaq = [
-                'faq_title'            => trim((string)($faqContent['faq_title'] ?? '')),
-                'faq'                  => $faqItems,
-                'faq_contact_title'    => trim((string)($faqContent['faq_contact_title'] ?? '')),
-                'faq_contact_desc'     => trim((string)($faqContent['faq_contact_desc'] ?? '')),
-                'faq_contact_btn_text' => trim((string)($faqContent['faq_contact_btn_text'] ?? '')),
-                'faq_contact_btn_link' => trim((string)($faqContent['faq_contact_btn_link'] ?? ''))
-            ];
         }
+
+        $faqSettings = cmf_get_option('product_category_faq_settings');
+        $faqSettings = is_array($faqSettings) ? $faqSettings : [];
+        $faqCategoryId = !empty($currentCategory) ? $currentCategory['id'] : 0;
+        $faqContent = $faqSettings[$faqCategoryId] ?? [];
+        $faqItems = is_array($faqContent['faq'] ?? null) ? $faqContent['faq'] : [];
+        $faqItems = array_values(array_filter($faqItems, function ($item) {
+            if (!is_array($item)) {
+                return false;
+            }
+            $question = trim((string)($item['question'] ?? ''));
+            $answer = trim((string)($item['answer'] ?? ''));
+            return $question !== '' || $answer !== '';
+        }));
+
+        $categoryFaq = [
+            'faq_title'            => trim((string)($faqContent['faq_title'] ?? '')),
+            'faq'                  => $faqItems,
+            'faq_contact_title'    => trim((string)($faqContent['faq_contact_title'] ?? '')),
+            'faq_contact_desc'     => trim((string)($faqContent['faq_contact_desc'] ?? '')),
+            'faq_contact_btn_text' => trim((string)($faqContent['faq_contact_btn_text'] ?? '')),
+            'faq_contact_btn_link' => trim((string)($faqContent['faq_contact_btn_link'] ?? '')),
+            'faq_bg_img'           => trim((string)($faqContent['faq_bg_img'] ?? ''))
+        ];
 
         $currentCategoryName = !empty($currentCategory['name']) ? $currentCategory['name'] : 'All Products';
 
@@ -332,7 +337,7 @@ class IndexController extends HomeBaseController
         $recommended_common_where = [['id', '<>', $id], ['is_recommended', '=', 1]];
         $category_where = [['category_id', '=', $product['category_id']]];
         $recommended_where = array_merge($recommended_common_where, $category_where);
-        $limit = 4;
+        $limit = 8;
         $recommended_list = $productModel->field('id,title,industry,thumbnail')->where($recommended_where)->orderRaw('RAND()')->limit($limit)->select()->toArray();
         $this->assign('recommended_list', $recommended_list);
 
@@ -360,17 +365,21 @@ class IndexController extends HomeBaseController
     public function industries()
     {
         $slide_id = 3;
-        $limit = 9;
-        if ($this->isMobile) {
+        $limit = 6;
+        if (cmf_is_mobile()) {
             $slide_id = 8;
             $limit = 6;
         }
         $this->getBanner($slide_id);
 
         $postModel = new PortalPostModel();
-        $list = $postModel->where('post_type', 3)->field('id,more,post_title,post_excerpt')->order('create_time desc')->paginate($limit);
+        
+        $where = [['post_type', '=', 3]];
+
+        $list = $postModel->where($where)->field('id,more,post_title,post_excerpt')->order('create_time desc')->paginate($limit);
         $this->assign('list', $list);
         $this->assign('page', $list->render());
+        $this->assign('page_title', 'Cases');
 
         return $this->fetch(':industries');
     }
@@ -406,6 +415,8 @@ class IndexController extends HomeBaseController
         $nextArticle = $portalPostModel->field('*')->where($where)->where('id', '>', $articleId)->order('id', 'ASC')->find();
         $this->assign('prev_article', $prevArticle);
         $this->assign('next_article', $nextArticle);
+        $this->assign('parent_title', 'Cases');
+        $this->assign('page_title', $article['post_title']);
 
         return $this->fetch(':industries-info');
     }
@@ -461,32 +472,12 @@ class IndexController extends HomeBaseController
         }
         $service_site = cmf_get_option('service_site');
         $this->assign('service_site', $service_site);
-        return $this->fetch(':service');
-    }
-
-    public function excellent_service()
-    {
-        if (cmf_is_mobile()) {
-            $this->getBanner(11);
-        } else {
-            $this->getBanner(6);
-        }
-        $service_site = cmf_get_option('excellent_service_site');
-        $this->assign('service_site', $service_site);
-        return $this->fetch(':excellent_service');
-    }
-
-    public function download()
-    {
-        if (cmf_is_mobile()) {
-            $this->getBanner(11);
-        } else {
-            $this->getBanner(6);
-        }
+        
         $portalPostModel = new PortalPostModel();
-        $list = $portalPostModel->where('post_type', 4)->field('id,post_title,more')->select();
-        $this->assign('list', $list);
-        return $this->fetch(':download');
+        $download_list = $portalPostModel->where('post_type', 4)->field('id,post_title,more')->select();
+        $this->assign('download_list', $download_list);
+        
+        return $this->fetch(':service');
     }
 
     public function quote()
@@ -626,7 +617,97 @@ class IndexController extends HomeBaseController
         if ($data['type'] == 3) {
             session('user_download', 1);
         }
-        $this->success('submit success', '', ['session' => session('user_download')]);
+
+        // Return JSON success response immediately to the client
+        $result = [
+            'code' => 1,
+            'msg' => 'submit success',
+            'data' => ['session' => session('user_download')],
+            'url' => '',
+            'wait' => 3
+        ];
+        
+        $response = \think\Response::create($result, 'json');
+        $response->send();
+        
+        // FastCGI finish request to close browser connection
+        if (function_exists('fastcgi_finish_request')) {
+            session_write_close();
+            fastcgi_finish_request();
+        }
+        
+        // Asynchronously forward inquiry details to the admin email in the background
+        if (isset($messageModel) && $messageModel) {
+            try {
+                $site_info = cmf_get_option('site_info');
+                $admin_email = !empty($site_info['email']) ? $site_info['email'] : 'sale@nucleoncranes.global';
+                
+                $subject = "New Website Inquiry: " . (!empty($messageModel->product_name) ? $messageModel->product_name : 'General');
+                
+                $email_content = "<h3>New Website Inquiry Details</h3>";
+                $email_content .= "<p><strong>Name:</strong> " . htmlspecialchars($messageModel->name ?? '') . "</p>";
+                $email_content .= "<p><strong>Email:</strong> " . htmlspecialchars($messageModel->email ?? '') . "</p>";
+                $email_content .= "<p><strong>Phone/Whatsapp:</strong> " . htmlspecialchars($messageModel->phone ?? '') . "</p>";
+                
+                if (!empty($messageModel->product_name)) {
+                    $email_content .= "<p><strong>Product Name:</strong> " . htmlspecialchars($messageModel->product_name) . "</p>";
+                }
+                
+                // Mapped parameters if submitted on details page
+                if (!empty($messageModel->lifting_capacity)) {
+                    $val = $messageModel->lifting_capacity;
+                    $email_content .= "<p><strong>Lifting Capacity:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->lifting_height)) {
+                    $val = $messageModel->lifting_height;
+                    $email_content .= "<p><strong>Lifting Height:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->span)) {
+                    $val = $messageModel->span;
+                    $email_content .= "<p><strong>Span:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->operating_voltage)) {
+                    $val = $messageModel->operating_voltage;
+                    $email_content .= "<p><strong>Operating Voltage:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->operating_herts)) {
+                    $val = $messageModel->operating_herts;
+                    $email_content .= "<p><strong>Operating Hertz:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->job_level)) {
+                    $val = $messageModel->job_level;
+                    $email_content .= "<p><strong>Job Level:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                if (!empty($messageModel->sling_available)) {
+                    $val = $messageModel->sling_available;
+                    $email_content .= "<p><strong>Sling Available:</strong> " . (is_array($val) ? implode(', ', $val) : htmlspecialchars($val)) . "</p>";
+                }
+                
+                $email_content .= "<p><strong>Message:</strong><br>" . nl2br(htmlspecialchars($messageModel->content ?? '')) . "</p>";
+                
+                cmf_send_email($admin_email, $subject, $email_content);
+            } catch (\Exception $e) {
+                // Ignore errors
+            }
+        }
+        
+        exit;
+    }
+
+    public function thankyou()
+    {
+        $site_info = cmf_get_option('site_info');
+        $this->assign('site_info', $site_info);
+        $this->assign('page_title', 'Thank You');
+        return $this->fetch(':thankyou');
+    }
+
+    public function privacy_policy()
+    {
+        $site_info = cmf_get_option('site_info');
+        $this->assign('site_info', $site_info);
+        $this->assign('page_title', 'Privacy Policy');
+        return $this->fetch(':privacy_policy');
     }
 }
 
