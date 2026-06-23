@@ -165,13 +165,11 @@
                 <ul class="info_content_title clearfix">
                     <notempty name="product.custom_field.content">
                         <foreach name="product.custom_field.content" item="vo" key="key">
-                            <if condition="$key neq 'features'">
-                                <notempty name="product[$key]">
-                                    <li class="info_content_item" data-target="{$key}">
-                                        {$vo}
-                                    </li>
-                                </notempty>
-                            </if>
+                            <notempty name="product[$key]">
+                                <li class="info_content_item" data-target="{$key}">
+                                    {$vo}
+                                </li>
+                            </notempty>
                         </foreach>
                         <else/>
                         <notempty name="product.overview">
@@ -182,6 +180,9 @@
                         </notempty>
                         <notempty name="product.certificate">
                             <li class="info_content_item" data-target="certificate">Certificate</li>
+                        </notempty>
+                        <notempty name="product.features">
+                            <li class="info_content_item" data-target="features">Features</li>
                         </notempty>
                         <notempty name="product.customized">
                             <li class="info_content_item" data-target="customized">Customized</li>
@@ -196,34 +197,32 @@
                 <div class="info_content_content">
                     <notempty name="product.custom_field.content">
                         <foreach name="product.custom_field.content" item="vo" key="key">
-                            <if condition="$key neq 'features'">
-                                <notempty name="product[$key]">
-                                    <eq name="key" value="certificate">
-                                        <div class="info_content_content_item" id="{$key}">
-                                            <div class="info_content_content_item-title">{$vo}</div>
-                                            <ul class="info_content_content_certificate">
-                                                <foreach name="product.certificate" item="v">
-                                                    <li class="info_content_content_certificate_item">
-                                                        <a href="{:cmf_get_image_url($v.url)}" target="_blank"><div class="certificate_wrap">
-                                                            <img src="{:cmf_get_image_url($v.url)}"
-                                                                 alt="{$v.name}" title="{$v.name}"></div>
-                                                            <div class="info_content_content_certificate_item_title">
-                                                                {$v.name}
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </foreach>
-                                                <div class="clear_both"></div>
-                                            </ul>
-                                        </div>
-                                        <else/>
-                                        <div class="info_content_content_item" id="{$key}">
-                                            <div class="info_content_content_item-title">{$vo}</div>
-                                            {$product[$key]}
-                                        </div>
-                                    </eq>
-                                </notempty>
-                            </if>
+                            <notempty name="product[$key]">
+                                <eq name="key" value="certificate">
+                                    <div class="info_content_content_item" id="{$key}">
+                                        <div class="info_content_content_item-title">{$vo}</div>
+                                        <ul class="info_content_content_certificate">
+                                            <foreach name="product.certificate" item="v">
+                                                <li class="info_content_content_certificate_item">
+                                                    <a href="{:cmf_get_image_url($v.url)}" target="_blank"><div class="certificate_wrap">
+                                                        <img src="{:cmf_get_image_url($v.url)}"
+                                                             alt="{$v.name}" title="{$v.name}"></div>
+                                                        <div class="info_content_content_certificate_item_title">
+                                                            {$v.name}
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </foreach>
+                                            <div class="clear_both"></div>
+                                        </ul>
+                                    </div>
+                                    <else/>
+                                    <div class="info_content_content_item" id="{$key}">
+                                        <div class="info_content_content_item-title">{$vo}</div>
+                                        {$product[$key]}
+                                    </div>
+                                </eq>
+                            </notempty>
                         </foreach>
                         <else/>
                         <notempty name="product.overview">
@@ -255,6 +254,12 @@
                                     </foreach>
                                     <div class="clear_both"></div>
                                 </ul>
+                            </div>
+                        </notempty>
+                        <notempty name="product.features">
+                            <div class="info_content_content_item" id="features">
+                                <div class="info_content_content_item-title">Features</div>
+                                {$product.features}
                             </div>
                         </notempty>
                         <notempty name="product.customized">

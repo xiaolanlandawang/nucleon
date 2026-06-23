@@ -1,273 +1,427 @@
 /* ============================================================
-   about.css — About Us page responsive styles
+   about.css — Mobile About Us page responsive styles
    ============================================================ */
 
 .title {
-    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    font-size: clamp(2rem, 6vw, 2.6rem);
     font-weight: bold;
     text-align: center;
+    color: #1a2740;
+    margin: 0 0 1.5rem;
+    line-height: 1.3;
 }
 
-/* ─── Introduction Section ───────────────────────────────── */
-.about-content {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 3rem auto;
-    font-size: 1.3rem;
-    color: #333;
+.about-section {
+    width: 90%;
+    max-width: 37rem;
+    margin: 4rem auto;
+}
+
+/* ─── Profile Section ────────────────────────────────────── */
+.about-profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-profile-header {
+    text-align: center;
+    position: relative;
+}
+
+.about-bg-text {
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(4rem, 12vw, 6rem);
+    font-weight: 900;
+    color: rgba(0,0,0,0.03);
+    white-space: nowrap;
+    z-index: -1;
+}
+
+.about-subtitle {
+    font-size: 1.4rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.about-profile-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: #f8fbfa;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.about-profile-logo {
+    height: 3.5rem;
+    width: auto;
+}
+
+.about-profile-company-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a2740;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.about-introduction p {
+    font-size: 1.35rem;
     line-height: 1.7;
+    color: #444;
+    margin-bottom: 1.2rem;
 }
 
-.about-content .about-introduction {
-    font-size: 1.3rem;
-    margin-top: 1rem;
-    text-align: left;
-    line-height: 1.8;
+.about-introduction-img {
+    margin-top: 1.5rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.about-content .about-introduction-img {
+.about-introduction-img img {
     width: 100%;
-    margin-top: 1rem;
-}
-
-.about-content .about-introduction-img img {
-    width: 100%;
-    height: auto;
     display: block;
 }
 
-/* ─── What We Do ─────────────────────────────────────────── */
-.about-do {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 3rem auto;
+/* ─── Stats Section (Like Homepage) ──────────────────────── */
+.about-stats-wrap {
+    width: 90%;
+    max-width: 37rem;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.6rem;
 }
 
-.about-do .about-do-desc {
+.about-stats-wrap .stat-item {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-stats-wrap .stat-num {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+}
+
+.about-stats-wrap .stat-num .counter {
+    font-size: clamp(2.8rem, 8vw, 3.6rem);
+    font-weight: bold;
+    color: #c41e1e;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+}
+
+.about-stats-wrap .stat-num .stat-unit {
     font-size: 1.3rem;
-    margin-top: 1rem;
-    line-height: 1.7;
+    color: #999;
+    margin-left: 0.4rem;
 }
 
-/* ─── Serve / Map Section ────────────────────────────────── */
-.serve-wrap {
+.about-stats-wrap .stat-text {
+    font-size: 1.35rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ─── Corporate Culture ──────────────────────────────────── */
+.about-culture {
     width: 100%;
-    margin: 3rem auto 0;
-    background-repeat: no-repeat;
-    background-position: center center;
+    max-width: none;
+    margin: 4rem 0;
+    padding: 5rem 5%;
     position: relative;
+    background-color: #1a2740;
     background-size: cover;
+    background-position: center;
+    color: #fff;
 }
 
-.serve-wrap::after {
-    content: '';
-    background-color: rgba(0,0,0,.2);
+.about-culture-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 25, 45, 0.85);
 }
 
-.serve {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 0 auto;
-    padding: 3rem 0;
+.about-culture-content {
     position: relative;
     z-index: 1;
-}
-
-.serve .title {
-    color: #fff;
-}
-
-.serve .serve-desc {
-    font-size: 1.3rem;
-    color: #fff;
-    margin-top: 1rem;
-    text-align: center;
-    line-height: 1.7;
-}
-
-/* ─── Global Section ─────────────────────────────────────── */
-.global-wrap {
     width: 100%;
-    margin: 0 auto 3rem;
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 100% auto;
-}
-
-.global {
-    padding-top: 4rem;
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
+    max-width: 37rem;
     margin: 0 auto;
 }
 
-.global .global-desc {
-    font-size: 1.3rem;
-    margin-top: 1rem;
-    line-height: 1.7;
+.about-culture .about-bg-text {
+    color: rgba(255,255,255,0.05);
 }
 
-.global .global-content {
-    margin-top: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
-}
-
-.global .global-content .global-content-item {
-    width: 100%;
-    margin-top: 0;
-    background-color: #ededed;
-    padding: 1.5rem 1rem;
-    border-radius: 0.4rem;
-}
-
-.global .global-content .global-content-item .global-content-item-title {
-    font-size: 1.6rem;
-    font-weight: bold;
-}
-
-.global .global-content .global-content-item .global-content-item-desc {
-    font-size: 1.2rem;
-    margin-top: 0.6rem;
-    line-height: 1.6;
-}
-
-/* ─── Advantage Grid ─────────────────────────────────────── */
-.advantage {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 3rem auto;
-}
-
-.advantage .advantage-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.advantage .advantage-list .advantage-item {
-    width: 100%;
-    margin-top: 0;
-    box-shadow: 0 0 12px 1px rgba(0,0,0,.12);
-    padding: 2rem 1rem;
+.about-culture-desc {
+    font-size: 1.35rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 3rem;
     text-align: center;
-    border-radius: 0.4rem;
 }
 
-.advantage .advantage-list .advantage-item .advantage-item-num {
-    font-size: clamp(2.8rem, 9vw, 4rem);
-    font-weight: bold;
-    color: #ea222d;
+.about-culture-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-.advantage .advantage-list .advantage-item .advantage-item-title {
-    font-size: 1.3rem;
-    margin-top: 1rem;
-    line-height: 1.4;
+.about-culture-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.2rem;
+    padding: 2.5rem 1.5rem;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
 }
 
-/* ─── Certificates ───────────────────────────────────────── */
-.certificate {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 3rem auto;
-}
-
-.certificate .certificate-list {
-    margin-top: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
-}
-
-.certificate .certificate-list .certificate-item {
-    cursor: pointer;
-    width: 100%;
-    margin-top: 0;
-    margin-right: 0;
-}
-
-.certificate .certificate-list .certificate-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* ─── Gallery ────────────────────────────────────────────── */
-.gallery {
-    width: 92%;             /* ← was 35.5rem fixed */
-    max-width: 36rem;
-    margin: 3rem auto;
-}
-
-.gallery .gallery-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.gallery .gallery-list .gallery-item {
-    width: 100%;
-    margin-top: 0;
-}
-
-.gallery .gallery-list .gallery-item .gallery-item-img {
-    width: 100%;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-}
-
-.gallery .gallery-list .gallery-item .gallery-item-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.3s ease-in-out;
-}
-
-.gallery .gallery-list .gallery-item .gallery-item-title {
-    margin-top: 0.6rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    line-height: 1.4;
-}
-
-.gallery .gallery-list .gallery-item:hover .gallery-item-img img {
-    transform: scale(1.05);
-}
-
-.gallery .gallery-list .gallery-item:hover .gallery-item-title {
-    color: #ea222d;
-}
-
-/* ─── Map Section ─────────────────────────────────────────── */
-.about-map {
-    width: 92%;
-    max-width: 36rem;
-    margin: 3rem auto;
-}
-
-.about-map .title {
+.about-culture-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    background: #ea222d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1.5rem;
 }
 
-.about-map .map-container {
-    width: 100%;
-    border-radius: 1.2rem;
-    overflow: hidden;
-    box-shadow: 0 0.6rem 1.6rem rgba(11,35,71,.04);
-    border: 0.1rem solid #e4eaf3;
+.about-culture-icon svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: #fff;
 }
 
-.about-map .map-container iframe {
-    display: block;
+.culture-card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 0 1rem;
+}
+
+.culture-card-item {
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.culture-card-item strong {
+    color: #fff;
+}
+
+/* ─── Customers We Serve ─────────────────────────────────── */
+.serve-wrap {
     width: 100%;
-    height: 30rem;
-    border: 0;
+    padding: 5rem 5%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.serve-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.serve {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 37rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.serve-desc {
+    color: #e0e0e0;
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+
+/* ─── Global Markets ─────────────────────────────────────── */
+.global-wrap {
+    text-align: center;
+}
+
+.global-desc {
+    font-size: 1.35rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.global-map-container img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+.global-market-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a2740;
+    margin-bottom: 2rem;
+}
+
+.global-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.global-content-item {
+    background: #f4f6f8;
+    border-radius: 0.8rem;
+    padding: 1.5rem 1rem;
+    border: 1px solid #e8ecf1;
+}
+
+.global-content-item-title {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #1a2740;
+    margin-bottom: 0.5rem;
+}
+
+.global-content-item-desc {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.global-content-item-desc strong {
+    font-size: 2rem;
+    color: #ea222d;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* ─── Service Center ─────────────────────────────────────── */
+.service-center {
+    text-align: center;
+}
+
+.service-description {
+    font-size: 1.35rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+}
+
+.service-content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.service-content-item {
+    background: #fff;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    text-align: left;
+}
+
+.service-img img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.service-content-block {
+    padding: 2rem;
+}
+
+.service-content-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1a2740;
+    margin: 0 0 1rem;
+}
+
+.service-content-text {
+    font-size: 1.35rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* ─── Certificates ───────────────────────────────────────── */
+.certificate, .gallery {
+    width: 90%;
+    max-width: 37rem;
+    margin: 4rem auto;
+}
+
+.certificate-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.certificate-item {
+    background: #fff;
+    border-radius: 0.8rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.certificate-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ─── Gallery ────────────────────────────────────────────── */
+.gallery-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    background: #fff;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.gallery-item-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.gallery-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item-title {
+    padding: 1rem 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1a2740;
+    text-align: center;
+    line-height: 1.3;
 }

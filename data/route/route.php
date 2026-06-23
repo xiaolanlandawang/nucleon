@@ -159,7 +159,7 @@ Route::get('Insulation-Bridge-Crane-QY-Type', 'portal/index/product_info?id=131'
 
 Route::get('LB-Explosion-Proof-Single-Girder-Overhead-Traveling-Crane', 'portal/index/product_info?id=132')->append(array('id' => '132',));
 
-Route::get('Low-Headroom-Overhead-Crane', 'portal/index/product_info?id=133')->append(array('id' => '133',));
+Route::get('Low-Headroom-Overhead-Crane', 'portal/index/product_info?id=192')->append(array('id' => '192',));
 
 Route::get('Metallurgy-Overhead-Crane-QDY-Type', 'portal/index/product_info?id=134')->append(array('id' => '134',));
 
@@ -263,6 +263,64 @@ Route::get('Clamps-Overhead-Crane', 'portal/index/product_info?id=184')->append(
 
 Route::get('news', 'portal/index/news');
 
+Route::get('3-Ton-Overhead-Crane', 'portal/index/product_info?id=185')->append(array('id' => '185',));
+
+Route::get('5-Ton-EOT-Crane', 'portal/index/product_info?id=186')->append(array('id' => '186',));
+
+Route::get('10-Ton-Overhead-Crane', 'portal/index/product_info?id=187')->append(array('id' => '187',));
+
+Route::get('20-Ton-Overhead-Crane', 'portal/index/product_info?id=188')->append(array('id' => '188',));
+
+Route::get('Double-Girder-EOT-Crane', 'portal/index/product_info?id=189')->append(array('id' => '189',));
+
+Route::get('Electric-Single-Girder-Crane-For-Pickling', 'portal/index/product_info?id=190')->append(array('id' => '190',));
+
+Route::get('Grab-Bucket-EOT-Crane', 'portal/index/product_info?id=191')->append(array('id' => '191',));
+
+Route::get('Single-Girder-EOT-Crane', 'portal/index/product_info?id=193')->append(array('id' => '193',));
+
+Route::get('Underslung-EOT-Crane', 'portal/index/product_info?id=194')->append(array('id' => '194',));
+
+Route::get('Workstation-Bridge-Crane', 'portal/index/product_info?id=195')->append(array('id' => '195',));
+
+Route::get('European-Double-Girder-Bridg-Crane', 'portal/index/product_info?id=196')->append(array('id' => '196',));
+
+Route::get('Freestanding-Bridge-Crane', 'portal/index/product_info?id=197')->append(array('id' => '197',));
+
+Route::get('Intelligent-Warehouse-Stacker-Crane', 'portal/index/product_info?id=198')->append(array('id' => '198',));
+
+Route::get('LH-Type-Double-Girder-Hoist-Bridge', 'portal/index/product_info?id=199')->append(array('id' => '199',));
+
+Route::get('Multifunctional-Crane-For-Roasting-Professional-Solutions', 'portal/index/product_info?id=200')->append(array('id' => '200',));
+
+Route::get('NLH-Euro-Double-Girder-Hoist-Bridge-Crane', 'portal/index/product_info?id=201')->append(array('id' => '201',));
+
+Route::get('NLX-European-Single-Girder-Underhung-Crane', 'portal/index/product_info?id=202')->append(array('id' => '202',));
+
+Route::get('QB-Type-Explosion-Proof-Overhead-Crane', 'portal/index/product_info?id=203')->append(array('id' => '203',));
+
+Route::get('QDY-Type-Metallurgy-Overhead-Crane', 'portal/index/product_info?id=204')->append(array('id' => '204',));
+
+Route::get('QY-Type-Insulation-Overhead-Crane', 'portal/index/product_info?id=205')->append(array('id' => '205',));
+
+Route::get('Slab-Clamp-Overhead-Crane', 'portal/index/product_info?id=206')->append(array('id' => '206',));
+
+Route::get('YZ-Foundry-Casting-Crane', 'portal/index/product_info?id=207')->append(array('id' => '207',));
+
+Route::get('HD-Type-European-Single-Girder-Bridge-Crane', 'portal/index/product_info?id=208')->append(array('id' => '208',));
+
+Route::get('LB-Type-Explosion-proof-Bridge-Crane', 'portal/index/product_info?id=209')->append(array('id' => '209',));
+
+Route::get('LD-Type-Single-Girder-Electric-Overhead-Crane', 'portal/index/product_info?id=210')->append(array('id' => '210',));
+
+Route::get('LX-Type-Electric-Suspension-Crane', 'portal/index/product_info?id=211')->append(array('id' => '211',));
+
+Route::get('QC-Type-Electromagnetic-Overhead Crane', 'portal/index/product_info?id=212')->append(array('id' => '212',));
+
+Route::get('QD-Type-Trolley-Double-Beam-Overhead-Crane', 'portal/index/product_info?id=213')->append(array('id' => '213',));
+
+Route::get('QZ-Type-Grab-Overhead-Crane', 'portal/index/product_info?id=214')->append(array('id' => '214',));
+
 Route::get('company1', 'portal/index/news_info?cid=1&id=2')->append(array('cid' => '1',  'id' => '2',));
 
 Route::get('acf-ic-expert-group-visits-weihua-for-one-enterprise-one-policy-pilot-study', 'portal/index/news_info?cid=1&id=10')->append(array('cid' => '1',  'id' => '10',));
@@ -298,6 +356,8 @@ Route::get('WEIHUA-2500t/h-Bridge-Grab-Ship-Unloader', 'portal/index/industries_
 Route::get('550t-Gantry-Crane-Load-Test', 'portal/index/industries_info?id=23')->append(array('id' => '23',));
 
 Route::get('admin$', 'admin/Index/index');
+
+Route::get('2x10t-HD-Euro-Single-Girder-Bridge-Cranes-Shipped-To-Mauritius', 'portal/index/industries_info?id=27')->append(array('id' => '27',));
 
 Route::get('case', 'portal/index/industries');
 

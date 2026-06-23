@@ -38,33 +38,6 @@
             <span>/</span>
             <span>Products</span>
         </div>
-
-        <div class="main-content">
-            <div class="products-category-section">
-                <div class="products-category-section__head">
-                    <h2 class="products-category-section__title">{$category_headline}</h2>
-                    <p class="products-category-section__desc">{$category_intro}</p>
-                </div>
-
-                <ul class="mobile-category-grid">
-                    <foreach name="category_cards" item="vo">
-                        <li class="mobile-category-grid__item">
-                            <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}" class="mobile-category-card">
-                                <div class="mobile-category-card__image-wrap">
-                                    <img src="{:cmf_get_image_url($vo['thumbnail'])}" alt="{$vo.name}" class="mobile-category-card__image" loading="lazy">
-                                </div>
-                                <div class="mobile-category-card__content">
-                                    <div class="mobile-category-card__title">{$vo.name}</div>
-                                    <div class="mobile-category-card__count">{$vo.product_count|default=0} Products</div>
-                                    <span class="mobile-category-card__arrow">View All ➔</span>
-                                </div>
-                            </a>
-                        </li>
-                    </foreach>
-                </ul>
-            </div>
-        </div>
-
     <else />
         <!-- ========================================== -->
         <!-- SPECIFIC CATEGORY PAGE                    -->
@@ -91,50 +64,66 @@
             <p class="mobile-product-hero__desc">{$hero_description}</p>
             <a href="javascript:;" class="mobile-product-hero__btn" id="inquiry">Get A Free Quote</a>
         </div>
+    </if>
 
-        <div class="main-content">
+    <!-- HORIZONTAL CATEGORY NAV (ALWAYS SHOW) -->
+    <nav class="product-category-nav">
+        <div class="product-category-nav__inner">
+            <ul class="product-category-nav__list">
+                <foreach name="category_cards" item="vo">
+                    <li class="product-category-nav__item {:isset($current_category['id']) && $current_category['id'] == $vo['id'] ? 'active' : ''}">
+                        <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}">
+                            <span class="product-category-nav__icon">
+                                <img src="{:cmf_get_image_url($vo['icon'] ?: $vo['thumbnail'])}" alt="{$vo.name}">
+                            </span>
+                            <span class="product-category-nav__name">{$vo.name}</span>
+                        </a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </nav>
 
+    <div class="main-content">
+        <!-- Products Grid Section (ALWAYS SHOW) -->
+        <div class="products-showcase-section">
+            <div class="products-showcase__head">
+                <h2 class="products-showcase__title">{$category_headline}</h2>
+                <p class="products-showcase__desc">{$category_intro}</p>
+            </div>
 
-            <!-- Products Grid Section -->
-            <div class="products-showcase-section">
-                <div class="products-showcase__head">
-                    <h2 class="products-showcase__title">{$category_headline}</h2>
-                    <p class="products-showcase__desc">{$category_intro}</p>
-                </div>
-
-                <div class="products-content">
-                    <ul class="products-content-list">
-                        <foreach name="list" item="vo" key="k">
-                            <li class="products-content-list-item" data-id="{$vo.id}">
-                                <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
-                                    <div class="products-content-list-item-img">
-                                        <img src="{:cmf_get_image_url($vo.thumbnail)}"
-                                             alt="{$vo.title}"
-                                             <if condition="$k eq 0">loading="eager" fetchpriority="high"<else />loading="lazy"</if>
-                                             decoding="async">
-                                    </div>
-                                    <div class="products-content-list-item-title">{$vo.title}</div>
-                                    <div class="product-content-li-desc">{$vo.industry|default='Tap to view more product details and parameters.'}</div>
-                                </a>
-                                <div class="product_list_item_btn">
-                                    <div class="product_list_item_btn_submit" id="inquiry">CONSULT</div>
+            <div class="products-content">
+                <ul class="products-content-list">
+                    <foreach name="list" item="vo" key="k">
+                        <li class="products-content-list-item" data-id="{$vo.id}">
+                            <a href="{:cmf_url('portal/index/product_info',array('id'=>$vo['id']))}">
+                                <div class="products-content-list-item-img">
+                                    <img src="{:cmf_get_image_url($vo.thumbnail)}"
+                                         alt="{$vo.title}"
+                                         <if condition="$k eq 0">loading="eager" fetchpriority="high"<else />loading="lazy"</if>
+                                         decoding="async">
                                 </div>
-                            </li>
-                        </foreach>
-                    </ul>
+                                <div class="products-content-list-item-title">{$vo.title}</div>
+                                <div class="product-content-li-desc">{$vo.industry|default='Tap to view more product details and parameters.'}</div>
+                            </a>
+                            <div class="product_list_item_btn">
+                                <div class="product_list_item_btn_submit" id="inquiry">Get Solution Quote</div>
+                            </div>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+
+            <if condition="count($list) eq 0">
+                <div class="mobile-product-empty">
+                    No products available.
                 </div>
+            </if>
 
-                <if condition="count($list) eq 0">
-                    <div class="mobile-product-empty">
-                        No products in this category yet.
-                    </div>
-                </if>
-
-                <div class="products-pagination-container">
-                    <span class="products-pagination-info">Page {$list->currentPage()} of {$list->lastPage()}</span>
-                    <div class="products-content-right-page">
-                        <ul class="pagination">{$page}</ul>
-                    </div>
+            <div class="products-pagination-container">
+                <span class="products-pagination-info">Page {$list->currentPage()} of {$list->lastPage()}</span>
+                <div class="products-content-right-page">
+                    <ul class="pagination">{$page}</ul>
                 </div>
             </div>
         </div>
@@ -158,7 +147,7 @@
                 </div>
             </div>
         </notempty>
-    </if>
+    </div>
 
     <include file="public@crane_selector"/>
 
@@ -171,20 +160,20 @@
                         <h2 class="form-title">Customize Your Lifting Solutions</h2>
                         <div class="home-collect-form">
                             <div class="home-collect-field">
-                                <label>Name</label>
-                                <input type="text" class="home-collect-name" placeholder="Name">
+                                <label>Name <span style="color:#ea222d">*</span></label>
+                                <input type="text" class="home-collect-name" placeholder="Name *">
                             </div>
                             <div class="home-collect-field">
-                                <label>Email</label>
-                                <input type="text" class="home-collect-email" placeholder="Email">
+                                <label>Email <span style="color:#ea222d">*</span></label>
+                                <input type="text" class="home-collect-email" placeholder="Email *">
                             </div>
                             <div class="home-collect-field full-width">
                                 <label>Phone / Whatsapp</label>
                                 <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
                             </div>
                             <div class="home-collect-field full-width">
-                                <label>Message</label>
-                                <textarea class="home-collect-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                                <label>Message <span style="color:#ea222d">*</span></label>
+                                <textarea class="home-collect-message" placeholder="Message *"></textarea>
                             </div>
                             <div class="home-collect-submit">SEND MESSAGE</div>
                         </div>

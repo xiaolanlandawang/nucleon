@@ -495,8 +495,8 @@ a:focus {
     bottom: 0;
     left: 0;
     z-index: 9999;
-    background-color: #fff;
-    box-shadow: 0 -2px 8px rgba(0,0,0,.1);
+    background-color: #f8f9fa; /* Light off-white background from screenshot */
+    border-top: 1px solid #eaeaea;
 }
 
 .right_fix .right_fix_connect {
@@ -509,10 +509,9 @@ a:focus {
     flex: 1;
     height: 5.6rem;
     font-size: 1.2rem;
-    color: #333;
     line-height: 2rem;
     text-align: center;
-    background-color: #fff;
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -527,19 +526,21 @@ a:focus {
     width: 100%;
     height: 100%;
     text-decoration: none;
+    color: #cb2a29; /* Red color matching the screenshot */
 }
 
 .right_fix .right_fix_connect .right_fix_box a p {
-    color: #333;
-    margin: 0.4rem 0 0 0;
+    color: #cb2a29; /* Red text */
+    margin: 0.2rem 0 0 0;
     font-size: 1.15rem;
+    font-weight: 500;
     line-height: 1.2;
     text-align: center;
 }
 
 .right_fix .right_fix_connect .right_fix_box img {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.2rem;
+    height: 2.2rem;
     display: block;
     margin: 0 auto;
 }
@@ -567,6 +568,7 @@ a:focus {
     border-radius: 1.4rem;
     overflow: visible;
     z-index: 1;
+    padding-bottom: 3rem;
 }
 
 .popover_wrap .iti {
@@ -593,7 +595,7 @@ a:focus {
 
 .popover_wrap .popover_container .popover_content {
     width: 92%;
-    margin: 3rem auto 5rem;
+    margin: 3rem auto 0;
 }
 
 .popover_wrap .popover_container .popover_content .popover_title h2 {

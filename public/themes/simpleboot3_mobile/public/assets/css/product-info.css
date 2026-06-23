@@ -11,6 +11,18 @@
     padding-top: 5rem;
 }
 
+.mobile-detail-hero::after {
+    content: '';
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 5rem);
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+    pointer-events: none;
+}
+
 .mobile-detail-hero__bg {
     position: relative;
     width: 100%;
@@ -22,7 +34,7 @@
 
 .mobile-detail-hero__content {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 2.5rem);
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -49,8 +61,8 @@
 
 /* ─── Page Wrapper ───────────────────────────────────────── */
 .product-info {
-    width: 92%;             /* ← was 35rem fixed */
-    max-width: 36rem;
+    width: 100%;             /* ← was 35rem fixed */
+    max-width: none;
     margin: 0 auto;
     padding-bottom: 3rem;
 }
@@ -578,7 +590,7 @@
     max-width: 100% !important;
 }
 
-#scenario > div > div {
+#scenario > div > div:has(> div) {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1.2rem !important;
@@ -679,3 +691,14 @@
     color: #0d57b7;
     text-decoration: underline;
 }
+
+/* Override editor content inline margins/paddings that cause excessive whitespace on mobile */
+.info_content_content_item div[style*="max-width"],
+.info_content_content_item div[style*="padding: 30px"],
+.info_content_content_item div[style*="padding:30px"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+

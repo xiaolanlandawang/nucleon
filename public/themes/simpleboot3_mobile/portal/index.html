@@ -74,37 +74,55 @@
   </div>
   <!--BANNER END-->
 
-  <!--PRODUCTS START-->
-  <div class="hot-products">
-    <div class="hot-products-title">HOT PRODUCTS</div>
-    <div class="hot-products-desc">{$index_site.products_description}</div>
-    <div class="product-category">
-      <foreach name="hot_products" item="vo">
-        <div class="product-category-item {$key==0 ? 'active' : ''}">{$vo.name}</div>
-      </foreach>
-    </div>
-    <div class="products">
-      <foreach name="hot_products" item="vo">
-        <div class="product-list {$key==0 ? 'active' : ''}">
-          <foreach name="vo.list" item="v" key="k">
-            <div class="product-item">
-              <a href="{:cmf_url('portal/index/product_info', ['id' => $v['id']])}" class="product-item__link">
-                <div class="product-img">
-                  <img loading="lazy" decoding="async" src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}">
-                </div>
-                <div class="product-item__content">
-                  <div class="product-title">{$v.title}</div>
-                  <div class="product-category-text">{$v.overview|default=$v.industry}</div>
-                  <div class="product-action">EXPLORE →</div>
-                </div>
-              </a>
-            </div>
-          </foreach>
-        </div>
-      </foreach>
-    </div>
+  <!-- CATEGORY CARDS -->
+  <div class="home-category-grid">
+    <foreach name="category_cards" item="vo" key="k">
+      <a href="{:cmf_url('portal/index/product',array('id'=>$vo['id']))}" class="home-category-item">
+        <img src="{:cmf_get_image_url($vo['icon'] ?: $vo['thumbnail'])}" alt="{$vo.name}" loading="lazy" decoding="async">
+        <span>{$vo.name}</span>
+      </a>
+    </foreach>
   </div>
-  <!--PRODUCTS END-->
+
+  <!--HOT PRODUCTS START-->
+  <div class="hot-products-header">
+    <h2 class="hot-products-title">HOT PRODUCTS</h2>
+    <a href="{:cmf_url('portal/index/product')}" class="hot-products-all">All Products &rarr;</a>
+  </div>
+  
+  <div class="hot-products-slider swiper">
+    <div class="swiper-wrapper">
+      <foreach name="hot_products" item="vo">
+        <foreach name="vo.list" item="v">
+          <div class="swiper-slide">
+             <a href="{:cmf_url('portal/index/product_info', ['id' => $v['id']])}">
+               <div class="hot-product-img">
+                 <img src="{:cmf_get_image_url($v['thumbnail'])}" alt="{$v.title}" loading="lazy" decoding="async">
+               </div>
+               <div class="hot-product-title">{$v.title}</div>
+             </a>
+          </div>
+        </foreach>
+      </foreach>
+    </div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new Swiper('.hot-products-slider.swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: '.hot-products-slider .swiper-button-next',
+          prevEl: '.hot-products-slider .swiper-button-prev',
+        },
+      });
+    });
+  </script>
+  <!--HOT PRODUCTS END-->
 
   <!--ABOUT US START-->
   <div class="about">
@@ -122,28 +140,52 @@
   <!-- STATS START -->
   <div class="home-stats">
     <div class="home-stats-wrap">
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="1988">0</span></div>
-        <div class="stat-text">Founded in China</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="3420">0</span>K</div>
-        <div class="stat-text">Square Meter Factory</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="1000">0</span></div>
-        <div class="stat-text">1000 R&D engineers team</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="170">0</span>+</div>
-        <div class="stat-text">Export to over 170 countries</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="500">0</span>+</div>
-        <div class="stat-text">500 honorary titles</div>
-      </div>
+      <notempty name="index_site.engineering">
+        <foreach name="index_site.engineering" item="vo">
+          <div class="stat-item">
+            <div class="stat-num"><span class="counter" data-target="{$vo.engineering_num}">0</span><span class="stat-unit">{$vo.engineering_name}</span></div>
+            <div class="stat-text">{$vo.engineering_desc}</div>
+          </div>
+        </foreach>
+      </notempty>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const counters = document.querySelectorAll('.counter');
+      const speed = 100; // The lower the slower
+
+      const animateCounters = () => {
+        counters.forEach(counter => {
+          const target = +counter.getAttribute('data-target');
+
+          const updateCount = () => {
+            const count = +counter.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+              counter.innerText = Math.ceil(count + inc);
+              setTimeout(updateCount, 15);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        });
+      };
+
+      const statsSection = document.querySelector('.home-stats');
+      if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            animateCounters();
+            observer.disconnect();
+          }
+        }, { threshold: 0.3 });
+        observer.observe(statsSection);
+      }
+    });
+  </script>
   <!-- STATS END -->
 
 
@@ -154,22 +196,15 @@
       <div class="choose-title">WHY CHOOSE US</div>
       <div class="choose-desc">{$index_site.choose_description}</div>
       <div class="choose-grid">
-        <notempty name="why_choose_slides">
-          <foreach name="why_choose_slides" item="vo">
-            <div class="choose-grid-item">
-              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.image)}" alt="{$vo.title}">
-              <div class="choose-grid-overlay">
-                <span class="choose-grid-text">{$vo.title}</span>
-              </div>
-            </div>
-          </foreach>
-        <else/>
-          <!-- Fallback to index_site.choose uploaded images if slides are not populated yet -->
+        <notempty name="index_site.choose">
           <foreach name="index_site.choose" item="vo">
             <div class="choose-grid-item">
-              <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.choose_image)}" alt="{$vo.choose_name}">
-              <div class="choose-grid-overlay">
-                <span class="choose-grid-text">{$vo.choose_name}</span>
+              <div class="choose-icon-wrap">
+                <img loading="lazy" decoding="async" src="{:cmf_get_image_url($vo.choose_image_active ?: $vo.choose_image)}" alt="{$vo.choose_name}">
+              </div>
+              <div class="choose-content-wrap">
+                <h3 class="choose-card-title">{$vo.choose_name}</h3>
+                <p class="choose-card-desc">{$vo.choose_desc}</p>
               </div>
             </div>
           </foreach>

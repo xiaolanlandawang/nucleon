@@ -201,13 +201,13 @@ $(document).ready(function(){
     })
 
     $('#popover-submit').click(function (){
-        let name = $('#popover-name').val();// 姓名
-        let phone = getFormattedPhoneNumber($('#popover-phone')); // 手机号
-        let email = $('#popover-email').val();// 邮箱
-        let content = $('#popover-content').val();// 内容
+        let name = $('#popover-name').val();// 姓名（必填）
+        let phone = getFormattedPhoneNumber($('#popover-phone')); // 手机号（可选）
+        let email = $('#popover-email').val();// 邮箱（必填）
+        let content = $('#popover-content').val();// 内容（必填）
 
-        if (!name || !phone || !email || !content){
-            notifyFormResult('Incomplete Information', 'Please fill in all the information completely.', 'error');
+        if (!name || !email || !content){
+            notifyFormResult('Incomplete Information', 'Please fill in your Name, Email and Message.', 'error');
             return;
         }
 

@@ -7,6 +7,8 @@
     <meta name="description" content="{$site_info.site_name|default=''}">
     <include file="public@head"/>
     <link href="__TMPL__/public/assets/css/about.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script type="text/javascript" src="__TMPL__/public/assets/js/about.js"></script>
 </head>
 <body>
@@ -26,26 +28,16 @@
     <ul class="certificate-list">
         <foreach name="about_site.cert" item="vo">
             <li class="certificate-item">
-                <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                <a href="{:cmf_get_image_url($vo.url)}" data-fancybox="gallery" data-caption="{$vo.name}">
+                    <img src="{:cmf_get_image_url($vo.url)}" alt="{$vo.name}">
+                </a>
             </li>
         </foreach>
     </ul>
 </div>
 <!-- CERTIFICATE END -->
 
-<div class="gallery">
-    <div class="title">WEIHUA GALLERY</div>
-    <div class="gallery-list">
-        <foreach name="about_site.corporate_images" item="vo">
-            <div class="gallery-item">
-                <div class="gallery-item-img">
-                    <img src="{:cmf_get_image_url($vo.url)}" alt="gallery">
-                </div>
-                <div class="gallery-item-title">{$vo.name}</div>
-            </div>
-        </foreach>
-    </div>
-</div>
+
 
 
 <include file="public@foot"/>

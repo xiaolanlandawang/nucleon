@@ -1,4 +1,4 @@
-<?php /*a:5:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\quote.html";i:1781250285;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1781168937;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1781085184;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1780886333;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1781167044;}*/ ?>
+<?php /*a:5:{s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/portal\\quote.html";i:1781666748;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\head.html";i:1781168937;s:64:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\nav.html";i:1781085184;s:67:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\banner.html";i:1780886333;s:65:"C:\laragon\www\nucleon\public/themes/simpleboot3/public\foot.html";i:1781676838;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,20 +242,20 @@
             <p class="form-subtitle">Please Contact Us Immediately Via Email At <a href="mailto:<?php echo (isset($site_info['email']) && ($site_info['email'] !== '')?$site_info['email']:''); ?>"><?php echo (isset($site_info['email']) && ($site_info['email'] !== '')?$site_info['email']:''); ?></a>, Or Fill Out The Following Form.</p>
             <div class="quote">
                 <div class="quote-field">
-                    <label>Name</label>
-                    <input type="text" name="name" class="quote-name" placeholder="Name">
+                    <label>Name <span style="color:#ea222d">*</span></label>
+                    <input type="text" name="name" class="quote-name" placeholder="Name *">
                 </div>
                 <div class="quote-field">
-                    <label>Email</label>
-                    <input type="text" name="email" class="quote-email" placeholder="Email">
+                    <label>Email <span style="color:#ea222d">*</span></label>
+                    <input type="text" name="email" class="quote-email" placeholder="Email *">
                 </div>
                 <div class="quote-field full-width">
                     <label>Phone/Whatsapp</label>
                     <input type="text" name="phone" class="quote-phone" placeholder="Phone/Whatsapp">
                 </div>
                 <div class="quote-field full-width">
-                    <label>Message</label>
-                    <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    <label>Message <span style="color:#ea222d">*</span></label>
+                    <textarea name="message" class="quote-message" placeholder="Message *"></textarea>
                 </div>
                 <div class="quote-btn" onclick="submit()">SEND MESSAGE</div>
             </div>
@@ -322,21 +322,21 @@
         <div class="footer-form">
             <div class="footer-title">CONTACT US</div>
             <div class="footer-field">
-                <label>Name</label>
-                <input type="text" class="footer-name" placeholder="Name">
+                <label>Name <span style="color:#ea222d">*</span></label>
+                <input type="text" class="footer-name" placeholder="Name *">
             </div>
             <div class="footer-field">
-                <label>Email</label>
-                <input type="text" class="footer-email" placeholder="Email">
+                <label>Email <span style="color:#ea222d">*</span></label>
+                <input type="text" class="footer-email" placeholder="Email *">
             </div>
             <div class="footer-field">
                 <label>Phone/Whatsapp</label>
                 <input type="text" class="footer-phone" placeholder="Phone/Whatsapp">
             </div>
             <div class="footer-field">
-                <label>Message</label>
+                <label>Message <span style="color:#ea222d">*</span></label>
                 <textarea class="footer-message"
-                    placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+                    placeholder="Message *"></textarea>
             </div>
             <div class="footer-submit">SUBMIT</div>
         </div>
@@ -404,34 +404,67 @@
         <div class=popover_close>
             <img src="/themes/simpleboot3/public/assets/images/close.png" alt="close">
         </div>
-        <div class="popover_content">
-            <div class="popover_title">
-                <h2>Develop your lifting solution</h2>
-                <p class="popover_title_description">Contact us today by email at :<a
-                        href="mailto:<?php echo $site_info['email']; ?>"><?php echo $site_info['email']; ?></a>,
-                    or fill out the form below.</p>
+        <h2 class="popover_main_title">DEVELOP YOUR LIFTING SOLUTION</h2>
+        <div class="popover_content new_popover_content">
+            <div class="popover_left">
+                <div class="popover_left_box">
+                    <h3>GET A QUOTE</h3>
+                    <ul class="popover_contact_list">
+                        <?php if(!(empty($site_info['email']) || (($site_info['email'] instanceof \think\Collection || $site_info['email'] instanceof \think\Paginator ) && $site_info['email']->isEmpty()))): ?>
+                            <li>
+                                <img src="/themes/simpleboot3/public/assets/images/quote-email.webp" alt="Email">
+                                <a href="mailto:<?php echo $site_info['email']; ?>"><?php echo $site_info['email']; ?></a>
+                            </li>
+                        <?php endif; if(!(empty($site_info['address']) || (($site_info['address'] instanceof \think\Collection || $site_info['address'] instanceof \think\Paginator ) && $site_info['address']->isEmpty()))): ?>
+                            <li>
+                                <img src="/themes/simpleboot3/public/assets/images/quote-location.webp" alt="Address">
+                                <span><?php echo $site_info['address']; ?></span>
+                            </li>
+                        <?php endif; if(!(empty($site_info['sale_tel']) || (($site_info['sale_tel'] instanceof \think\Collection || $site_info['sale_tel'] instanceof \think\Paginator ) && $site_info['sale_tel']->isEmpty()))): ?>
+                            <li>
+                                <img src="/themes/simpleboot3/public/assets/images/quote-tel.webp" alt="Tel">
+                                <a href="tel:<?php echo $site_info['sale_tel']; ?>"><?php echo $site_info['sale_tel']; ?></a>
+                            </li>
+                        <?php endif; if(!(empty($site_info['wechat']) || (($site_info['wechat'] instanceof \think\Collection || $site_info['wechat'] instanceof \think\Paginator ) && $site_info['wechat']->isEmpty()))): ?>
+                            <li>
+                                <img src="/themes/simpleboot3/public/assets/images/fix-wechat.webp" alt="WeChat">
+                                <span><?php echo $site_info['wechat']; ?></span>
+                            </li>
+                        <?php endif; if(!(empty($site_info['whatsapp']) || (($site_info['whatsapp'] instanceof \think\Collection || $site_info['whatsapp'] instanceof \think\Paginator ) && $site_info['whatsapp']->isEmpty()))): ?>
+                            <li>
+                                <img src="/themes/simpleboot3/public/assets/images/quote-whatsapp.webp" alt="WhatsApp">
+                                <?php $cleanWhatsapp = preg_replace('/[^0-9]/', '', $site_info['whatsapp']); ?>
+                                <a href="https://api.whatsapp.com/send?phone=<?php echo $cleanWhatsapp; ?>" target="_blank"><?php echo $site_info['whatsapp']; ?></a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
             </div>
-            <div class="popover_form">
-                <form method="post">
-                    <div class="popover_form_name">
-                        <input id="popover-name" type="text" name="name" placeholder="Name:">
-                    </div>
-                    <div class="popover_form_phone">
-                        <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
-                    </div>
-                    <div class="popover_form_email">
-                        <input id="popover-email" type="text" name="email" placeholder="E-mail:">
-                    </div>
-                    <div class="popover_form_content">
-                        <textarea id="popover-content" name="content" placeholder="Message:"></textarea>
-                    </div>
-                    <div class="popover_form_submit">
-                        <input name="product_id" id="product-id" type="hidden" value="<?php echo (isset($product['id']) && ($product['id'] !== '')?$product['id']:''); ?>">
-                        <input name="file" id="file" type="hidden" value="">
-                        <input type="hidden" name="feedback_type" id="feedback_type" value="2">
-                        <button id="popover-submit" type="button">SUBMIT</button>
-                    </div>
-                </form>
+            <div class="popover_right">
+                <div class="popover_form">
+                    <form method="post">
+                        <div class="popover_form_row">
+                            <div class="popover_form_name">
+                                <input id="popover-name" type="text" name="name" placeholder="Name: *">
+                            </div>
+                            <div class="popover_form_email">
+                                <input id="popover-email" type="text" name="email" placeholder="E-mail: *">
+                            </div>
+                        </div>
+                        <div class="popover_form_phone">
+                            <input id="popover-phone" type="text" name="phone" placeholder="Phone / WhatsApp:">
+                        </div>
+                        <div class="popover_form_content">
+                            <textarea id="popover-content" name="content" placeholder="Message: *"></textarea>
+                        </div>
+                        <div class="popover_form_submit">
+                            <input name="product_id" id="product-id" type="hidden" value="<?php echo (isset($product['id']) && ($product['id'] !== '')?$product['id']:''); ?>">
+                            <input name="file" id="file" type="hidden" value="">
+                            <input type="hidden" name="feedback_type" id="feedback_type" value="2">
+                            <button id="popover-submit" type="button">SUBMIT</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -592,128 +625,6 @@
 
 
 
-<script>
-    $(document).ready(function () {
-        var itiReady = false;
-        var itiLoading = false;
-        var itiPromise = null;
-
-        function loadCss(href) {
-            return new Promise(function (resolve, reject) {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = href;
-                link.onload = resolve;
-                link.onerror = function () { reject(new Error('CSS load failed')); };
-                document.head.appendChild(link);
-            });
-        }
-
-        function loadJs(src) {
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.async = true;
-                script.onload = resolve;
-                script.onerror = function () { reject(new Error('JS load failed')); };
-                document.body.appendChild(script);
-            });
-        }
-
-        function appendStylesOnce() {
-            if (document.getElementById('iti-custom-styles')) {
-                return;
-            }
-            var style = document.createElement('style');
-            style.id = 'iti-custom-styles';
-            style.innerHTML = `
-                .iti { 
-                    width: 100%; 
-                    display: block !important;
-                }
-                .iti__country-list { 
-                    z-index: 9999; 
-                    color: #333;
-                    text-align: left;
-                }
-                /* Fix for input padding when ITI is active */
-                .iti input {
-                    padding-left: 52px !important;
-                    width: 100% !important;
-                }
-                .iti__selected-flag {
-                    padding: 0 8px 0 12px !important;
-                    background: transparent !important;
-                }
-                .iti__flag-container {
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        function initIntlTelInputs() {
-            if (!window.intlTelInput) {
-                return;
-            }
-            var phoneInputs = document.querySelectorAll('.home-collect-phone, .quote-phone, .footer-phone, #popover-phone');
-            phoneInputs.forEach(function (input) {
-                if (input._iti) {
-                    return;
-                }
-                var iti = window.intlTelInput(input, {
-                    initialCountry: "auto",
-                    geoIpLookup: function (callback) {
-                        fetch("https://ipapi.co/json")
-                            .then(function (res) { return res.json(); })
-                            .then(function (data) { callback(data.country_code || "us"); })
-                            .catch(function () { callback("us"); });
-                    },
-                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/utils.js"
-                });
-                // Store the instance on the element for later access
-                input._iti = iti;
-            });
-            itiReady = true;
-        }
-
-        function ensureIntlTelInputLoaded() {
-            if (itiReady) {
-                return Promise.resolve();
-            }
-            if (itiLoading && itiPromise) {
-                return itiPromise;
-            }
-
-            itiLoading = true;
-            itiPromise = Promise.all([
-                loadCss("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css"),
-                loadJs("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js")
-            ]).then(function () {
-                appendStylesOnce();
-                initIntlTelInputs();
-            }).catch(function () {
-                // Keep form available even when CDN/network fails
-            }).finally(function () {
-                itiLoading = false;
-            });
-
-            return itiPromise;
-        }
-
-        // Load on focus/click of any phone input elements
-        $(document).on('focus click', '.home-collect-phone, .quote-phone, .footer-phone, #popover-phone, #popover-submit', function () {
-            ensureIntlTelInputLoaded();
-        });
-
-        // Listen to interaction to load immediately
-        window.addEventListener('scroll', ensureIntlTelInputLoaded, { passive: true, once: true });
-        window.addEventListener('mousemove', ensureIntlTelInputLoaded, { passive: true, once: true });
-        window.addEventListener('touchstart', ensureIntlTelInputLoaded, { passive: true, once: true });
-    });
-</script>
 <!-- old -->
 
 <script>
@@ -748,10 +659,19 @@
     }
 
     function submit() {
-        let name = $('.quote-name').val();// 姓名
-        let phone = getFormattedPhoneNumber($('.quote-phone'));// 手机号
-        let email = $('.quote-email').val();// 邮箱
-        let content = $('.quote-message').val();// 内容
+        let name = $('.quote-name').val();// 姓名（必填）
+        let phone = getFormattedPhoneNumber($('.quote-phone'));// 手机号（可选）
+        let email = $('.quote-email').val();// 邮箱（必填）
+        let content = $('.quote-message').val();// 内容（必填）
+
+        if (!name || !email || !content) {
+            if (typeof window.showFormMessage === 'function') {
+                window.showFormMessage('Incomplete Information', 'Please fill in your Name, Email and Message.', 'error');
+            } else {
+                alert('Please fill in your Name, Email and Message.');
+            }
+            return;
+        }
 
         if (quoteSubmitting) {
             return;

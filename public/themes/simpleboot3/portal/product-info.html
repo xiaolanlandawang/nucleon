@@ -293,25 +293,35 @@
         <!-- HOT PRODUCTS END -->
 
         <!-- INQUIRY FORM START -->
-        <div class="product-inquiry-section animate-on-scroll">
-            <h2 class="form-title">CUSTOMIZE YOUR LIFTING SOLUTION</h2>
-            <p class="form-subtitle">Please contact us via email at <a href="mailto:{$site_info.email|default='sale@nucleoncranes.global'}">{$site_info.email|default='sale@nucleoncranes.global'}</a>, or fill out the form below to get a free solution proposal and quote.</p>
-            <div class="quote">
-                <div class="quote-grid">
-                    <div class="quote-field">
-                        <input type="text" name="name" class="quote-name" placeholder="Name">
-                    </div>
-                    <div class="quote-field">
-                        <input type="text" name="email" class="quote-email" placeholder="Email">
-                    </div>
-                    <div class="quote-field full-width">
-                        <input type="text" name="phone" class="quote-phone" placeholder="Phone/Whatsapp">
-                    </div>
-                    <div class="quote-field full-width">
-                        <textarea name="message" class="quote-message" placeholder="Tell us your lifting requirement, capacity, span, lifting height or project details."></textarea>
+        <div class="home-collect" id="detail-inquiry-form">
+            <div class="home-collect-container">
+                <div class="home-collect-left">
+                    <h2 class="intro-title">NEED A CUSTOMIZED LIFTING SOLUTION?</h2>
+                    <p class="intro-subtitle">Tell Us About Your Project – Capacity, Span, Working Environment – Our Engineers Will Respond Within 24 Hours With A Competitive Quote.</p>
+                    <ul class="intro-list">
+                        <li>Free Technical Consultation</li>
+                        <li>3D Layout Proposal</li>
+                        <li>Lifetime Support</li>
+                    </ul>
+                </div>
+
+                <div class="home-collect-form-section">
+                    <div class="home-collect-form">
+                        <div class="home-collect-field full-width">
+                            <input type="text" class="home-collect-name" placeholder="Name *">
+                        </div>
+                        <div class="home-collect-field full-width">
+                            <input type="text" class="home-collect-email" placeholder="Email *">
+                        </div>
+                        <div class="home-collect-field full-width">
+                            <input type="text" class="home-collect-phone" placeholder="Phone / Whatsapp">
+                        </div>
+                        <div class="home-collect-field full-width">
+                            <textarea class="home-collect-message" placeholder="Message *"></textarea>
+                        </div>
+                        <div class="home-collect-submit" onclick="submitDetailInquiry()">Submit Request</div>
                     </div>
                 </div>
-                <div class="quote-btn" onclick="submitDetailInquiry()">SEND MESSAGE</div>
             </div>
         </div>
         <!-- INQUIRY FORM END -->
@@ -364,7 +374,7 @@
         }
 
         function clearDetailQuoteForm() {
-            $('.product-inquiry-section .quote-name, .product-inquiry-section .quote-email, .product-inquiry-section .quote-phone, .product-inquiry-section .quote-message').val('');
+            $('#detail-inquiry-form .home-collect-name, #detail-inquiry-form .home-collect-email, #detail-inquiry-form .home-collect-phone, #detail-inquiry-form .home-collect-message').val('');
         }
 
         function getDetailFormattedPhoneNumber($input) {
@@ -384,17 +394,22 @@
         }
 
         function submitDetailInquiry() {
-            let name = $('.product-inquiry-section .quote-name').val();
-            let phone = getDetailFormattedPhoneNumber($('.product-inquiry-section .quote-phone'));
-            let email = $('.product-inquiry-section .quote-email').val();
-            let content = $('.product-inquiry-section .quote-message').val();
+            let name = $('#detail-inquiry-form .home-collect-name').val();
+            let phone = getDetailFormattedPhoneNumber($('#detail-inquiry-form .home-collect-phone'));
+            let email = $('#detail-inquiry-form .home-collect-email').val();
+            let content = $('#detail-inquiry-form .home-collect-message').val();
             let productId = '{$product.id}';
+
+            if (!name || !email || !content) {
+                showDetailQuoteMessage('Incomplete Information', 'Please fill in your Name, Email and Message.', 'error');
+                return;
+            }
 
             if (detailQuoteSubmitting) {
                 return;
             }
 
-            let $button = $('.product-inquiry-section .quote-btn');
+            let $button = $('#detail-inquiry-form .home-collect-submit');
             let data = {
                 name: name,
                 phone: phone,
